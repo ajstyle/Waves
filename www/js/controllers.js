@@ -85,6 +85,10 @@ angular.module('starter.controllers', [])
             fabs[0].remove();
         }
     };
+ $scope.clearFabs = function() {
+    $scope.number = '' ;
+}
+
 })
 
 .controller('LoginCtrl', function($scope, $timeout, $stateParams, ionicMaterialInk) {
@@ -175,4 +179,5 @@ angular.module('starter.controllers', [])
 
 })
 
+ 
 ;
