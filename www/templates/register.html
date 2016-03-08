@@ -1,0 +1,75 @@
+<ion-view view-title="Register">
+<form name = "myform" novalidate>
+<ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+<div class="app-icon1"></div>
+
+ <ion-list class = "animate-ripple">
+  <div ng-controller="MainCtrl">
+ <div class = "list">
+        
+        <label class = "item item-input item-floating-label">
+        <span class = "input-label"style="color:black;font-weight:bold" >
+         Login Id
+        </span>
+              
+           <input type = "text" name = "login" placeholder="Login Id " ng-model="loginid">
+         </label>
+         <p class = "error validationerror" ng-show = "myform.login.$invalid&&myform.login.$touched">Login id is required</p>
+         
+                  </div>
+     
+       
+
+         <div class = "list">
+         
+        <label class = "item item-input item-floating-label">
+        <span class = "input-label" style="color:black;font-weight:bold" >
+        Branch
+        </span>
+
+           <input type = "text" name = "branch" placeholder="Branch" ng-model = "branchid" ng-required = "true" />
+         </label>
+         <p class = "error validationerror" ng-show = "myform.branch.$invalid&&myform.branch.$touched">Branch is required </p>
+
+      
+         </div>
+          <div class = "list">
+        <label class = "item item-input item-floating-label">
+        <span class = "input-label" style="color:black;font-weight:bold">
+      User Id  
+        </span>
+
+           <input type = "text" name = "userid" placeholder="User Id" ng-model = "userid" ng-required = "true">
+         </label>
+         <p class = "error validationerror" ng-show = "myform.userid.$invalid&&myform.userid.$touched">You must fill out your user_id</p>
+
+         </div>
+
+         <div class = "list">
+        <label class = "item item-input item-floating-label">
+        <span class = "input-label" style="color:black;font-weight:bold">
+        Password
+        </span>
+
+           <input type = "password" name = "password" placeholder="Password" ng-model = "user.password" 
+           ng-required = "true" ng-minlength = "6">
+         </label>
+        <p class = "error validationerror" ng-show = "myform.password.$invalid&&myform.password.$touched">Password must be atleast 6 characters </p>
+
+         </div>
+
+          <div class = "list">
+         <div class="padding">
+            <button ui-sref="app.gallery" class="button button-full button-royal ink">Register</button>
+        </div>
+          
+             </div>
+             </div>
+
+
+
+</ion-list>
+
+</ion-content>
+</form>
+</ion-view>
