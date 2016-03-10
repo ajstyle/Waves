@@ -1,14 +1,20 @@
 <ion-view view-title="Register">
+
 <form name = "myform" novalidate>
+
+
 <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
 <div class="app-icon1"></div>
 
- <ion-list class = "animate-ripple">
-  <div ng-controller="MainCtrl">
+
+<ion-list class = "animate-ripple">
+
+ 
+
  <div class = "list">
-        
-        <label class = "item item-input item-floating-label">
-        <span class = "input-label"style="color:black;font-weight:bold" >
+ 
+ <label class = "item item-input item-floating-label">
+        <span class = "input-label" style="color:black;font-weight:bold" >
          Login Id
         </span>
               
@@ -16,11 +22,9 @@
          </label>
          <p class = "error validationerror" ng-show = "myform.login.$invalid&&myform.login.$touched">Login id is required</p>
          
-                  </div>
-     
-       
+</div>
 
-         <div class = "list">
+<div class = "list">
          
         <label class = "item item-input item-floating-label">
         <span class = "input-label" style="color:black;font-weight:bold" >
@@ -33,7 +37,9 @@
 
       
          </div>
-          <div class = "list">
+
+
+ <div class = "list">
         <label class = "item item-input item-floating-label">
         <span class = "input-label" style="color:black;font-weight:bold">
       User Id  
@@ -45,7 +51,7 @@
 
          </div>
 
-         <div class = "list">
+<div class = "list">
         <label class = "item item-input item-floating-label">
         <span class = "input-label" style="color:black;font-weight:bold">
         Password
@@ -58,17 +64,34 @@
 
          </div>
 
-          <div class = "list">
+
+
+<div class = "list">
          <div class="padding">
             <button ui-sref="app.gallery" class="button button-full button-royal ink">Register</button>
         </div>
           
              </div>
-             </div>
 
 
 
-</ion-list>
+
+
+
+
+
+
+ </ion-list>
+
+
+
+
+
+
+
+
+
+
 
 </ion-content>
 </form>

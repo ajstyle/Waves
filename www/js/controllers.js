@@ -105,13 +105,22 @@ angular.module('starter.controllers', ['ngCordova'])
 
 
 
-.controller('MainCtrl', function($scope, testService) {
+.controller('MainCtrl', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, testService) {
 
-   function writeToDom(title, content) {
-   return  $("#results").append("<div class='header'>" + title + ":</div><div><pre>" + content + "</pre></div>");
-}
+      $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = true;
+    $scope.$parent.setExpanded(true);
+    $scope.$parent.setHeaderFab('right');
 
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideIn({
+            selector: '.animate-fade-slide-in .item'
+        });
+    }, 200);
 
+    // Activate ink for controller
+    ionicMaterialInk.displayEffect();
 
 
   testService.HelloWorld().then(function(response){
@@ -125,16 +134,29 @@ angular.module('starter.controllers', ['ngCordova'])
    var res4 = JSON.parse(res3);
     var res5 = res4.key.NewDataSet;
     console.log(res5);
-      $scope.ip = res5.login.ip;
+      var ip = res5.login.ip;
         var us = res5.login.us;
-        $scope.userid       =  res5.login.bName;      
-   
+        $scope.userid  =  res5.login.bName;      
+        console.log(ip);
+         if(ip != null)
+         {
+            console.log("Ip");
+            $location.path("app/register");
+         }
+         else
+         {
+              console.log("NULL");
+
+            $location.path("app/login");
+         }
+          
+
      $scope.user = us.substring(0,10);
      $scope.loginid =  us.substring(12,18);
  $scope.branchid = us.substring(20,23);
 
 
-  var res1 = writeToDom('Formatted', JSON.stringify(response, null, 4));
+ 
    
 
     //console.log(res1.login);

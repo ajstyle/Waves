@@ -1,35 +1,4 @@
-// Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-/*var object = {
-    
-    
-        "NewDataSet": {
-            "login": {
-                "ip": "108.178.25.54",
-                "db": "waves_SyncData",
-                "us": "wavesUser2;;125066;;A04",
-                "ps": "waves77430@77430",
-                "aName": "WAVES COMPUSOFT PVT. LTD.",
-                "aCity": "UDAIPUR",
-                "bName": "AMIT",
-                "bCity": "-"
-            }
-        }
-    }
-
-var obj = JSON.stringify(object);
-
-var string = obj + "AMit" ; 
- var str = string.substring(1,4) ; 
- alert(str);
-var res = JSON.parse(obj);
-console.log(res);
-console.log(res.NewDataSet);
-*/
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
 (function(){
 
 
@@ -38,13 +7,12 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-mate
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-        // 
-
    //Get uuid 
-  var a =  window.device.uuid;
+
+  var uuid =  window.device.uuid;
+
   alert(a);
+    
 
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -55,52 +23,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-mate
         }
     });
 })
-/*
-.controller('DashCtrl',['$cordovaDevice' ,  function ($scope, $state, $cordovaDevice) {
 
-var init = function () {
-  console.log("initializing device");
-  try {
-    console.log("AMit");
-
-    $scope.uuid = $cordovaDevice.getUUID();
-   document.getElementById("demo").innerHTML = uuid ;
-   
-  }
-  catch (err) {
-    console.log("Error " + err.message);
-  document.getElementById("demo").innerHTML = "error" ;
-   
-  }
-
-};
-
-ionic.Platform.ready(function(){
-  init();
-});
-
-}])
-
-
-.controller('MyCtrl', function($scope, $cordovaDevice) {
-     console.log("enter");
-  
- console.log("enter1");
-    this.device = $cordovaDevice.getDevice();
-     
-    var cordova = $cordovaDevice.getCordova();
-
-    var model = $cordovaDevice.getModel();
-
-    var platform = $cordovaDevice.getPlatform();
-
-    var uuid = $cordovaDevice.getUUID();
-
-    var version = $cordovaDevice.getVersion();
-
-  
-})
-*/
 
 
 .factory("testService", ['$soap',function($soap){
@@ -162,6 +85,8 @@ ionic.Platform.ready(function(){
     };
 })
 
+
+
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
     // Turn off caching for demo simplicity's sake
@@ -185,7 +110,7 @@ ionic.Platform.ready(function(){
         views: {
             'menuContent': {
                 templateUrl: 'templates/register.html',
-                controller: 'ActivityCtrl'
+                controller: 'MainCtrl'
             },
             'fabContent': {
                 template: '<button id="fab-activity" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-star"></i></button>',
@@ -357,9 +282,10 @@ ionic.Platform.ready(function(){
     })
     ;
   
-
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
+
+
 
 
 });
