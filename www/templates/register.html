@@ -1,3 +1,4 @@
+
 <ion-view view-title="Register">
 
 <form name = "myform" novalidate>
@@ -18,13 +19,23 @@
          Login Id
         </span>
               
-           <input type = "text" name = "login" placeholder="Login Id " ng-model="loginid">
+           <input type = "text" name = "login" placeholder="Login Id " ng-model="loginid" valid-number ng-maxlength = "6" ng-minlength = "6" ng-required = "true"  required >
+         
          </label>
-         <p class = "error validationerror" ng-show = "myform.login.$invalid&&myform.login.$touched">Login id is required</p>
+          <div ng-messages="myform.login.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id  required</div>
+         </div>
+      <div ng-message="minlength">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id Not valid</div>
+         </div>
+      <div ng-message="maxlength">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id  Not valid</div>
+         </div>
          
 </div>
 
-<div class = "list">
+
          
         <label class = "item item-input item-floating-label">
         <span class = "input-label" style="color:black;font-weight:bold" >
@@ -33,13 +44,15 @@
 
            <input type = "text" name = "branch" placeholder="Branch" ng-model = "branchid" ng-required = "true" />
          </label>
-         <p class = "error validationerror" ng-show = "myform.branch.$invalid&&myform.branch.$touched">Branch is required </p>
-
+         <div ng-messages="myform.login.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.branch.$touched">branch id required</div>
+         </div>
       
          </div>
 
 
- <div class = "list">
+
         <label class = "item item-input item-floating-label">
         <span class = "input-label" style="color:black;font-weight:bold">
       User Id  
@@ -47,11 +60,15 @@
 
            <input type = "text" name = "userid" placeholder="User Id" ng-model = "userid" ng-required = "true">
          </label>
-         <p class = "error validationerror" ng-show = "myform.userid.$invalid&&myform.userid.$touched">You must fill out your user_id</p>
-
+      <div ng-messages="myform.userid.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.userid.$invalid&&myform.userid.$touched">User id required</div>
          </div>
+      
+         </div>
+ 
 
-<div class = "list">
+
         <label class = "item item-input item-floating-label">
         <span class = "input-label" style="color:black;font-weight:bold">
         Password
@@ -60,19 +77,21 @@
            <input type = "password" name = "password" placeholder="Password" ng-model = "user.password" 
            ng-required = "true" ng-minlength = "6">
          </label>
-        <p class = "error validationerror" ng-show = "myform.password.$invalid&&myform.password.$touched">Password must be atleast 6 characters </p>
-
+ <div ng-messages="myform.password.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.password.$invalid&&myform.password.$touched">Password must be atleast 6 characters</div>
+         </div>
+      
          </div>
 
-
-
-<div class = "list">
-         <div class="padding">
-            <button ui-sref="app.gallery" class="button button-full button-royal ink">Register</button>
-        </div>
           
-             </div>
 
+
+
+         <div class="padding">
+            <button ui-sref="app.gallery" class="button button-full button-royal in" ng-disabled = "myform.$invalid" ng-click = "makeTextFile({{text}})">Register</button>                  
+        </div>
+          </div>
 
 
 

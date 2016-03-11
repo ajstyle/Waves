@@ -101,11 +101,9 @@ angular.module('starter.controllers', ['ngCordova'])
 
 
 
-
-
-
-
 .controller('MainCtrl', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, testService) {
+
+
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -134,6 +132,9 @@ angular.module('starter.controllers', ['ngCordova'])
    var res4 = JSON.parse(res3);
     var res5 = res4.key.NewDataSet;
     console.log(res5);
+      var txtString = res5.login ; 
+      $scope.text = JSON.stringify(txtString);
+
       var ip = res5.login.ip;
         var us = res5.login.us;
         $scope.userid  =  res5.login.bName;      
@@ -155,27 +156,25 @@ angular.module('starter.controllers', ['ngCordova'])
      $scope.loginid =  us.substring(12,18);
  $scope.branchid = us.substring(20,23);
 
+var textFile = null ; 
+  $scope.makeTextFile = function (text) {
+    var data = new Blob([text], {type: 'text/plain'});
 
- 
+    // If we are replacing a previously generated file we need to
+    // manually revoke the object URL to avoid memory leaks.
+    if (textFile !== null) {
+      window.URL.revokeObjectURL(textFile);
+    console.log("Amit");
+    }
+
+    textFile = window.URL.createObjectURL(data);
    
-
-    //console.log(res1.login);
-      
+    return textFile;
+  };
   });
 
 })
 
-/*.controller('MainCtrl', function($scope, $http) {
-  $http.get('http://wcplreg.in/app/appLoginSer1.asmx?login').then(function(resp) {
-        console.log(resp.data);
-        document.getElementById('obj').innerHTML = (resp);
-        
-  }, function(err) {
-    console.error('ERR', err);
-    // err.status will contain the status code
-  })
-})
-*/
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     // Set Header
     $scope.$parent.showHeader();

@@ -9,22 +9,37 @@
   
 
      <form name = "form1" >
-        <div class = "list">
-       
-        <label class = "item item-input item-floating-label" ng-controller="MainCtrl">
-                <span class = "input-label" style="color:white;font-weight:bold">
-          Mobile No.
+       <div class = "list">
+        <label class = "item item-input item-floating-label">
+        <span class = "input-label" style="color:black;font-weight:bold">
+      Mobile no. 
         </span>
-         <p id = "obj" style="color:white;font-weight:bold"></p>   
-           <input type = "text" name = "mobile" placeholder="Mobile No." id="FieldText" ng-maxlength = "10"  nks-only-number ng-model="mynumber" >
-           <p class = "error validationerror" ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">mobile no. not valid </p>
 
+           <input type = "text" name = "mobile" placeholder="Mobile no." ng-model = "data.mobile" ng-required = "true"  valid-number id = "FieldText" ng-minlength = "10" ng-maxlength = "10">
          </label>
+        <div ng-messages="form1.mobile.$error" ng-messages-multiple>
+      <div ng-message="required">
+        <div class = "error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. required</div>
+      </div>
+    
+            
+      <div ng-message="minlength">
+        <div class="error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+       
+      
+       <div ng-message="maxlength">
+        <div class = "error-messages" ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+      
+     
+     </div>
          </div>
+        
         
          <header></header>
         <div class="padding">
-            <button ui-sref="app.register" class="button button-full button-balanced ink">Verify</button>
+            <button ui-sref="app.register" class="button button-full button-balanced in" ng-disabled = "form1.$invalid">Verify</button>
     
         <div class="button-bar social-login">
             <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>

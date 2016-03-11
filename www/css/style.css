@@ -90,7 +90,7 @@ p {
 
 #FieldText
 {
-    color: #D6D6D0;
+    color: black;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 20px;
     height: 30px;
@@ -98,3 +98,18 @@ p {
     padding-top: 4px;
    
 }
+/*Validation */
+.error-messages{
+  background: #ff9999 ;
+  color:white;
+  padding:5px;
+  border-radius:5px;
+  margin-top:15px;
+  position:relative;
+}
+
+.error-messages1{
+   color:red;
+  }
+
+button:disabled { background-color : lime}
