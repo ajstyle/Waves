@@ -1,0 +1,55 @@
+<ion-view view-title="Login" align-title="left">
+    <ion-content style="background: url(img/background.jpg)  ; background-size: cover ;   background-repeat: no-repeat;">
+        <div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon"></div>
+          
+            </div>
+        </div>
+  
+
+     <form name = "form1" >
+       <div class = "list">
+        <label class = "item item-input item-floating-label">
+        <span class = "input-label" style="color:black;font-weight:bold">
+      Mobile no. 
+        </span>
+
+           <input type = "text" name = "mobile" placeholder="Mobile no." ng-model = "data.mobile"  valid-number id = "FieldText" ng-minlength = "10" ng-maxlength = "10" required>
+         </label>
+        <div ng-messages="form1.mobile.$error" ng-messages-multiple>
+      <div ng-message="required">
+        <div class = "error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. required</div>
+      </div>
+    
+            
+      <div ng-message="minlength">
+        <div class="error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+       
+      
+       <div ng-message="maxlength">
+        <div class = "error-messages" ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+      
+     
+     </div>
+         </div>
+        
+        
+         <header></header>
+        <div class="padding">
+            <button ui-sref="app.register" class="button button-full button-balanced in" ng-disabled = "form1.$invalid">Verify</button>
+    
+        <div class="button-bar social-login">
+            <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
+            <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
+            <button class="button button-small button-border icon-left ion-social-facebook button-positive-900">Facebook</button>
+        </div>
+        </div>
+    
+    </ion-content>
+</ion-view>
+</form>
+</div>
+</body>
