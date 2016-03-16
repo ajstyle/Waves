@@ -1,0 +1,92 @@
+
+<ion-view view-title="Waves Compusoft">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('img/waves11.jpg'); background-position: center; ">
+            <div class="content">
+                <div class="avatar" style="background-image: url('img/wave2.png'); background-position: center top  "></div>
+          
+            </div>
+        </div>
+      <body onload='setFocusToTextBox()'>
+           <h1>
+              <div class="tabs tabs-dark tabs-icon-top static">
+                <i class="icon ion-android-people"></i> Login 
+          </div>
+           </h1>
+   
+        <h4 class="content padding double-padding-x"></h4>
+       
+
+
+         <form name = "form1" >
+       <div class = "list">
+        <label class = "item item-input item-floating-label">
+        <span class = "input-label" style="color:black;font-weight:bold">
+      Mobile no. 
+        </span>
+
+           <input type = "text" name = "mobile" placeholder="Mobile no." ng-model = "data.mobile"  valid-number id = "FieldText" ng-minlength = "10" ng-maxlength = "10" autofocus required>
+         </label>
+        <div ng-messages="form1.mobile.$error" ng-messages-multiple>
+      <div ng-message="required">
+        <div class = "error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. required</div>
+      </div>
+    
+            
+      <div ng-message="minlength">
+        <div class="error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+       
+      
+       <div ng-message="maxlength">
+        <div class = "error-messages" ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+      
+     
+     </div>
+       <header></header>
+        <div class="padding">
+            <button ui-sref="app.register" class="button button-full button-balanced in" ng-disabled = "form1.$invalid">Verify</button>
+
+
+        
+
+         </div>
+         </div>
+
+</form>
+</body>
+
+<script type="text/javascript" src = "js/focus.js"></script>
+
+
+
+    </ion-content>
+</ion-view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
