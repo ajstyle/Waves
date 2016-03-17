@@ -83,6 +83,24 @@ p {
     width: 120px;
 }
 
+.app-icon2 {
+    background-color: #fff;
+    background: url('../img/waveslogo.png') center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 80px;
+    margin: auto;
+    width: 100px;
+}
+
+
+
+
+
+
+
+
+
 .social-login {
     position: fixed;
     bottom: 0;

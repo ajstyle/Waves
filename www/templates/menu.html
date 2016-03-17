@@ -13,26 +13,27 @@
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
-            <span class="avatar" style="background: url('img/crown.jpg'); background-size: cover;"></span>
-            <h2>Thronester</h2>
+              <div class="app-icon2"></div>
+                    
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
             <ion-list>
+               
+                <ion-item nav-clear menu-close ui-sref="app.friends">
+                     <center><h2>Follow Us</h2></center>
+                </ion-item>
+                
                 <ion-item nav-clear menu-close ui-sref="app.activity">
-                    Activity
+                     <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
+          
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.login">
-                    Login
+                    <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.profile">
-                    Profile
+                   <button class="button button-small button-border icon-left ion-social-facebook button-positive-900">Facebook</button>
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.friends">
-                    Friends
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.gallery">
-                    Gallery
-                </ion-item>
+               
             </ion-list>
         </ion-content>
     </ion-side-menu>

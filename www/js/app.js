@@ -3,7 +3,7 @@
 
 
 
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages','ngFileSaver'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

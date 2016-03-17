@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers', ['ngCordova'])
+angular.module('starter.controllers', ['ngCordova' , 'ngFileSaver'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
@@ -120,9 +120,7 @@ loginService.login().then(function(response)
 
 
 
-.controller('MainCtrl', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService) {
-
-
+.controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob) {
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -140,12 +138,47 @@ loginService.login().then(function(response)
     ionicMaterialInk.displayEffect();
 
   
+ 
+
+ $scope.user = {
+             loginid: '',
+             branchid: '',
+             userid : ''
+        };
+
+
+
+$scope.register = function() {
+           console.log('User clicked register', this.user);
+              $scope.txt = this.user ; 
+              var text = JSON.stringify($scope.txt);
+                   
+             
+            $scope.val = {
+                         text: JSON.stringify($scope.txt)
+                         };
+                         $scope.txt = $scope.val.text;
+                         console.log($scope.txt);
+  $scope.download = function(txt) {
+    console.log("Amit");
+  var data = new Blob([text], { type: 'application/json;charset=utf-8' });
+   var obj =  FileSaver.saveAs(data, 'text1.JSON');
+     
+        };
+
+
+
+
+
+
+}   
+      
 
 
 //--------------------------LOGIN SERVICE---------------------------------------------//
 
 
-
+/*
 loginService.login().then(function(response)
 {
       var us = response.login.us;
@@ -161,9 +194,8 @@ loginService.login().then(function(response)
 /*
         console.log(ip);
           
-
 */
-})
+}])
 //Login Factory 
 .factory('loginService',['testService' ,  function(testService) {
  

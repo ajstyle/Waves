@@ -1,8 +1,6 @@
-
 <ion-view view-title="Register">
 
-<form name = "myform" novalidate>
-
+<form name = "myform" ng-submit="register()" novalidate>
 
 <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
 <div class="app-icon1"></div>
@@ -10,8 +8,12 @@
 
 <ion-list class = "animate-ripple">
 
- 
+<a href="" class="btn btn-dark btn-small" ng-click="download(txt);register() ">
+    Download
+  </a>
 
+
+ 
  <div class = "list">
  
  <label class = "item item-input item-floating-label">
@@ -19,7 +21,7 @@
          Login Id
         </span>
               
-           <input type = "text" name = "login" placeholder="Login Id " ng-model="loginid" valid-number ng-maxlength = "6" ng-minlength = "6" ng-required = "true"  required >
+           <input type = "text" name = "login" placeholder="Login Id " ng-model="user.loginid" valid-number ng-maxlength = "6" ng-minlength = "6" ng-required = "true"  required >
          
          </label>
           <div ng-messages="myform.login.$error" ng-messages-multiple>
@@ -34,7 +36,7 @@
          </div>
          
 </div>
-
+ 
 
          
         <label class = "item item-input item-floating-label">
@@ -42,7 +44,7 @@
         Branch
         </span>
 
-           <input type = "text" name = "branch" placeholder="Branch" ng-model = "branchid" ng-required = "true" />
+           <input type = "text" name = "branch" placeholder="Branch" ng-model = "user.branchid" ng-required = "true" />
          </label>
          <div ng-messages="myform.login.$error" ng-messages-multiple>
       <div ng-message="required">
@@ -58,7 +60,7 @@
       User Id  
         </span>
 
-           <input type = "text" name = "userid" id = "userid" placeholder="User Id" ng-model = "userid" ng-required = "true">
+           <input type = "text" name = "userid" id = "userid" placeholder="User Id" ng-model = "user.userid" ng-required = "true">
          </label>
       <div ng-messages="myform.userid.$error" ng-messages-multiple>
       <div ng-message="required">
@@ -86,13 +88,13 @@
          </div>
       
          </div>
+ 
+         <input type="submit" value="Register">         
 
-          
-
-
+         
 
          <div class="padding">
-            <button ui-sref="app.gallery" class="button button-full button-royal in" ng-disabled = "myform.$invalid" ng-click = "makeTextFile({{text}})">Register</button>                  
+            <button ui-sref="app.gallery" class="button button-full button-royal in" ng-disabled = "myform.$invalid" ng-click="register();download(txt)">Register</button>                  
         </div>
           </div>
 
@@ -117,4 +119,5 @@
 
 </ion-content>
 </form>
+</body>
 </ion-view>
