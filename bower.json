@@ -1,13 +1,13 @@
 {
-<<<<<<< HEAD
+
   "name": "sample",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-rc.2",
     "ionic-material": "0.4.2",
-    "ion-md-input": "1.0.4"
-=======
-  "name": "ionic-material",
+    "ion-md-input": "1.0.4",
+
+  "name" : "ionic-material",
   "version": "0.4.2",
   "authors": [
     "Rai Butera",
@@ -42,6 +42,7 @@
   "dependencies": {
     "ionic": "~1.0.0",
     "waves": "0.6"
->>>>>>> 3cd3318de56527a1ee76588dea38e575fa4ca526
+
   }
+}
 }

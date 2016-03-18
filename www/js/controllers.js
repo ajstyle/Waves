@@ -4,7 +4,7 @@
  
 
 
-angular.module('starter.controllers', ['ngCordova','ngFileSaver'])
+angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
@@ -95,11 +95,6 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver'])
 
 
 
-
-
-
-
-
 .controller('LoginCtrl', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -149,7 +144,7 @@ loginService.login().then(function(response)
 
 
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob) {
+.controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http) {
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -190,17 +185,23 @@ $scope.register = function() {
                          console.log($scope.txt);
   $scope.download = function(txt) {
     console.log("Amit");
-  var data = new Blob([text], { type: 'application/json;charset=utf-8' });
-   var obj =  FileSaver.saveAs(data, 'text1.JSON');
-     
-        };
+  var data = new Blob([text], { type: 'application/json;charset=utf-8'  });
+       var obj = FileSaver.saveAs(data, 'text.txt');
+    FileReader.readAsText(data,'charset=utf-8', $scope)
+    .then(function (resp) {
+             console.log(resp);
+              $scope.response = resp ; 
 
 
-
-
-
-
-}   
+         
+    }, function (err) {
+         
+         console.log(err);
+    
+     });
+    }
+       
+   }   
       
 
 
@@ -224,6 +225,31 @@ loginService.login().then(function(response)
 */
 }])
 //Login Factory 
+
+
+.controller( 'customersController', function( $scope, $window,$http) {
+    
+   
+    $http({
+        url: 'text.txt' ,
+        dataType: 'json',
+        method: 'POST',
+        data: '',
+        headers: {
+            "Content-Type": "application/json"
+        }
+
+    }).success(function(response){
+        $scope.names = response;
+        console.log(response);
+        console.log("response");
+
+    }).error(function(error){
+        console.log("error");
+        $scope.names = 'error';
+    });        
+})
+
 .factory('loginService',['testService' ,  function(testService) {
  
   return {

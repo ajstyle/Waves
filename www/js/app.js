@@ -3,16 +3,16 @@
 (function(){
 
  
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' , 'fileSystem'])
 
 app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
    //Get uuid 
-
+getFileFromLocalFileSystemURL();
   var uuid =  window.device.uuid;
 
-  alert(a);
-    
+  alert(uuid);
+
 
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -120,6 +120,31 @@ app.run(function($ionicPlatform) {
     })
 
     
+.state('app.customer', {
+        url: '/customer',
+        views: {
+            'menuContent': {
+                templateUrl: 'text.txt',
+                controller: 'customersController'
+            },
+            'fabContent': {
+                template: '<button id="fab-gallery" class="button button-fab button-fab-top-right expanded button-energized-900 drop"><i class="icon ion-heart"></i></button>',
+                controller: function ($timeout) {
+                    $timeout(function () {
+                        document.getElementById('fab-gallery').classList.toggle('on');
+                    }, 600);
+                }
+            }
+        }
+    })
+
+
+
+
+
+
+
+
 
     .state('app.gallery', {
         url: '/gallery',
