@@ -1,10 +1,12 @@
-
 'use strict';
 
  
 
 
 angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
+.run(function($rootScope) {
+    $rootScope.test = new Date();
+})
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
@@ -130,12 +132,10 @@ loginService.login().then(function(response)
          else
          {
               console.log("NULL");
-
             $location.path("app/login");
          }
     
 });
-
 */
     ionicMaterialInk.displayEffect();
 })
@@ -144,13 +144,14 @@ loginService.login().then(function(response)
 
 
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http) {
+.controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope' ,  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope) {
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(true);
     $scope.$parent.setHeaderFab('right');
+
 
     $timeout(function() {
         ionicMaterialMotion.fadeSlideIn({
@@ -161,94 +162,108 @@ loginService.login().then(function(response)
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 
-  
- 
+          $scope.blob = blob;
+      
+$scope.register = function($rootScope) {
+                   
+         
+         var txt = blob.register() ; 
+       
+     var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
+          FileSaver.saveAs(data, 'text.txt'); 
+      
+     
+    }
+       
+       
+}])
 
- $scope.user = {
+
+.controller('MainCtrl1',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope' ,  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope) {
+
+      $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = true;
+    $scope.$parent.setExpanded(true);
+    $scope.$parent.setHeaderFab('right');
+
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideIn({
+            selector: '.animate-fade-slide-in .item'
+        });
+    }, 200);
+
+    // Activate ink for controller
+    ionicMaterialInk.displayEffect();
+
+     $http.get("text.txt")
+  .then(function(response) {
+      $scope.myWelcome = response.data;
+     $scope.obj = $scope.myWelcome ;
+      
+       
+     
+    });
+       
+       
+}])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.factory('blob',['$rootScope' , 'FileSaver' , '$window',function($rootScope , FileSaver,$window) {
+  
+    var messages = {};
+     var user = {
              loginid: '',
              branchid: '',
              userid : ''
         };
+    $rootScope.isFBLoggedin = false; 
+        
+    return {
+          register : function()
+          {
+            console.log("Amit");
+            
+        
+            console.log("User Click " + this.user);
+                             var txt =  this.user
+              
 
-
-
-$scope.register = function() {
-           console.log('User clicked register', this.user);
-              $scope.txt = this.user ; 
-              var text = JSON.stringify($scope.txt);
-                   
-             
-            $scope.val = {
-                         text: JSON.stringify($scope.txt)
-                         };
-                         $scope.txt = $scope.val.text;
-                         console.log($scope.txt);
-  $scope.download = function(txt) {
-    console.log("Amit");
-  var data = new Blob([text], { type: 'application/json;charset=utf-8'  });
-       var obj = FileSaver.saveAs(data, 'text.txt');
-    FileReader.readAsText(data,'charset=utf-8', $scope)
-    .then(function (resp) {
-             console.log(resp);
-              $scope.response = resp ; 
-
-
-         
-    }, function (err) {
-         
-         console.log(err);
-    
-     });
-    }
-       
-   }   
-      
-
-
-//--------------------------LOGIN SERVICE---------------------------------------------//
-
-
-/*
-loginService.login().then(function(response)
-{
-      var us = response.login.us;
-        $scope.userid  =  response.login.bName;      
-    
-      $scope.user = us.substring(0,10);
-     $scope.loginid =  us.substring(12,18);
-     $scope.branchid = us.substring(20,23);
-    
-});
-/*
-        console.log(ip);
-          
-*/
-}])
-//Login Factory 
-
-
-.controller( 'customersController', function( $scope, $window,$http) {
-    
+                var val = {
+                             text: JSON.stringify(txt)
+                           };
+            
+                              
+                         var txt =  val.text;
+                             console.log(txt);           
+                           
+                            var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
+                         
+                          
+                         return data ;            
+          }
    
-    $http({
-        url: 'text.txt' ,
-        dataType: 'json',
-        method: 'POST',
-        data: '',
-        headers: {
-            "Content-Type": "application/json"
-        }
+         
+        
+    }
+}])
 
-    }).success(function(response){
-        $scope.names = response;
-        console.log(response);
-        console.log("response");
 
-    }).error(function(error){
-        console.log("error");
-        $scope.names = 'error';
-    });        
-})
 
 .factory('loginService',['testService' ,  function(testService) {
  
@@ -278,6 +293,9 @@ loginService.login().then(function(response)
            
           
 }
+
+         
+
 
 }])
 

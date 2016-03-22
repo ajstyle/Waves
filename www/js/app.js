@@ -1,14 +1,27 @@
- 
-
 (function(){
 
  
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' , 'fileSystem'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' ])
 
-app.run(function($ionicPlatform) {
+app.run(['$ionicPlatform','$location' , '$http' ,  function($ionicPlatform,$location,$http) {
     $ionicPlatform.ready(function() {
-   //Get uuid 
-getFileFromLocalFileSystemURL();
+
+      
+     $http.get("text.txt")
+  .then(function(response) {
+    
+          $location.url("/app/registertxt");
+      
+     
+    },function(error){
+        
+    });
+       
+ 
+    
+
+
+
   var uuid =  window.device.uuid;
 
   alert(uuid);
@@ -22,8 +35,7 @@ getFileFromLocalFileSystemURL();
             StatusBar.styleDefault();
         }
     });
-})
-
+}])
 
 
 .factory("testService", ['$soap',function($soap){
@@ -119,7 +131,33 @@ getFileFromLocalFileSystemURL();
         }
     })
 
-    
+
+      .state('app.registertxt', {
+        url: '/registertxt',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/registertxt.html',
+                controller: 'MainCtrl1'
+            },
+            'fabContent': {
+                template: '<button id="fab-activity" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-star"></i></button>',
+                controller: function ($timeout) {
+                    $timeout(function () {
+                        document.getElementById('fab-activity').classList.toggle('on');
+                    }, 200);
+                }
+            }
+        }
+    })
+
+
+
+
+
+
+
+
+
 .state('app.customer', {
         url: '/customer',
         views: {
