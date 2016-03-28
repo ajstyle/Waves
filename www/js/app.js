@@ -10,7 +10,7 @@ app.run(['$ionicPlatform','$location' , '$http' ,  function($ionicPlatform,$loca
      $http.get("text.txt")
   .then(function(response) {
     
-          $location.url("/app/registertxt");
+         $location.url("/app/registertxt");
       
      
     },function(error){
@@ -41,12 +41,19 @@ app.run(['$ionicPlatform','$location' , '$http' ,  function($ionicPlatform,$loca
 .factory("testService", ['$soap',function($soap){
     var base_url = "http://wcplreg.in/app/appLoginSer1.asmx";
     var action = "login" ; 
+    var action1 = "GetCustomers" ; 
     return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
             return $soap.post(base_url, action , {info1 : '125066' ,  info2 : 'A04' , info3 : 'AMIT' , info4 : '1234' , info5 : '917877361402' , info6 : '1234'});
+        },
+        GetCustomer: function(){
+            return $soap.post(base_url, action1 , {serIp : '108.178.25.54' , serDb : 'waves_SyncData' , serUs : 'wavesUser2;;125066;;A04' ,serPsw : 'waves77430@77430'});
         }
     }
 }])
+
+
+
 
   .directive('validNumber', function() {
       return {

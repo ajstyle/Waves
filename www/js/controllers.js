@@ -119,9 +119,9 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
 
     // Set Ink
     ionicMaterialInk.displayEffect();
-/*
+
 loginService.login().then(function(response)
-{
+{/*
        var ip = response.login.ip;
     
          if(ip != null)
@@ -134,9 +134,10 @@ loginService.login().then(function(response)
               console.log("NULL");
             $location.path("app/login");
          }
-    
+   */
+   console.log(response); 
 });
-*/
+
     ionicMaterialInk.displayEffect();
 })
 
@@ -179,13 +180,28 @@ $scope.register = function($rootScope) {
 }])
 
 
-.controller('MainCtrl1',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope' ,  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope) {
+.controller('MainCtrl1',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope'  , function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope) {
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(true);
     $scope.$parent.setHeaderFab('right');
+
+
+loginService.GetCustomers().then(function(response)
+{
+   var arr = [] ; 
+  for(var x in response){
+  arr.push(response[x]);
+}
+   
+console.log(arr);
+   console.log(response); 
+});
+
+
+
 
 
     $timeout(function() {
@@ -208,20 +224,6 @@ $scope.register = function($rootScope) {
        
        
 }])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .factory('blob',['$rootScope' , 'FileSaver' , '$window',function($rootScope , FileSaver,$window) {
@@ -289,8 +291,20 @@ $scope.register = function($rootScope) {
                });
          
                   return loginResponse ;
-             }
-           
+             },
+           GetCustomers : function()
+           {
+                 var GetCustomer_res =  testService.GetCustomer().then(function(response){
+                          var res2 = JSON.stringify(response);
+                      var res3 = res2.replace("diffgr:diffgram", "key");
+   
+                      var res4 = JSON.parse(res3);
+                       var res5 = res4.key.NewDataSet;                                 
+                         return res5 ;
+                      
+                 })
+                return GetCustomer_res ; 
+           }
           
 }
 
