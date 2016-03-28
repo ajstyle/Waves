@@ -3,10 +3,22 @@
  
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' ])
 
-app.run(['$ionicPlatform','$location' , '$http' ,  function($ionicPlatform,$location,$http) {
+app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile', function($ionicPlatform,$location,$http,$cordovaFile) {
     $ionicPlatform.ready(function() {
 
-      
+       document.addEventListener('deviceready', function () {
+
+      $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "text.txt")
+      .then(function (success) {
+       $location.url("/app/registertxt"); 
+      }, function (error) {
+        
+      });
+
+  })
+
+
+
      $http.get("text.txt")
   .then(function(response) {
     

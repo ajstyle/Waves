@@ -145,7 +145,7 @@ loginService.login().then(function(response)
 
 
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope' ,  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope) {
+.controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope' , '$cordovaFile',  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope , $cordovaFile) {
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -167,28 +167,58 @@ loginService.login().then(function(response)
       
 $scope.register = function($rootScope) {
                    
-         
+      
+
+
          var txt = blob.register() ; 
-       
+        document.addEventListener('deviceready', function () {
+
+        $cordovaFile.createFile(cordova.file.applicationStorageDirectory, "text.txt", true)
+      .then(function (success) {
+       alert("Create file" + success) ; 
+      }, function (error) {
+        alert("Create file error " + error);
+      });
+
+$cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt , true)
+      .then(function (success) {
+        alert( " Write Success " + success ); 
+      }, function (error) {
+        alert( " error Success " + success );
+      });
+
+  }) 
      var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
-          FileSaver.saveAs(data, 'text.txt'); 
+        //  FileSaver.saveAs(data, 'text.txt'); 
       
      
     }
-       
+    
        
 }])
 
 
-.controller('MainCtrl1',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope'  , function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope) {
+.controller('MainCtrl1',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope','$cordovaFile', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope,$cordovaFile) {
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(true);
     $scope.$parent.setHeaderFab('right');
+  document.addEventListener('deviceready', function () {
+    $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 
+      .then(function (success) {
+         
+         alert("readFile " + success) ;       
+        var res =  JSON.parse(success)
+        alert(res);
+        $scope.obj  = res ; 
 
+      }, function (error) {
+          alert("readFileerror " + error) ; 
+      });
 
+});
 loginService.GetCustomers().then(function(response)
 {
    var arr = [] ; 
@@ -196,7 +226,7 @@ loginService.GetCustomers().then(function(response)
   arr.push(response[x]);
 }
    
-console.log(arr);
+   console.log(arr);
    console.log(response); 
 });
 
@@ -252,12 +282,12 @@ console.log(arr);
             
                               
                          var txt =  val.text;
-                             console.log(txt);           
+                            // console.log(txt);           
                            
-                            var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
+                           // var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
                          
                           
-                         return data ;            
+                         return txt ;            
           }
    
          
@@ -266,8 +296,7 @@ console.log(arr);
 }])
 
 
-
-.factory('loginService',['testService' ,  function(testService) {
+.factory('loginService',['testService' , 'Response' ,   function(testService,Response) {
  
   return {
            login : function() 
@@ -278,14 +307,9 @@ console.log(arr);
                var loginResponse =  testService.HelloWorld().then(function(response)
                {
                      
-                      //$scope.response = response;
+                      
     
-                      var res2 = JSON.stringify(response);
-                      var res3 = res2.replace("diffgr:diffgram", "key");
-   
-                      var res4 = JSON.parse(res3);
-                       var res5 = res4.key.NewDataSet;                                 
-                         return res5 ;
+                       return Response.response(response); 
                       
 
                });
@@ -295,14 +319,8 @@ console.log(arr);
            GetCustomers : function()
            {
                  var GetCustomer_res =  testService.GetCustomer().then(function(response){
-                          var res2 = JSON.stringify(response);
-                      var res3 = res2.replace("diffgr:diffgram", "key");
-   
-                      var res4 = JSON.parse(res3);
-                       var res5 = res4.key.NewDataSet;                                 
-                         return res5 ;
-                      
-                 })
+                       return Response.response(response); 
+                 });
                 return GetCustomer_res ; 
            }
           
@@ -312,6 +330,28 @@ console.log(arr);
 
 
 }])
+
+
+
+
+
+
+.factory('Response',function(){
+
+  return {
+           response : function(response)
+       {
+      
+                      var res2 = JSON.stringify(response);
+                      var res3 = res2.replace("diffgr:diffgram", "key");
+   
+                      var res4 = JSON.parse(res3);
+                       var res5 = res4.key.NewDataSet;                                 
+                         return res5 ;
+      }
+}})
+
+
 
 
 
