@@ -18,7 +18,7 @@ app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile', function($ioni
   })
 
 
-
+/*
      $http.get("text.txt")
   .then(function(response) {
     
@@ -29,7 +29,7 @@ app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile', function($ioni
         
     });
        
- 
+ */
     
 
 
@@ -202,7 +202,6 @@ app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile', function($ioni
 
 
 
-
     .state('app.gallery', {
         url: '/gallery',
         views: {
@@ -257,7 +256,7 @@ app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile', function($ioni
         views: {
             'menuContent': {
                 templateUrl: 'templates/debtors.html',
-                controller: 'ProfileCtrl'
+                controller: 'DebtorCtrl'
             },
             'fabContent': {
                 template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
@@ -358,8 +357,28 @@ app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile', function($ioni
             }
         }
     })
-    ;
+    
   
+   .state('app.purchase', {
+        url: '/purchase',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/purchase.html',
+                controller: 'ProfileCtrl'
+            },
+            'fabContent': {
+                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+    ;
+
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
 

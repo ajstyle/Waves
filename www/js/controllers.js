@@ -1,12 +1,18 @@
 'use strict';
 
- 
 
 
 angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
 .run(function($rootScope) {
     $rootScope.test = new Date();
 })
+
+
+/**
+ *
+ * App Ctrl
+ *
+ */
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
@@ -41,11 +47,9 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
             }
         }
     };
-
     $scope.setExpanded = function(bool) {
         $scope.isExpanded = bool;
     };
-
     $scope.setHeaderFab = function(location) {
         var hasHeaderFabLeft = false;
         var hasHeaderFabRight = false;
@@ -95,9 +99,21 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
 
 })
 
+/*=====  End of App Ctrl  ======*/
 
 
-.controller('LoginCtrl', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService) {
+
+
+
+
+
+
+/*==================================
+=            Login Ctrl            =
+==================================*/
+
+.controller('LoginCtrl', function($scope,$stateParams, $timeout,$location,
+                                   ionicMaterialMotion, ionicMaterialInk, loginService) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -121,20 +137,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
     ionicMaterialInk.displayEffect();
 
 loginService.login().then(function(response)
-{/*
-       var ip = response.login.ip;
-    
-         if(ip != null)
-         {
-            console.log("Ip");
-            $location.path("app/register");
-         }
-         else
-         {
-              console.log("NULL");
-            $location.path("app/login");
-         }
-   */
+{
    console.log(response); 
 });
 
@@ -144,6 +147,16 @@ loginService.login().then(function(response)
 
 
 
+/*=====  End of Login Ctrl  ======*/
+
+
+
+
+
+
+/*=================================
+=            Main Ctrl            =
+=================================*/
 
 .controller('MainCtrl',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope' , '$cordovaFile',  function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope , $cordovaFile) {
 
@@ -198,6 +211,19 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 }])
 
 
+
+
+/*=====  End of Main Ctrl  ======*/
+
+
+
+
+
+
+/*===================================
+=            Main Ctrl 1            =
+===================================*/
+
 .controller('MainCtrl1',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope','$cordovaFile', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope,$cordovaFile) {
 
       $scope.$parent.showHeader();
@@ -219,19 +245,6 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
       });
 
 });
-loginService.GetCustomers().then(function(response)
-{
-   var arr = [] ; 
-  for(var x in response){
-  arr.push(response[x]);
-}
-   
-   console.log(arr);
-   console.log(response); 
-});
-
-
-
 
 
     $timeout(function() {
@@ -256,126 +269,76 @@ loginService.GetCustomers().then(function(response)
 }])
 
 
-.factory('blob',['$rootScope' , 'FileSaver' , '$window',function($rootScope , FileSaver,$window) {
-  
-    var messages = {};
-     var user = {
-             loginid: '',
-             branchid: '',
-             userid : ''
-        };
-    $rootScope.isFBLoggedin = false; 
-        
-    return {
-          register : function()
-          {
-            console.log("Amit");
-            
-        
-            console.log("User Click " + this.user);
-                             var txt =  this.user
-              
-
-                var val = {
-                             text: JSON.stringify(txt)
-                           };
-            
-                              
-                         var txt =  val.text;
-                            // console.log(txt);           
-                           
-                           // var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
-                         
-                          
-                         return txt ;            
-          }
-   
-         
-        
-    }
-}])
-
-
-.factory('loginService',['testService' , 'Response' ,   function(testService,Response) {
- 
-  return {
-           login : function() 
-           { 
-               
-              
-
-               var loginResponse =  testService.HelloWorld().then(function(response)
-               {
-                     
-                      
-    
-                       return Response.response(response); 
-                      
-
-               });
-         
-                  return loginResponse ;
-             },
-           GetCustomers : function()
-           {
-                 var GetCustomer_res =  testService.GetCustomer().then(function(response){
-                       return Response.response(response); 
-                 });
-                return GetCustomer_res ; 
-           }
-          
-}
-
-         
-
-
-}])
+/*=====  End of Main Ctrl 1  ======*/
 
 
 
+/*====================================
+=           Debtor Ctrl            =
+====================================*/
 
-
-
-.factory('Response',function(){
-
-  return {
-           response : function(response)
-       {
-      
-                      var res2 = JSON.stringify(response);
-                      var res3 = res2.replace("diffgr:diffgram", "key");
-   
-                      var res4 = JSON.parse(res3);
-                       var res5 = res4.key.NewDataSet;                                 
-                         return res5 ;
-      }
-}})
-
-
-
-
-
-
-
-.controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,loginService) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.$parent.setHeaderFab('left');
-
-    // Delay expansion
-    $timeout(function() {
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
-    }, 300);
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
 
     // Set Motion
-    ionicMaterialMotion.fadeSlideInRight();
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
 
     // Set Ink
     ionicMaterialInk.displayEffect();
+
+
+
+  loginService.GetCustomers().then(function(response)
+{
+  var lname = [];
+      
+   for(var i=0;i<response.length;i++){
+        
+       $scope.lname = response[i].lname;
+      console.log( $scope.lname);
+
+      $scope.city = response[i].city;
+       $scope.baltype = response[i].baltype ;  
+    }
+
+
+  console.log(response);
+});
+
+
+
+
+
+
+
+
+
+
 })
 
+/*=====  End of Debtor Ctrl  ======*/
+
+
+
+
+/*====================================
+=            Service Ctrl            =
+====================================*/
 
 .controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     // Set Header
@@ -401,23 +364,15 @@ loginService.GetCustomers().then(function(response)
     // Set Ink
     ionicMaterialInk.displayEffect();
 })
+/*=====  End of Service Ctrl  ======*/
 
-.controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab('right');
 
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideIn({
-            selector: '.animate-fade-slide-in .item'
-        });
-    }, 200);
 
-    // Activate ink for controller
-    ionicMaterialInk.displayEffect();
-})
+
+
+/*====================================
+=            Gallery Ctrl            =
+====================================*/
 
 .controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     $scope.$parent.showHeader();
@@ -438,5 +393,69 @@ loginService.GetCustomers().then(function(response)
 
 })
 
- 
-;
+/*=====  End of Gallery Ctrl  ======*/
+
+
+
+
+
+
+/*=================================
+=            FACTORIES            =
+=================================*/
+
+.factory('blob',['$rootScope' , 'FileSaver' , '$window',function($rootScope , FileSaver,$window) {
+    var messages = {};
+     var user = {
+             loginid: '',
+             branchid: '',
+             userid : ''
+        };
+    $rootScope.isFBLoggedin = false; 
+    return {
+          register : function()
+          {
+            console.log("Amit");
+            console.log("User Click " + this.user);
+                             var txt =  this.user
+                var val = {
+                             text: JSON.stringify(txt)
+                           };
+                         var txt =  val.text;
+                            // console.log(txt);           
+                           // var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
+                         return txt ;            
+          }
+    }
+}])
+.factory('loginService',['testService' , 'Response' ,   function(testService,Response) {
+  return {
+           login : function() 
+           { 
+               var loginResponse =  testService.HelloWorld().then(function(response)
+               {
+                       return Response.response(response); 
+               });
+                  return loginResponse ;
+             },
+           GetCustomers : function()
+           {
+                 var GetCustomer_res =  testService.GetCustomer().then(function(response){
+                       return Response.response(response); 
+                 });
+                return GetCustomer_res ; 
+           }
+}
+}])
+.factory('Response',function(){
+  return {
+           response : function(response)
+       {
+                      var res2 = JSON.stringify(response);
+                      var res3 = res2.replace("diffgr:diffgram", "key");
+                      var res4 = JSON.parse(res3);
+                       var res5 = res4.key.NewDataSet;                                 
+                         return res5 ;
+      }
+}});
+/*=====  End of FACTORIES  ======*/
