@@ -1,43 +1,55 @@
 <ion-view view-title="Debtors">
     <ion-content ng-class="{expanded:isExpanded}">
-        <div class="content has-header">
-            <div class="list animate-fade-slide-in-right">
-               
-                <a href="#/app/profile" class="item item-avatar item-icon-right">
-                    <img src="img/jon-snow.jpg">
-                   
-                    <h2>{{lname}}</h2>
+       
+       
+<label class = "item item-input item-floating-label">
+       
+              
+           <input type = "text" name = "Search" placeholder="Search" ng-model="search"  >
+      <p>
+       <h4>search by: </h4>
+          <input class="with-gap" name="group1" type="radio" id="test1" checked="checked"  />
+          <label for="test1">Name</label>
+       
+      <input class="with-gap" name="group1" type="radio" id="test2" />
+      <label for="test2">City</label>
+   </p>
+         </label>
+
+
+      
+        <ion-list>
+             
+                   <ion-item ng-repeat= "responses in response |filter:search">
                   
+                 <a class="waves-effect waves-green " href="#/app/profile">
+          
                 
-                    <p>{{city}}</p>
-                    <p>{{baltype}}</p>
-                    <i class="icon ion-chatbubble muted"></i>
-                </a>
-                <a href="#/app/profile" class="item item-avatar item-icon-right">
-                    <img src="img/daenerys.jpg">
-                    <h2>Daenerys Targaryen</h2>
-                    <p>Dragon mommy</p>
-                    <i class="icon ion-chatbubble muted"></i>
-                </a>
-                <a href="#/app/profile" class="item item-avatar item-icon-right">
-                    <img src="img/arya.jpg">
-                    <h2>Arya Stark</h2>
-                    <p>Is Chuck Norris' fear</p>
-                    <i class="icon ion-chatbubble muted"></i>
-                </a>
-                <a href="#/app/profile" class="item item-avatar item-icon-right">
-                    <img src="img/sansa.jpg">
-                    <h2>Sansa Stark</h2>
-                    <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
-                    <i class="icon ion-chatbubble muted"></i>
-                </a>
-                <a href="#/app/profile" class="item item-avatar item-icon-right">
-                    <img src="img/tyrion.jpg">
-                    <h2>Tyrion Lannister</h2>
-                    <p>B.A.M.F. imp</p>
-                    <i class="icon ion-chatbubble muted"></i>
-                </a>
+            <div class="list animate-fade-slide-in-right">
+                    
+
+                    <h2>{{responses.lname}}</h2>
+                
+                    <p>{{responses.city}}</p>
+                    
+                   
+                    <p>{{responses.baltype}}</p>
+                  
+                    
+                
+               
             </div>
-        </div>
+           </a> 
+       
+       </ion-item>
+       
+       </ion-list>
+       </div>
+
+
+
     </ion-content>
 </ion-view>
+
+
+

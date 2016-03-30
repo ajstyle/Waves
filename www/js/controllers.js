@@ -87,12 +87,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader'])
         $scope.hasHeader();
     };
 
-    $scope.clearFabs = function() {
-        var fabs = document.getElementsByClassName('button-fab');
-        if (fabs.length && fabs.length > 1) {
-            fabs[0].remove();
-        }
-    };
+   
  $scope.clearFabs = function() {
     $scope.number = '' ;
 }
@@ -305,19 +300,13 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
   loginService.GetCustomers().then(function(response)
 {
-  var lname = [];
+  $scope.response = response; 
+ console.log(response);
       
-   for(var i=0;i<response.length;i++){
-        
-       $scope.lname = response[i].lname;
-      console.log( $scope.lname);
+  
+    
 
-      $scope.city = response[i].city;
-       $scope.baltype = response[i].baltype ;  
-    }
-
-
-  console.log(response);
+ 
 });
 
 

@@ -8,25 +8,28 @@
             </div>
         </div>
     
-           <h1>
-              <div class="tabs static">
-                <i class="icon ion-android-people"></i> Login 
-          </div>
-           </h1>
+           <h5>
+             
+                <center><i class="icon ion-android-people"></i> Login </center>
+         
+           </h5>
    
           
+  
+          
+        
            
   
 
          <form name = "form1" >
-       <div class = "list">
-        <label class = "item item-input item-floating-label">
-        <span class = "input-label" style="color:black;font-weight:bold">
-      Mobile no. 
-        </span>
-
-           <input type = "text" name = "mobile" placeholder="Mobile no." ng-model = "data.mobile"  valid-number id = "FieldText" ng-minlength = "10" ng-maxlength = "10" autofocus required>
-         </label>
+      
+      <div class="row">
+     <div class="card-panel grey lighten-5 z-depth-1">
+     <div class="input-field col s12">
+           <i class="material-icons prefix">phone</i>
+           <input type = "text" name = "mobile"  length="10" ng-model = "data.mobile"  valid-number id = "FieldText" ng-minlength = "10" ng-maxlength = "10"  autofocus required>
+       
+         <label for="email">Mobile no.</label>
         <div ng-messages="form1.mobile.$error" ng-messages-multiple>
       <div ng-message="required">
         <div class = "error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. required</div>
@@ -44,16 +47,18 @@
       
      
      </div>
+
        <header></header>
         <div class="padding">
-            <button ui-sref="app.register" class="button button-full button-balanced in" ng-disabled = "form1.$invalid">Verify</button>
+            <center>
+            <button ui-sref="app.register" class="waves-effect waves-light btn" ng-disabled = "form1.$invalid">Verify</button>
+            </center>
 
 
-        
 
          </div>
          </div>
-
+</div>
 </form>
 </body>
 
