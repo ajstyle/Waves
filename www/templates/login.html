@@ -13,23 +13,17 @@
                 <center><i class="icon ion-android-people"></i> Login </center>
          
            </h5>
-   
-          
-  
-          
-        
-           
-  
 
          <form name = "form1" >
-      
+       <div class="card-panel grey lighten-5 z-depth-1">
       <div class="row">
-     <div class="card-panel grey lighten-5 z-depth-1">
+         
+    
      <div class="input-field col s12">
            <i class="material-icons prefix">phone</i>
            <input type = "text" name = "mobile"  length="10" ng-model = "data.mobile"  valid-number id = "FieldText" ng-minlength = "10" ng-maxlength = "10"  autofocus required>
        
-         <label for="email">Mobile no.</label>
+         <label for="email">Mobile_no.</label>
         <div ng-messages="form1.mobile.$error" ng-messages-multiple>
       <div ng-message="required">
         <div class = "error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. required</div>
@@ -58,11 +52,12 @@
 
          </div>
          </div>
+         </div>
+</div>
 </div>
 </form>
 </body>
 
-<script type="text/javascript" src = "js/focus.js"></script>
 
 
 

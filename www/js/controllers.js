@@ -272,7 +272,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 =           Debtor Ctrl            =
 ====================================*/
 
-.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,loginService) {
+.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,loginService,$ionicLoading) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -280,6 +280,8 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
 
+
+     
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -287,10 +289,30 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
         });
     }, 300);
 
-    $timeout(function() {
+   
+      $ionicLoading.show({
+          template: 'Loading...'
+       });
+
+       $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 3000
         });
+    }, 700);
+
+      $timeout(function() {
+         
+     loginService.GetCustomers().then(function(response)
+      {
+
+        $ionicLoading.hide(); 
+        $scope.hide = function(){
+       $ionicLoading.hide();
+      };
+
+    $scope.response = response; 
+    console.log(response);
+   })
     }, 700);
 
     // Set Ink
@@ -298,27 +320,18 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
 
 
-  loginService.GetCustomers().then(function(response)
-{
-  $scope.response = response; 
- console.log(response);
-      
-  
-    
-
  
-});
-
-
-
-
-
-
-
-
-
 
 })
+
+
+
+
+
+
+
+
+
 
 /*=====  End of Debtor Ctrl  ======*/
 
