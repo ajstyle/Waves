@@ -1,0 +1,95 @@
+<ion-view view-title="Register">
+
+<form name = "myform" novalidate>
+
+<ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+<div class="app-icon1"></div>
+
+
+
+ <div class="card-panel grey lighten-5 z-depth-1">
+ 
+  <div class="row">
+
+     <div class="input-field col s12">
+               <i class="material-icons prefix">supervisor_account</i>
+           <input type = "text" name = "login" ng-model="blob.user.loginid" valid-number ng-maxlength = "6" ng-minlength = "6" ng-required = "true"  required >
+         <label for="Login id">Login_id</label>
+        
+          <div ng-messages="myform.login.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id  required</div>
+         </div>
+      <div ng-message="minlength">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id Not valid</div>
+         </div>
+      <div ng-message="maxlength">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id  Not valid</div>
+         </div>
+     </div>    
+</div>
+ </div>
+
+ 
+
+
+         
+        
+ <div class="row">
+
+     <div class="input-field col s12">
+               <i class="material-icons prefix">label_outline</i>
+          <input type = "text" name = "branch" ng-model = "blob.user.branchid" ng-required = "true" />
+         <label for="Branch">Branch</label>
+         <div ng-messages="myform.login.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.branch.$touched">branch id required</div>
+         </div>
+      
+         </div>
+</div>
+ </div>
+
+  <div class="row">
+
+     <div class="input-field col s12">
+              <i class="material-icons prefix">person_pin</i>
+
+        <input type = "text" name = "userid" id = "userid"  ng-model = "blob.user.userid" ng-required = "true">
+         <label for="user id">User_id</label>
+         <div ng-messages="myform.login.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.branch.$touched">branch id required</div>
+         </div>
+      
+         </div>
+</div>
+ </div>
+       
+        
+ <div class="row">
+
+     <div class="input-field col s12">
+          <i class="material-icons prefix">lock_outline</i>
+      <input type = "password" name = "password" id = "password"  ng-model = "blob.user.password" 
+            ng-required = "true">
+         <label for="user id">Password</label>
+        <div ng-messages="myform.password.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.password.$invalid&&myform.password.$touched">Password to be required</div>
+         </div>
+         
+      
+         </div>
+</div>
+ </div>
+      <div class="padding">
+            <button ui-sref="app.gallery" class="button button-full button-royal in" ng-disabled = "myform.$invalid" ng-click="register(blob) ">Register</button>                  
+        </div>   
+
+</div>  
+</ion-content>
+</form>
+</body>
+</ion-view>
+ 
