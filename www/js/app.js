@@ -262,7 +262,7 @@ app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile', function($ioni
             'menuContent': {
                 templateUrl: 'templates/debtors.html',
                 controller: 'DebtorCtrl'
-            },
+            }
             
         }
     })

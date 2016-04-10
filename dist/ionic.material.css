@@ -708,7 +708,7 @@
 .card .icon + .icon {
   padding-left: 1rem; }
 
-.card.animate-fade-in {
+.card.-fade-in {
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform: translate3d(-30px, 1px, 0);
@@ -1681,7 +1681,7 @@
 ==================================*/
 .animate-fade-slide-in-right .item,
 .animate-fade-slide-in-right .item {
-  visibility: hidden; }
+  visibility: visible; }
 
 .animate-fade-slide-in-right .item,
 .animate-fade-slide-in-right .item {

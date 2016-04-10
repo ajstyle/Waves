@@ -16,6 +16,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
     // Form data for the login modal
+    
     $scope.loginData = {};
     $scope.isExpanded = false;
     $scope.hasHeaderFabLeft = false;
@@ -299,10 +300,11 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 =           Debtor Ctrl            =
 ====================================*/
 
-.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,loginService,$ionicLoading) {
+.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,loginService,$ionicLoading,$filter) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
+      
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -318,7 +320,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
    
       $ionicLoading.show({
-          template: 'Loading...'
+          templateUrl: 'templates/loader.html'
        });
 
        $timeout(function() {
@@ -331,14 +333,31 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
          
      loginService.GetCustomers().then(function(response)
       {
-
+         $scope.showme = true;
+         $scope.nodata = false;  
         $ionicLoading.hide(); 
         $scope.hide = function(){
        $ionicLoading.hide();
       };
 
     $scope.response = response; 
-    console.log(response);
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
    })
     }, 700);
 

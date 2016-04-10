@@ -123,34 +123,137 @@ p {
 
 button:disabled { background-color : lime}
 
-.loader
+.loading-container 
 {
-
-    
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: auto;
+    color: white
 }
+
 
 .spinner svg {
   width: 28px;
   height: 28px;
-  stroke: : white;
-  fill: white;
+
+}
+ 
+/*Animations*/
+
+/*
+  We're using CSS transitions for when
+  the enter and move events are triggered
+  for the element that has the .repeated-item
+  class
+*/
+.repeated-item.ng-enter, .repeated-item .ng-move{
+  -webkit-transition:0.1s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+  
+}
+
+/*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+.repeated-item.ng-move{
+
+    opacity:0;
+  -webkit-transition : opacity 1s ;
+   -webkit-animation-name : slide-out ;
+   animation-name : slide-out;
+}
+.repeated-item.ng-enter.ng-enter-active,
+.repeated-item.ng-move.ng-move-active {
+  opacity:1;
+ 
+}
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .repeated-item class
+*/
+.repeated-item.ng-leave {
+  -webkit-animation:0.5s my_animation;
+  -moz-animation:0.5s my_animation;
+  -o-animation:0.5s my_animation;
+  animation:0.5s my_animation;
+}
+
+@keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-moz-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-o-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+.boxme.ng-hide-add {
+    -webkit-animation: rotateIn 1s;
+    display: block!important;
+}
+.boxme.ng-hide-remove {
+    -webkit-animation: rotateIn 1s;
+}
+p.bal
+{
+    color: rgb(0,0,255);
+     display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+
+}
+p.city
+{
+    color: green;
+     display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
 
 }
 
+h3.lname
+{
+   color: black;
+     font-family: 'Source Sans Pro', sans-serif;
+     display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
 
-.list-animation.ng-enter {
-  -webkit-transition: 1s linear all; /* Chrome */
-  transition: 1s linear all;
-  opacity: 0;
 }
 
-.list-animation.ng-enter.ng-enter-active {
-  opacity: 1;
+p.message
+{
+    font-size: 15px ;
+    color:red;
+     display: block;
+    margin-top: 15em;
+    margin-bottom: 10em;
+    margin-left: 5em;
+    margin-right: 5em;
+
 }
