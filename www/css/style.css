@@ -1,0 +1,283 @@
+/* General
+==================================*/
+h1 {
+    color: black;
+    text-shadow: 0 1px 0px #000;
+    font-size: 15px;
+    margin : auto;
+}
+
+
+/* Utilities
+==================================*/
+.title-bordered {
+    border-top: solid 2px #bbb;
+    padding-top: 30px;
+}
+
+p {
+    color: #555;
+    margin: 0 0 25px;
+    font-family: 'Indie Flower', cursive;
+    font-size : 15px;
+}
+
+.scroll {
+    height: 100%;
+}
+
+
+/* Menu
+==================================*/
+.menu .bar.bar-header.expanded {
+    transition: all .5s ease-in-out;
+}
+
+.menu-open .bar.bar-header.expanded {
+    background-color: #222;
+}
+
+.menu h2 {
+    bottom: 0;
+    font-size: 18px;
+    left: 16px;
+    position: absolute;
+}
+
+.menu .avatar {
+    height: 88px;
+    width: 88px;
+}
+
+.menu.menu-left * {
+    font-weight: bold;
+}
+
+.menu-open .ion-navicon {
+    transform: rotate(-360deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-open .ion-navicon:before {
+    content: "\f2ca";
+}
+
+
+/* Login
+==================================*/
+.app-icon {
+    background-color: #fff;
+    background: url('../img/waveslogo.png') center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 120px;
+    margin: 100px auto;
+    width: 120px;
+}
+
+.app-icon1 {
+    background-color: #fff;
+    background: url('../img/waveslogo.png') center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 120px;
+    margin: 0 auto;
+    width: 120px;
+}
+
+.app-icon2 {
+    background-color: #fff;
+    background: url('../img/waveslogo.png') center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 80px;
+    margin: 0 auto;
+    width: 100px;
+    position: center ; 
+}
+
+.social-login {
+    position: fixed;
+    bottom: 0;
+}
+
+#FieldText
+{
+    color: black;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    height: 30px;
+    padding-left: 0;
+    padding-top: 4px;
+   
+}
+/*Validation */
+.error-messages{
+  color:red;
+}
+
+.error-messages1{
+   color:red;
+  }
+
+button:disabled { background-color : lime}
+
+.loading-container 
+{
+    color: white
+}
+
+
+.spinner svg {
+  width: 28px;
+  height: 28px;
+
+}
+ 
+/*Animations*/
+
+/*
+  We're using CSS transitions for when
+  the enter and move events are triggered
+  for the element that has the .repeated-item
+  class
+*/
+.repeated-item.ng-enter, .repeated-item .ng-move{
+  -webkit-transition:0.1s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+  
+}
+
+/*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+.repeated-item.ng-move{
+
+    opacity:0;
+  -webkit-transition : opacity 1s ;
+   -webkit-animation-name : slide-out ;
+   animation-name : slide-out;
+}
+.repeated-item.ng-enter.ng-enter-active,
+.repeated-item.ng-move.ng-move-active {
+  opacity:1;
+ 
+}
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .repeated-item class
+*/
+.repeated-item.ng-leave {
+  -webkit-animation:0.5s my_animation;
+  -moz-animation:0.5s my_animation;
+  -o-animation:0.5s my_animation;
+  animation:0.5s my_animation;
+}
+
+@keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-moz-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-o-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+.boxme.ng-hide-add {
+    -webkit-animation: rotateIn 1s;
+    display: block!important;
+}
+.boxme.ng-hide-remove {
+    -webkit-animation: rotateIn 1s;
+}
+p.bal
+{
+    color: rgb(0,0,255);
+     display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+
+}
+p.city
+{
+    color: green;
+     display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+
+}
+
+h3.lname
+{
+   color: black;
+     font-family: 'Source Sans Pro', sans-serif;
+     display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+
+}
+
+p.message
+{
+    font-size: 15px ;
+    color:red;
+     display: block;
+    margin-top: 15em;
+    margin-bottom: 10em;
+    margin-left: 5em;
+    margin-right: 5em;
+
+}
+
+.title
+{
+  font-size: 15px ;
+  font-family: 'Sue Ellen Francisco', cursive;
+  margin : 15px;
+  
+   margin-bottom : 20px;
+
+}
+
+h5
+{
+    font-family: 'Sue Ellen Francisco', cursive;
+     font-size: 20px ;
+     color : white;
+     position: center ;
+
+}
+
+.collection-header
+{
+   background: url('../img/material1.jpg') center;
+}

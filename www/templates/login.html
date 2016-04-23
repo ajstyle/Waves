@@ -1,0 +1,81 @@
+<ion-view view-title="Waves Compusoft">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('img/waves11.jpg'); background-position: center; ">
+            <div class="content">
+                <div class="avatar" style="background-image: url('img/wave2.png'); background-position: center top  "></div>
+          
+            </div>
+        </div>
+   
+           <h5>
+             
+                <center><i class="icon ion-android-people"></i> Login </center>
+         
+           </h5>
+
+         <form name = "form1" >
+       <div class="card-panel grey lighten-5 z-depth-1">
+      <div class="row">
+         
+    
+     <div class="input-field col s12">
+         
+           <input type = "text" name = "mobile"  length="10" ng-model = "mobile"  valid-number id = "FieldText" ng-minlength = "10" ng-maxlength = "10"  autofocus required>
+       
+         <label for="email">Mobile_no.</label>
+        <div ng-messages="form1.mobile.$error" ng-messages-multiple>
+      <div ng-message="required">
+        <div class = "error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. required</div>
+      </div>
+    
+            
+      <div ng-message="minlength">
+        <div class="error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+       
+      
+       <div ng-message="maxlength">
+        <div class = "error-messages" ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+      
+     
+     </div>
+
+       <header></header>
+        <div class="padding">
+            <center>
+            <button ui-sref="app.register" class="waves-effect waves-light btn" ng-click = "getMobile(mobile)" ng-disabled = "form1.$invalid">Verify</button>
+            </center>
+
+
+
+         </div>
+         </div>
+         </div>
+</div>
+</div>
+</form>
+</body>
+
+
+
+
+    </ion-content>
+</ion-view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
