@@ -160,13 +160,13 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'$cordovaFile','Response','blob','Mobile',  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,$cordovaFile,Response,blob,Mobile)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile',  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile)
 {
      
         $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab('right');
 
 
@@ -186,29 +186,23 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
     $scope.output = Mobile;
           
 $scope.register = function(user) {
-                     
-
-  
+                   
       
-
-
-            $scope.master = angular.copy(user);
+$scope.master = angular.copy(user);
            $scope.loginid = $scope.master.user.loginid;
            $scope.branchid = $scope.master.user.branchid;
            $scope.userid = $scope.master.user.userid;
             $scope.password = $scope.master.user.password;
             $scope.Mobile   = $scope.output.text;
-          
-testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,'1234').then(function(response){
+
+            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,'1234').then(function(response){
    
     $scope.response = Response.response(response); 
     console.log( $scope.response);
 
   });
 
-
-
-         //var txt = blob.register() ; 
+         var txt = blob.register() ; 
         document.addEventListener('deviceready', function () {
 
         $cordovaFile.createFile(cordova.file.applicationStorageDirectory, "text.txt", true)
@@ -226,7 +220,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
       });
 
   }) 
-    // var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
+     var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
         //  FileSaver.saveAs(data, 'text.txt'); 
       
      
@@ -261,8 +255,8 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab('right');
   document.addEventListener('deviceready', function () {
     $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 

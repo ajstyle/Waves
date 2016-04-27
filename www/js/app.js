@@ -167,15 +167,8 @@ if( connection.checkconnection() == 'No network connection' )
             'menuContent': {
                 templateUrl: 'templates/registertxt.html',
                 controller: 'MainCtrl1'
-            },
-            'fabContent': {
-                template: '<button id="fab-activity" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-star"></i></button>',
-                controller: function ($timeout) {
-                    $timeout(function () {
-                        document.getElementById('fab-activity').classList.toggle('on');
-                    }, 200);
-                }
             }
+            
         }
     })
 
