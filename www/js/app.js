@@ -3,9 +3,17 @@
  
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' , 'ngAnimate','chart.js'])
 
-app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile','connection', function($ionicPlatform,$location,$http,$cordovaFile,connection) {
+app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile','connection', 'Mobile' , function($ionicPlatform,$location,$http,$cordovaFile,connection,Mobile) {
     $ionicPlatform.ready(function() {
+     
+var uuid =  window.device.uuid;
+alert(uuid);
+      var output = Mobile;
+   
+     output.id=uuid ;
+alert(output.id);
 
+          navigator.splashscreen.hide();
        document.addEventListener('deviceready', function () {
 
       $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "text.txt")
@@ -23,7 +31,11 @@ if( connection.checkconnection() == 'No network connection' )
    alert("No Network Connection ") ; 
 
 }
- var uuid =  window.device.uuid;
+ 
+
+ 
+
+  
 
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -40,7 +52,7 @@ if( connection.checkconnection() == 'No network connection' )
 .config(['ChartJsProvider', function (ChartJsProvider) {
     // Configure all charts
     ChartJsProvider.setOptions({
-      colours: ['#FF5252', '#FF8A80'],
+      colours: ['#FF5252', 'green'],
       responsive: false
     });
     // Configure all line charts
@@ -61,7 +73,7 @@ if( connection.checkconnection() == 'No network connection' )
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
         },
         GetCustomer: function(){
-            return $soap.post(base_url, action1 , {serIp : '108.178.25.54' , serDb : 'waves_SyncData' , serUs : 'wavesUser2;;125066;;A04' ,serPsw : 'waves77430@77430'});
+            return $soap.post(base_url, action1 , {serIp : 'Ip' , serDb : 'Db' , serUs : 'Us' ,serPsw : 'Psw'});
         }
     }
 }])

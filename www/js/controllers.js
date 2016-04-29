@@ -22,6 +22,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
 
+
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
         navIcons.addEventListener('click', function() {
@@ -137,6 +138,8 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
                          $scope.output = Mobile;
                         
                          $scope.output.text = $scope.mobile ;
+                       alert($scope.output.id);
+                           alert($scope.output.text);
                    
     } 
 
@@ -160,7 +163,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile',  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location',  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location)
 {
      
         $scope.$parent.showHeader();
@@ -179,7 +182,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 
- 
+
 
  $scope.blob = blob;         
 
@@ -194,11 +197,21 @@ $scope.master = angular.copy(user);
            $scope.userid = $scope.master.user.userid;
             $scope.password = $scope.master.user.password;
             $scope.Mobile   = $scope.output.text;
-
-            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,'1234').then(function(response){
+            $scope.id       =  $scope.output.id ;
+            alert($scope.id);
+            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,$scope.id).then(function(response){
    
-    $scope.response = Response.response(response); 
-    console.log( $scope.response);
+    var response = Response.response(response); 
+     var res =  response["login"];
+        if(res["ip"] == "0")
+        {
+               alert(res["us"]);
+            $location.path("/app/register"); 
+        }
+         else
+         {
+            $location.path("/app1/gallery"); 
+         }
 
   });
 
@@ -207,16 +220,16 @@ $scope.master = angular.copy(user);
 
         $cordovaFile.createFile(cordova.file.applicationStorageDirectory, "text.txt", true)
       .then(function (success) {
-       alert("Create file" + success) ; 
+      
       }, function (error) {
-        alert("Create file error " + error);
+       
       });
 
 $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt , true)
       .then(function (success) {
-        alert( " Write Success " + success ); 
+       
       }, function (error) {
-        alert( " error Success " + success );
+       
       });
 
   }) 
@@ -262,13 +275,13 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
     $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 
       .then(function (success) {
          
-         alert("readFile " + success) ;       
+           
         var res =  JSON.parse(success)
-        alert(res);
+     
         $scope.obj  = res ; 
 
       }, function (error) {
-          alert("readFileerror " + error) ; 
+         
       });
 
 });
@@ -433,11 +446,11 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
   
 
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
+  
+    
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab(false);
+   
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
@@ -564,6 +577,8 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
  var object = {};
   object.text = "";
+  object.id = "";
+
   return object;
 
  
