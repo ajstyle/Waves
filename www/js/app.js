@@ -7,11 +7,10 @@ app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile','connection', '
     $ionicPlatform.ready(function() {
      
 var uuid =  window.device.uuid;
-alert(uuid);
+
       var output = Mobile;
    
      output.id=uuid ;
-alert(output.id);
 
           navigator.splashscreen.hide();
        document.addEventListener('deviceready', function () {
@@ -73,7 +72,7 @@ if( connection.checkconnection() == 'No network connection' )
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
         },
         GetCustomer: function(){
-            return $soap.post(base_url, action1 , {serIp : 'Ip' , serDb : 'Db' , serUs : 'Us' ,serPsw : 'Psw'});
+            return $soap.post(base_url, action1 , {serIp : '108.178.25.54' , serDb : 'waves_SyncData' , serUs : 'wavesUser2;;125066;;A04' ,serPsw : 'waves77430@77430'});
         }
     }
 }])

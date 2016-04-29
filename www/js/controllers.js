@@ -138,8 +138,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
                          $scope.output = Mobile;
                         
                          $scope.output.text = $scope.mobile ;
-                       alert($scope.output.id);
-                           alert($scope.output.text);
+                      
                    
     } 
 
@@ -198,14 +197,14 @@ $scope.master = angular.copy(user);
             $scope.password = $scope.master.user.password;
             $scope.Mobile   = $scope.output.text;
             $scope.id       =  $scope.output.id ;
-            alert($scope.id);
-            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,$scope.id).then(function(response){
+         
+            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,$scope.id ).then(function(response){
    
     var response = Response.response(response); 
      var res =  response["login"];
         if(res["ip"] == "0")
         {
-               alert(res["us"]);
+              alert(res["us"]);
             $location.path("/app/register"); 
         }
          else
