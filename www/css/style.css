@@ -81,9 +81,9 @@ p {
     background: url('../img/waveslogo.png') center;
     background-size: cover;
     border-radius: 50%;
-    height: 120px;
+    height: 40px;
     margin: 0 auto;
-    width: 120px;
+    width: 40px;
 }
 
 .app-icon2 {
@@ -261,7 +261,7 @@ p.message
 .title
 {
   font-size: 15px ;
-  font-family: 'Sue Ellen Francisco', cursive;
+ font-family: 'Source Sans Pro', sans-serif;
   margin : 15px;
   
    margin-bottom : 20px;
@@ -270,7 +270,7 @@ p.message
 
 h5
 {
-    font-family: 'Sue Ellen Francisco', cursive;
+   font-family: 'Source Sans Pro', sans-serif;
      font-size: 20px ;
      color : white;
      position: center ;
@@ -280,4 +280,10 @@ h5
 .collection-header
 {
    background: url('../img/material1.jpg') center;
+}
+.p1
+{
+   font-size: 10px ; 
+   padding: 0 ; 
+   
 }

@@ -110,7 +110,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
 ==================================*/
 
 .controller('LoginCtrl', function($scope,$stateParams, $timeout,$location,
-                                   ionicMaterialMotion, ionicMaterialInk,Mobile) {
+                                   ionicMaterialMotion, ionicMaterialInk,Mobile,blob) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -162,7 +162,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location',  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services)
 {
      
         $scope.$parent.showHeader();
@@ -184,8 +184,9 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
 
 
  $scope.blob = blob;         
-
     $scope.output = Mobile;
+$scope.Mobile   = $scope.output.text;
+console.log($scope.Mobile);
           
 $scope.register = function(user) {
                    
@@ -198,23 +199,26 @@ $scope.master = angular.copy(user);
             $scope.Mobile   = $scope.output.text;
             $scope.id       =  $scope.output.id ;
          
-            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,$scope.id ).then(function(response){
+            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,"1234").then(function(response){
    
     var response = Response.response(response); 
-     var res =  response["login"];
-        if(res["ip"] == "0")
+    var res =  response["login"];
+    
+
+    //Services for Debtors Creditors
+
+$scope.service = Services;
+    $scope.service.login = res ;
+
+ if(res["ip"] == "0")
         {
               alert(res["us"]);
             $location.path("/app/register"); 
         }
          else
          {
-            $location.path("/app1/gallery"); 
-         }
-
-  });
-
-         var txt = blob.register() ; 
+             var txt = blob.register() ; 
+             console.log(txt);
         document.addEventListener('deviceready', function () {
 
         $cordovaFile.createFile(cordova.file.applicationStorageDirectory, "text.txt", true)
@@ -234,19 +238,13 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
   }) 
      var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
         //  FileSaver.saveAs(data, 'text.txt'); 
-      
-     
+            $location.path("/app1/gallery"); 
+         }
+
+  });
+   
     }
     
-
-
-
-
-
-
-
-
-
 }])
 
 
@@ -263,22 +261,69 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 =            Main Ctrl 1            =
 ===================================*/
 
-.controller('MainCtrl1',['$scope','$stateParams','$timeout','$location', 'ionicMaterialMotion', 'ionicMaterialInk','loginService','FileSaver','Blob', '$window','FileReader','$http' ,'blob' ,'$rootScope','$cordovaFile', function($scope,$stateParams, $timeout,$location, ionicMaterialMotion, ionicMaterialInk, loginService,FileSaver,Blob, $window,FileReader,$http,blob,$rootScope,$cordovaFile) {
+.controller('MainCtrl1',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services){
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab('right');
-  document.addEventListener('deviceready', function () {
+  
+
+
+
+document.addEventListener('deviceready', function () {
+              
     $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 
       .then(function (success) {
          
-           
         var res =  JSON.parse(success)
      
         $scope.obj  = res ; 
+          $scope.output = Mobile;
+         
+           $scope.register = function(password)
+{
+                  $scope.password = angular.copy(password);
+                        
+                 // alert($scope.password);
 
+              var res =  JSON.parse(success)
+              $scope.obj  = res ; 
+
+           $scope.loginid =  $scope.obj.loginid ;
+             $scope.branchid =  $scope.obj.branchid ;
+             $scope.userid =  $scope.obj.userid ;
+             $scope.Mobile   = "917877361402";
+            $scope.password1  = $scope.password ;
+            $scope.id       =  $scope.output.id ;
+          
+
+                  
+
+             testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password1,$scope.Mobile,"1234").then(function(response){
+                    var response = Response.response(response); 
+                   
+                   ///  alert(response);
+                    var res =  response["login"];
+                        // alert(res.ip);
+                      
+                  
+
+                    if(res.ip == "0")
+                   {
+                     alert(res.us);
+                      $location.path("/app/registertxt"); 
+                  }
+                   else
+                  { 
+                      $location.path("/app1/gallery");                           
+
+                   }
+         
+
+        })
+     }
       }, function (error) {
          
       });
@@ -286,23 +331,15 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 });
 
 
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideIn({
-            selector: '.animate-fade-slide-in .item'
-        });
-    }, 200);
 
-    // Activate ink for controller
-    ionicMaterialInk.displayEffect();
 
-     $http.get("text.txt")
-  .then(function(response) {
-      $scope.myWelcome = response.data;
-     $scope.obj = $scope.myWelcome ;
-      
-       
-     
-    });
+
+
+
+
+
+
+
        
        
 }])
@@ -316,7 +353,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 =           Debtor Ctrl            =
 ====================================*/
 
-.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,loginService,$ionicLoading,$filter,connection) {
+.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -325,8 +362,16 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
 
-
-     
+    $scope.service = Services;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+         alert( $scope.ip);
+          
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -349,8 +394,9 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
       $timeout(function() {
          
-     loginService.GetCustomers().then(function(response)
+     testService.GetCustomer($scope.ip , $scope.db , $scope.us , $scope.ps).then(function(response)
       {
+         
          $scope.showme = true;
          $scope.nodata = false;  
         $ionicLoading.hide(); 
@@ -358,7 +404,8 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
        $ionicLoading.hide();
       };
 
-    $scope.response = response; 
+        var response1 = Response.response(response); 
+    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
     $scope.$watch('search', function(val)
@@ -397,7 +444,100 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
 
 
-/*=====  End of Debtor Ctrl  ======*/
+/*=====  End of Creditor Ctrl  ======*/
+
+.controller('CreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+         alert( $scope.ip);
+          
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+   
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html'
+       });
+
+       $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+
+      $timeout(function() {
+         
+     testService.GetSupplier($scope.ip , $scope.db , $scope.us , $scope.ps).then(function(response)
+      {
+         
+         $scope.showme = true;
+         $scope.nodata = false;  
+        $ionicLoading.hide(); 
+        $scope.hide = function(){
+       $ionicLoading.hide();
+      };
+
+        var response1 = Response.response(response); 
+    $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+
+
+
+
+
+
+
+
+
+/*=====  End of Creditor Ctrl  ======*/
 
 
 
@@ -495,6 +635,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 .factory('blob',['$rootScope' , 'FileSaver' , '$window',function($rootScope , FileSaver,$window) {
     var messages = {};
      var user = {
+             mobileno:'',
              loginid: '',
              branchid: '',
              userid : ''
@@ -503,13 +644,15 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
     return {
           register : function()
           {
-            console.log("Amit");
+            
             console.log("User Click " + this.user);
                              var txt =  this.user
                 var val = {
                              text: JSON.stringify(txt)
                            };
                          var txt =  val.text;
+                 
+
                             // console.log(txt);           
                            // var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
                          return txt ;            
@@ -577,6 +720,18 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
  var object = {};
   object.text = "";
   object.id = "";
+
+  return object;
+
+ 
+})
+
+.factory('Services', function () {
+  
+
+ var object = {};
+  object.login = "";
+  
 
   return object;
 

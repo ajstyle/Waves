@@ -62,69 +62,40 @@ if( connection.checkconnection() == 'No network connection' )
 
 
 
-.factory("testService", ['$soap',function($soap){
+.factory("testService", ['$soap', 'Services',function($soap,Services){
     var base_url = "http://wcplreg.in/app/appLoginSer1.asmx";
     var action = "login" ; 
-    var action1 = "GetCustomers" ; 
+    var action1 = "GetCustomers" ;
+    var action2 = "GetSupplier";
+    var action3 = "";
+    var action4 = "";
           
      return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
         },
-        GetCustomer: function(){
-            return $soap.post(base_url, action1 , {serIp : '108.178.25.54' , serDb : 'waves_SyncData' , serUs : 'wavesUser2;;125066;;A04' ,serPsw : 'waves77430@77430'});
+        GetCustomer: function(Ip,Db,Us,Psw){
+            return $soap.post(base_url, action1 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw});
+        },
+       GetSupplier: function(Ip,Db,Us,Psw){
+            return $soap.post(base_url, action2 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw});
         }
+      
+
+
+
+
+
+
+
+
+
     }
 }])
 
 
 
-  .directive('validNumber', function() {
-      return {
-        require: '?ngModel',
-        link: function(scope, element, attrs, ngModelCtrl) {
-          if(!ngModelCtrl) {
-            return; 
-          }
-
-          ngModelCtrl.$parsers.push(function(val) {
-            if (angular.isUndefined(val)) {
-                var val = '';
-            }
-            
-            var clean = val.replace(/[^-0-9\.]/g, '');
-            var negativeCheck = clean.split('-');
-            var decimalCheck = clean.split('.');
-            if(!angular.isUndefined(negativeCheck[1])) {
-                negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
-                clean =negativeCheck[0] + '-' + negativeCheck[1];
-                if(negativeCheck[0].length > 0) {
-                    clean =negativeCheck[0];
-                }
-                
-            }
-              
-            if(!angular.isUndefined(decimalCheck[1])) {
-                decimalCheck[1] = decimalCheck[1].slice(0,2);
-                clean =decimalCheck[0] + '.' + decimalCheck[1];
-            }
-
-            if (val !== clean) {
-              ngModelCtrl.$setViewValue(clean);
-              ngModelCtrl.$render();
-            }
-            return clean;
-          });
-
-          element.bind('keypress', function(event) {
-            if(event.keyCode === 32) {
-              event.preventDefault();
-            }
-          });
-        }
-      };
-    })
-
+ 
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
@@ -268,6 +239,18 @@ if( connection.checkconnection() == 'No network connection' )
             
         }
     })
+
+.state('app2.creditor', {
+        url: '/Creditors',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/creditors.html',
+                controller: 'CreditorCtrl'
+            }
+        }
+    })
+
+
 .state('app.receipt', {
         url: '/receipt',
         views: {
@@ -302,23 +285,7 @@ if( connection.checkconnection() == 'No network connection' )
             }
         }
     })
-.state('app.creditor', {
-        url: '/Creditors',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/creditors.html',
-                controller: 'ProfileCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
-            }
-        }
-    })
+
     
 .state('app.inventory', {
         url: '/inventory',
