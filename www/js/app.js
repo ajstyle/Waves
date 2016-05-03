@@ -67,8 +67,8 @@ if( connection.checkconnection() == 'No network connection' )
     var action = "login" ; 
     var action1 = "GetCustomers" ;
     var action2 = "GetSupplier";
-    var action3 = "";
-    var action4 = "";
+    var action3 = "GetOtherLedgers";
+    var action4 = "GetPDC";
           
      return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
@@ -79,7 +79,16 @@ if( connection.checkconnection() == 'No network connection' )
         },
        GetSupplier: function(Ip,Db,Us,Psw){
             return $soap.post(base_url, action2 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw});
-        }
+        },
+        GetOtherLedgers : function(Ip,Db,Us,Psw)
+        {
+                return $soap.post(base_url, action3 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw});
+        } ,
+       GetPDC : function(Ip,Db,Us,Psw,dFrom,dTo)
+        {
+                return $soap.post(base_url, action4 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw, dFrom:dFrom , dto : dTo});
+        } 
+
       
 
 
@@ -117,7 +126,7 @@ if( connection.checkconnection() == 'No network connection' )
    .state('app1', {
         url: '/app1',
         abstract: true,
-        templateUrl: 'templates/menu1.html',
+        templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
     })
  
@@ -307,21 +316,14 @@ if( connection.checkconnection() == 'No network connection' )
     
 
 
-  .state('app.cheque', {
+  .state('app2.cheque', {
         url: '/cheque',
         views: {
             'menuContent': {
                 templateUrl: 'templates/cheque.html',
-                controller: 'ProfileCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
+                controller: 'ChequeCtrl'
             }
+           
         }
     })
     
@@ -343,7 +345,23 @@ if( connection.checkconnection() == 'No network connection' )
             }
         }
     })
-    ;
+
+
+.state('app2.other', {
+        url: '/other',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/other.html',
+                controller: 'OtherCtrl'
+            }
+        }
+    })
+
+
+
+
+
+
 
 
     // if none of the above states are matched, use this as the fallback

@@ -1,36 +1,12 @@
-<ion-view view-title="Cheque">
+<ion-view view-title="Others">
     <ion-content >
     
 
-
-                              
-           <div class = "Searchcheque">
-
-
-
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
-            </div>          
-   
-          <table class="Cheque" >
-                    <tr style = "background : black ; line-height: 1px; color : white" >
-                       <th> Date</th>
-                      <th>Voucher</th>
-                      <th> Debit</th>
-                      <th>Credit</th>
-                      <th>Balance</th>
-                    </tr>
-            </table>
-
-
-
+                     
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
-               
-
-
-
-
                 <ion-list>
 
                    <ion-item>

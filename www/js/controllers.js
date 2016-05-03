@@ -14,7 +14,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
  *
  */
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,$location) {
     // Form data for the login modal
     
     $scope.loginData = {};
@@ -93,7 +93,11 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
  $scope.clearFabs = function() {
     $scope.number = '' ;
 }
-
+console.log($location.$$path);
+if($location.$$path == "/app1/gallery")
+{
+      
+}
 })
 
 /*=====  End of App Ctrl  ======*/
@@ -203,7 +207,7 @@ $scope.master = angular.copy(user);
    
     var response = Response.response(response); 
     var res =  response["login"];
-    
+                            console.log(res);
 
     //Services for Debtors Creditors
 
@@ -281,6 +285,7 @@ document.addEventListener('deviceready', function () {
      
         $scope.obj  = res ; 
           $scope.output = Mobile;
+        
          
            $scope.register = function(password)
 {
@@ -290,7 +295,9 @@ document.addEventListener('deviceready', function () {
 
               var res =  JSON.parse(success)
               $scope.obj  = res ; 
+                 
 
+              
            $scope.loginid =  $scope.obj.loginid ;
              $scope.branchid =  $scope.obj.branchid ;
              $scope.userid =  $scope.obj.userid ;
@@ -305,12 +312,15 @@ document.addEventListener('deviceready', function () {
                     var response = Response.response(response); 
                    
                    ///  alert(response);
-                    var res =  response["login"];
+                    var res1 =  response["login"];
+
                         // alert(res.ip);
-                      
+                        $scope.service = Services;
+                $scope.service.login = res1 ;
+                alert($scope.service.login);
                   
 
-                    if(res.ip == "0")
+                    if(res1.ip == "0")
                    {
                      alert(res.us);
                       $location.path("/app/registertxt"); 
@@ -435,16 +445,17 @@ document.addEventListener('deviceready', function () {
 
 })
 
+/*=====  End of Debtor Ctrl  ======*/
 
 
 
 
 
 
+/*====================================
+=           Creditor Ctrl            =
+====================================*/
 
-
-
-/*=====  End of Creditor Ctrl  ======*/
 
 .controller('CreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
     // Set Header
@@ -529,16 +540,188 @@ document.addEventListener('deviceready', function () {
 })
 
 
-
-
-
-
-
-
-
-
 /*=====  End of Creditor Ctrl  ======*/
 
+
+/*====================================
+=           Other Ctrl            =
+====================================*/
+
+
+.controller('OtherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+         alert( $scope.ip);
+          
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+   
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html'
+       });
+
+       $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+
+      $timeout(function() {
+         
+     testService.GetOtherLedgers($scope.ip , $scope.db , $scope.us , $scope.ps).then(function(response)
+      {
+         console.log(response);
+         $scope.showme = true;
+         $scope.nodata = false;  
+        $ionicLoading.hide(); 
+        $scope.hide = function(){
+       $ionicLoading.hide();
+      };
+
+        var response1 = Response.response(response); 
+    $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of Other Ctrl  ======*/
+
+
+
+/*====================================
+=         Cheque Ctrl            =
+====================================*/
+
+
+.controller('ChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+         alert( $scope.ip);
+          
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+   
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html'
+       });
+
+       $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+
+      $timeout(function() {
+         
+     testService.GetPDC($scope.ip , $scope.db , $scope.us , $scope.ps , " " , " ").then(function(response)
+      {
+         console.log(response);
+         $scope.showme = true;
+         $scope.nodata = false;  
+        $ionicLoading.hide(); 
+        $scope.hide = function(){
+       $ionicLoading.hide();
+      };
+
+        var response1 = Response.response(response); 
+    $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of  Cheque Ctrl  ======*/
 
 
 
@@ -587,8 +770,8 @@ document.addEventListener('deviceready', function () {
 
   
     
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
    
 
     // Activate ink for controller
