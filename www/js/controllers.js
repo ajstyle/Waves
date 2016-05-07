@@ -96,7 +96,11 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
 console.log($location.$$path);
 if($location.$$path == "/app1/gallery")
 {
-      
+      $scope.hide = "false"
+}
+else
+{
+   $scope.hide = "true"
 }
 })
 
@@ -166,7 +170,7 @@ if($location.$$path == "/app1/gallery")
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading', '$ionicHistory' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading,$ionicHistory)
 {
      
         $scope.$parent.showHeader();
@@ -185,17 +189,28 @@ if($location.$$path == "/app1/gallery")
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 
+  console.log($ionicHistory.viewHistory() );  
+$ionicHistory.viewHistory() ; 
 
-
+ 
  $scope.blob = blob;         
     $scope.output = Mobile;
 $scope.Mobile   = $scope.output.text;
 console.log($scope.Mobile);
           
 $scope.register = function(user) {
-                   
+  
+
+   
+     $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+            hideOnStateChange : 'true',
+          noBackdrop : 'true'
+       });
       
-$scope.master = angular.copy(user);
+              
+            
+               $scope.master = angular.copy(user);
            $scope.loginid = $scope.master.user.loginid;
            $scope.branchid = $scope.master.user.branchid;
            $scope.userid = $scope.master.user.userid;
@@ -214,13 +229,17 @@ $scope.master = angular.copy(user);
 $scope.service = Services;
     $scope.service.login = res ;
 
+
+
  if(res["ip"] == "0")
         {
+           $ionicLoading.hide();
               alert(res["us"]);
             $location.path("/app/register"); 
         }
          else
          {
+              $ionicLoading.hide();
              var txt = blob.register() ; 
              console.log(txt);
         document.addEventListener('deviceready', function () {
@@ -246,6 +265,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
          }
 
   });
+          
    
     }
     
@@ -265,7 +285,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 =            Main Ctrl 1            =
 ===================================*/
 
-.controller('MainCtrl1',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services){
+.controller('MainCtrl1',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  , 'connection' , '$ionicLoading' ,'$ionicPlatform', function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services,connection,$ionicLoading,$ionicPlatform){
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -277,7 +297,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 
 
 document.addEventListener('deviceready', function () {
-              
+             
     $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 
       .then(function (success) {
          
@@ -289,6 +309,16 @@ document.addEventListener('deviceready', function () {
          
            $scope.register = function(password)
 {
+                 
+                      $ionicLoading.show({
+                         templateUrl: 'templates/loader.html',
+                          hideOnStateChange : 'true',
+                            noBackdrop : 'true'
+                     
+           });
+      
+
+                         
                   $scope.password = angular.copy(password);
                         
                  // alert($scope.password);
@@ -321,23 +351,25 @@ document.addEventListener('deviceready', function () {
                   
 
                     if(res1.ip == "0")
-                   {
+                   {  $ionicLoading.hide();
                      alert(res.us);
                       $location.path("/app/registertxt"); 
                   }
                    else
                   { 
+                      $ionicLoading.hide();
                       $location.path("/app1/gallery");                           
 
                    }
          
 
         })
+           
      }
       }, function (error) {
          
       });
-
+     
 });
 
 
@@ -391,7 +423,10 @@ document.addEventListener('deviceready', function () {
 
    
       $ionicLoading.show({
-          templateUrl: 'templates/loader.html'
+
+          templateUrl: 'templates/loader.html',
+            hideOnStateChange : 'true',
+          noBackdrop : 'true'
        });
 
        $timeout(function() {
@@ -485,7 +520,9 @@ document.addEventListener('deviceready', function () {
 
    
       $ionicLoading.show({
-          templateUrl: 'templates/loader.html'
+          templateUrl: 'templates/loader.html',
+            hideOnStateChange : 'true',
+          noBackdrop : 'true'
        });
 
        $timeout(function() {
@@ -576,7 +613,10 @@ document.addEventListener('deviceready', function () {
 
    
       $ionicLoading.show({
-          templateUrl: 'templates/loader.html'
+          templateUrl: 'templates/loader.html',
+            hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
        });
 
        $timeout(function() {
@@ -667,28 +707,23 @@ document.addEventListener('deviceready', function () {
 
    
       $ionicLoading.show({
-          templateUrl: 'templates/loader.html'
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
        });
 
-       $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight({
-            startVelocity: 3000
-        });
-    }, 700);
 
 
-
-      $timeout(function() {
+     
          
-     testService.GetPDC($scope.ip , $scope.db , $scope.us , $scope.ps , " " , " ").then(function(response)
+     testService.GetPDC("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , " " , " ").then(function(response)
       {
          console.log(response);
          $scope.showme = true;
          $scope.nodata = false;  
-        $ionicLoading.hide(); 
-        $scope.hide = function(){
        $ionicLoading.hide();
-      };
+       
 
         var response1 = Response.response(response); 
     $scope.response = response1; 
@@ -710,7 +745,7 @@ document.addEventListener('deviceready', function () {
 
 
    })
-    }, 700);
+
 
     // Set Ink
     ionicMaterialInk.displayEffect();
@@ -722,6 +757,313 @@ document.addEventListener('deviceready', function () {
 })
 
 /*=====  End of  Cheque Ctrl  ======*/
+
+
+/*====================================
+=         Receipt Ctrl            =
+====================================*/
+
+
+.controller('receiptCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+         alert( $scope.ip);
+          
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+   
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+
+
+     
+         
+     testService.GetReceipts("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , " " , " ").then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of  Receipt Ctrl  ======*/
+
+
+
+
+/*====================================
+=         Sales Ctrl            =
+====================================*/
+
+
+.controller('SalesCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+         alert( $scope.ip);
+          
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+   
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+
+
+     
+         
+     testService. GetSales("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , "S" ).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of  Sales Ctrl  ======*/
+
+
+
+
+/*====================================
+=     Purchase Ctrl            =
+====================================*/
+
+
+.controller('PurchaseCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+         alert( $scope.ip);
+          
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+   
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+
+
+     
+         
+     testService. GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , "P" ).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of  Purchase Ctrl  ======*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

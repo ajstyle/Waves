@@ -11,16 +11,27 @@
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
             </div>          
    
-          <table class="Cheque" >
-                    <tr style = "background : black ; line-height: 1px; color : white" >
-                       <th> Date</th>
-                      <th>Voucher</th>
-                      <th> Debit</th>
-                      <th>Credit</th>
-                      <th>Balance</th>
-                    </tr>
-            </table>
+            <div class = "row">
+                    <div class = "col col-27">   
+                     Date
+                     </div>
+                     <div class = "col col-20"> 
+                   Voucher
+                      </div>
+                       <div class = "col col-20"> 
+                     Debit
+                      </div>
 
+                       <div class = "col col-20"> 
+                      Credit
+                      </div>
+                       <div class = "col col-20"> 
+                    Balance
+                      </div>
+                    
+
+                      </div>
+                   
 
 
                        <div ng-show="showme" class="boxme">
@@ -31,31 +42,63 @@
 
 
 
-                <ion-list>
-
-                   <ion-item>
+               
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      
                         
                            
-                            
+                         
                 <a href="#/app/profile" class=" waves-effect waves-green item  item-icon-right">
+               <p>    
+                  <div class = "row  row-center ">
+                  <div class = "col col-28">
+             {{responses.date}}
+                                              
+                      </div>
+                      
                   
-                    
-                    <h3 class = "lname"><b>{{responses.lname}}</b></h3>
-                    <p class = "city">{{responses.city}}</p>
+                   <div class = "col col-23">
+                 {{responses.vchno}}
+                    </div>
                    
-                    <i class="icon"> <p class = "bal"> {{responses.baltype}}</p></i>
-                    
-                </a>
+                      
+                  <div class = "col col-15">
 
+                  {{responses.debit}}
+                   </div>
+                  
+                  <div class = "col col-20">
+
+                  {{responses.credit}}
+                   </div>
+                   <div class = "col col-10">
+
+                  {{responses.balance}}
+                   </div>
+
+                
+
+                   </div>
+                 </p>
+                 <p>
+                   
+                  <div class = "col col-70" >
+             {{responses.ledName}}
+            <p>        {{responses.ledAdd}}</p>
+                                              
+                      </div>
+                   </p>
+
+
+                 
+                   
+                </a>
+              
             
 
                    </div>
                </div>
-</ion-item>
-              </ion-list>         
-     
+
 
                   <!--
 

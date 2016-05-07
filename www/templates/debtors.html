@@ -7,15 +7,13 @@
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
-                <ion-list>
-
-                   <ion-item>
+              
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      
                         
                            
                             
-                <a href="#/app/profile" class=" waves-effect waves-green item  item-icon-right">
+                <a href="#/app/profile" class=" waves-effect waves-green item ">
                        
 
                     <h3 class = "lname"><b>{{responses.lname}}</b></h3>
@@ -29,8 +27,7 @@
 
                    </div>
                </div>
-</ion-item>
-              </ion-list>         
+   
      
 
                   <!--

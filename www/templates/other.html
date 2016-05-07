@@ -7,9 +7,7 @@
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
-                <ion-list>
-
-                   <ion-item>
+              
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      
                         
@@ -29,9 +27,7 @@
 
                    </div>
                </div>
-</ion-item>
-              </ion-list>         
-     
+
 
                   <!--
 
