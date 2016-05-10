@@ -1,4 +1,4 @@
-<ion-view view-title="Register">
+<ion-view view-title="Login">
 
 <form name = "myform" novalidate>
 
@@ -12,9 +12,9 @@
 
      <div class="input-field col s12">
              
-           <input type = "number" name = "login" ng-model="blob.user.loginid"  ng-maxlength = "6" ng-minlength = "6"   required >
+           <input type = "number" name = "login" ng-model="blob.user.loginid"  ng-maxlength = "6" ng-minlength = "6"  >
            
-         <label  for="Login id">Login_id</label>
+         <label  class = "active" for="Login id">Loginid</label>
         
           <div ng-messages="myform.login.$error" ng-messages-multiple>
       <div ng-message="required">
@@ -30,6 +30,7 @@
 </div>
  </div>
 
+
  
 
 
@@ -39,7 +40,7 @@
 
      <div class="input-field col s12">
          
-          <input type = "text" name = "branch" ng-model = "blob.user.branchid" ng-required = "true" autofocus />
+          <input type = "text" name = "branch" ng-model = "blob.user.branchid" ng-required = "true" class = "active" autofocus />
          <label for="Branch">Branch</label>
          <div ng-messages="myform.branch.$error" ng-messages-multiple>
       <div ng-message="required">
@@ -55,8 +56,8 @@
      <div class="input-field col s12">
           
 
-        <input type = "text" name = "userid" id = "userid"  ng-model = "blob.user.userid" ng-required = "true" autofocus >
-         <label for="user id">User_id</label>
+        <input type = "text" name = "userid" id = "userid"  ng-model = "blob.user.userid" class = "active" ng-required = "true" autofocus >
+         <label for="user id">Userid</label>
          <div ng-messages="myform.userid.$error" ng-messages-multiple>
       <div ng-message="required">
          <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.userid.$touched">User id required</div>
@@ -72,7 +73,7 @@
      <div class="input-field col s12">
 
       <input type = "password" name = "password" id = "password"  ng-model = "blob.user.password" 
-            ng-required = "true" autofocus >
+            ng-required = "true" class = "active" autofocus >
          <label for="user id">Password</label>
         <div ng-messages="myform.password.$error" ng-messages-multiple>
       <div ng-message="required">

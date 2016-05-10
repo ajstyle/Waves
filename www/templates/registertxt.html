@@ -1,4 +1,4 @@
-<ion-view view-title="Register">
+<ion-view view-title="Login">
 
 <form name = "myform" novalidate>
 
@@ -10,7 +10,7 @@
      <div class="input-field col s12">
           
             <input type = "text" name = "login"  ng-model="obj.loginid" valid-number ng-maxlength = "6" ng-minlength = "6" ng-required = "true" ng-value = "obj.loginid"  required >
-         <label class="active"  for="Login id">Login_id</label>
+         <label class="active"  for="Login id">Loginid</label>
         
           <div ng-messages="myform.login.$error" ng-messages-multiple>
       <div ng-message="required">
@@ -52,7 +52,7 @@
           
 
         <input type = "text" name = "userid" id = "userid" ng-model="obj.userid" ng-required = "true">
-         <label class="active" for="user id">User_id</label>
+         <label class="active" for="user id">Userid</label>
          <div ng-messages="myform.login.$error" ng-messages-multiple>
       <div ng-message="required">
          <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.branch.$touched">branch id required</div>
@@ -91,4 +91,3 @@
 </form>
 </body>
 </ion-view>
- 

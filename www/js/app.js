@@ -3,9 +3,15 @@
  
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' , 'ngAnimate','chart.js'])
 
-app.run(['$ionicPlatform','$location' , '$http' , '$cordovaFile','connection', 'Mobile' , function($ionicPlatform,$location,$http,$cordovaFile,connection,Mobile) {
+app.run(['$ionicPlatform','$ionicLoading','$location' , '$http' , '$cordovaFile','connection', 'Mobile' , function($ionicPlatform,$ionicLoading,$location,$http,$cordovaFile,connection,Mobile) {
     $ionicPlatform.ready(function() {
-     
+$ionicPlatform.onHardwareBackButton(function(){
+Materialize.updateTextFields();
+  $ionicLoading.hide();
+});
+
+
+
 var uuid =  window.device.uuid;
 
       var output = Mobile;
@@ -19,7 +25,8 @@ var uuid =  window.device.uuid;
       .then(function (success) {
        $location.url("/app/registertxt"); 
       }, function (error) {
-        
+       
+        //$location.url("/app/login"); 
       });
 
   })
@@ -69,7 +76,9 @@ if( connection.checkconnection() == 'No network connection' )
     var action2 = "GetSupplier";
     var action3 = "GetOtherLedgers";
     var action4 = "GetPDC";
-          
+    var action5 = "GetReceipts";
+    var action6 = "GetSalesPurchase" ; 
+      var action7 = "GetItems" ; 
      return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
@@ -87,12 +96,26 @@ if( connection.checkconnection() == 'No network connection' )
        GetPDC : function(Ip,Db,Us,Psw,dFrom,dTo)
         {
                 return $soap.post(base_url, action4 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw, dFrom:dFrom , dto : dTo});
-        } 
-
+        } ,
+    
+       GetReceipts : function(Ip,Db,Us,Psw,dFrom,dTo)
+        {
+                return $soap.post(base_url, action5 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw, dFrom:dFrom , dto : dTo});
+        } ,
+    
+        GetSales :  function(Ip,Db,Us,Psw,Type)
+        {
+                return $soap.post(base_url, action6 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw, typ : Type });
+        } ,
+         GetPurchase :  function(Ip,Db,Us,Psw,Type)
+        {
+                return $soap.post(base_url, action6 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw, typ : Type });
+        } ,
       
-
-
-
+         Getinventory :  function(Ip,Db,Us,Psw)
+        {
+                return $soap.post(base_url, action7 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw });
+        } 
 
 
 
@@ -126,7 +149,7 @@ if( connection.checkconnection() == 'No network connection' )
    .state('app1', {
         url: '/app1',
         abstract: true,
-        templateUrl: 'templates/menu.html',
+        templateUrl: 'templates/menu1.html',
         controller: 'AppCtrl'
     })
  
@@ -134,7 +157,7 @@ if( connection.checkconnection() == 'No network connection' )
    .state('app2', {
         url: '/app2',
         abstract: true,
-        templateUrl: 'templates/servicemenu.html',
+        templateUrl: 'templates/menu1.html',
         controller: 'AppCtrl'
     })
 
@@ -260,57 +283,37 @@ if( connection.checkconnection() == 'No network connection' )
     })
 
 
-.state('app.receipt', {
+.state('app2.receipt', {
         url: '/receipt',
         views: {
             'menuContent': {
                 templateUrl: 'templates/receipt.html',
-                controller: 'ProfileCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
+                controller: 'receiptCtrl'
             }
+        
         }
     })
-.state('app.sales', {
+
+
+.state('app2.sales', {
         url: '/sales',
         views: {
             'menuContent': {
                 templateUrl: 'templates/sales.html',
-                controller: 'ProfileCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
+                controller: 'SalesCtrl'
             }
         }
     })
 
     
-.state('app.inventory', {
+.state('app2.inventory', {
         url: '/inventory',
         views: {
             'menuContent': {
                 templateUrl: 'templates/inventory.html',
-                controller: 'ProfileCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
+                controller: 'inventoryCtrl'
             }
+            
         }
     })
     
@@ -328,21 +331,14 @@ if( connection.checkconnection() == 'No network connection' )
     })
     
   
-   .state('app.purchase', {
+   .state('app2.purchase', {
         url: '/purchase',
         views: {
             'menuContent': {
                 templateUrl: 'templates/purchase.html',
-                controller: 'ProfileCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
+                controller: 'PurchaseCtrl'
             }
+            
         }
     })
 
@@ -365,7 +361,7 @@ if( connection.checkconnection() == 'No network connection' )
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/app/login');
 
 
 

@@ -1,5 +1,10 @@
 /* General
 ==================================*/
+*
+{
+  margin : 0px;
+  padding : 0px;
+}
 h1 {
     color: black;
     text-shadow: 0 1px 0px #000;
@@ -13,13 +18,16 @@ h1 {
 .title-bordered {
     border-top: solid 2px #bbb;
     padding-top: 30px;
+    
 }
 
 p {
     color: #555;
     margin: 0 0 25px;
-    font-family: 'Indie Flower', cursive;
+      font-family: Arial,Helvetica,sans-serif;
     font-size : 15px;
+ overflow: visible;
+
 }
 
 .scroll {
@@ -67,12 +75,12 @@ p {
 /* Login
 ==================================*/
 .app-icon {
-    background-color: #fff;
+    
     background: url('../img/waveslogo.png') center;
     background-size: cover;
     border-radius: 50%;
     height: 120px;
-    margin: 100px auto;
+    margin: 45px auto;
     width: 120px;
 }
 
@@ -295,9 +303,77 @@ h5
   margin-top: 0 ;
 }
 
-.cheque
+.receipt
 {
-   margin: 0;
-  padding: 0;
-  margin-top: 0 ;
+  font-size: 15px ; 
+color :#cc0066 ;
+text-overflow: clip;
+}
+
+.container1
+{
+  color : white; 
+  background: black ;
+}
+
+.date
+{
+  color : black ;
+  text-align: left;
+  margin : 0px ;
+ padding : 0px;
+   width: 250px;
+word-wrap: break-word;
+}
+
+.vch
+{
+  color :#00b300 ;
+}
+.company
+{
+  color : #0059b3 ;
+}
+.Add
+{
+ color :  #993d00;
+}
+.credit
+{
+   color :  #660033;
+
+}
+.balance
+{
+  color : #0059b3 ;
+}
+.container2
+{
+  margin: 0;
+padding: 0;
+text-align: left
+
+}
+
+.divider
+{
+
+ line-height: 1;
+
+
+ 
+    /* IE 5.5-7 */
+      
+     
+}
+.logo
+{
+  align : center;
+  border-radius: 50%;
+  padding: 5px;
+}
+.login-container
+{
+
+margin-top  :90px ;  
 }
