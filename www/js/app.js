@@ -8,10 +8,11 @@ app.run(['$ionicPlatform','$ionicLoading','$location' , '$http' , '$cordovaFile'
 $ionicPlatform.onHardwareBackButton(function(){
 Materialize.updateTextFields();
   $ionicLoading.hide();
+ 
 });
 
 
-
+ 
 var uuid =  window.device.uuid;
 
       var output = Mobile;
@@ -142,25 +143,11 @@ if( connection.checkconnection() == 'No network connection' )
     $stateProvider.state('app', {
         url: '/app',
         abstract: true,
-        templateUrl: 'templates/menu.html',
-        controller: 'AppCtrl'
-    })
-
-   .state('app1', {
-        url: '/app1',
-        abstract: true,
-        templateUrl: 'templates/menu1.html',
-        controller: 'AppCtrl'
-    })
- 
-
-   .state('app2', {
-        url: '/app2',
-        abstract: true,
         templateUrl: 'templates/menu1.html',
         controller: 'AppCtrl'
     })
 
+  
    
 
      .state('app.register', {
@@ -219,7 +206,7 @@ if( connection.checkconnection() == 'No network connection' )
 
 
 
-    .state('app1.gallery', {
+    .state('app.gallery', {
         url: '/gallery',
         views: {
             'menuContent': {
@@ -243,25 +230,9 @@ if( connection.checkconnection() == 'No network connection' )
         }
     })
 
-    .state('app.profile', {
-        url: '/profile',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/profile.html',
-                controller: 'ProfileCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
-            }
-        }
-    })
+    
   
-.state('app2.debtors', {
+.state('app.debtors', {
         url: '/debtors',
         views: {
             'menuContent': {
@@ -272,7 +243,7 @@ if( connection.checkconnection() == 'No network connection' )
         }
     })
 
-.state('app2.creditor', {
+.state('app.creditor', {
         url: '/Creditors',
         views: {
             'menuContent': {
@@ -283,7 +254,7 @@ if( connection.checkconnection() == 'No network connection' )
     })
 
 
-.state('app2.receipt', {
+.state('app.receipt', {
         url: '/receipt',
         views: {
             'menuContent': {
@@ -295,7 +266,7 @@ if( connection.checkconnection() == 'No network connection' )
     })
 
 
-.state('app2.sales', {
+.state('app.sales', {
         url: '/sales',
         views: {
             'menuContent': {
@@ -306,7 +277,7 @@ if( connection.checkconnection() == 'No network connection' )
     })
 
     
-.state('app2.inventory', {
+.state('app.inventory', {
         url: '/inventory',
         views: {
             'menuContent': {
@@ -319,7 +290,7 @@ if( connection.checkconnection() == 'No network connection' )
     
 
 
-  .state('app2.cheque', {
+  .state('app.cheque', {
         url: '/cheque',
         views: {
             'menuContent': {
@@ -331,7 +302,7 @@ if( connection.checkconnection() == 'No network connection' )
     })
     
   
-   .state('app2.purchase', {
+   .state('app.purchase', {
         url: '/purchase',
         views: {
             'menuContent': {
@@ -343,7 +314,7 @@ if( connection.checkconnection() == 'No network connection' )
     })
 
 
-.state('app2.other', {
+.state('app.other', {
         url: '/other',
         views: {
             'menuContent': {

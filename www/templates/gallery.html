@@ -1,8 +1,22 @@
 <ion-view view-title="Dashboard">
+     <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "{{hide}}">
+                </button>
+            </ion-nav-buttons>
+
+
+
+
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
      
         <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" 
                 chart-legend="true" chart-series="series" chart-click="onClick"></canvas> 
 
-    </ion-content>
+   
+ 
+
+
+   </ion-content>
+
+
 </ion-view>

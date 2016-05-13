@@ -118,7 +118,7 @@ else
 ==================================*/
 
 .controller('LoginCtrl', function($scope,$stateParams, $timeout,$location,
-                                   ionicMaterialMotion, ionicMaterialInk,Mobile,blob) {
+                                   ionicMaterialMotion, ionicMaterialInk,Mobile,$cordovaFile,blob) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
@@ -143,16 +143,34 @@ else
    
   $scope.getMobile = function(mobile)
     {                  $scope.mobile = angular.copy(mobile);
+                                  var mobile     =  $scope.mobile ;
+                        
+                           console.log(mobile);
                          $scope.output = Mobile;
                         
                          $scope.output.text = $scope.mobile ;
-                      
-                   
+                       
+   
+                document.addEventListener('deviceready', function () {
+               
+                 $cordovaFile.createFile(cordova.file.applicationStorageDirectory, "mobile.txt", true)
+                .then(function (success) {
+
+                }, function (error) {
+                     
+               });
+                $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "mobile.txt", mobile , true)
+                   .then(function (success) {
+                 alert("successwrite" + success) 
+           }, function (error) {
+                 alert("write" + success)
+              });
+
+                
+
+
+             })
     } 
-
-
-  
-    
 
 })
 
@@ -170,7 +188,7 @@ else
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading', '$ionicHistory' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading,$ionicHistory)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading)
 {
      
         $scope.$parent.showHeader();
@@ -190,13 +208,8 @@ else
     ionicMaterialInk.displayEffect();
 
  
-
-
-
-
-  
  $scope.blob = blob;  
-
+console.log(blob);
     $scope.output = Mobile;
 $scope.Mobile   = $scope.output.text;
 console.log($scope.Mobile);
@@ -216,15 +229,15 @@ $scope.register = function(user) {
                   user.mobileno = $scope.Mobile ;
                $scope.master = angular.copy(user);
                                
-               console.log(user);
-        
+              
+                              console.log(user);
            $scope.loginid = $scope.master.user.loginid;
            $scope.branchid = $scope.master.user.branchid;
            $scope.userid = $scope.master.user.userid;
             $scope.password = $scope.master.user.password;
             $scope.Mobile   = $scope.output.text;
             $scope.id       =  $scope.output.id ;
-         
+                            
             testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,"1234").then(function(response){
    
     var response = Response.response(response); 
@@ -236,7 +249,8 @@ $scope.register = function(user) {
 $scope.service = Services;
     $scope.service.login = res ;
 
-
+ var txt = blob.register() ; 
+       
 
  if(res["ip"] == "0")
         {
@@ -248,7 +262,7 @@ $scope.service = Services;
          {
               $ionicLoading.hide();
              var txt = blob.register() ; 
-             console.log(txt);
+            
         document.addEventListener('deviceready', function () {
 
         $cordovaFile.createFile(cordova.file.applicationStorageDirectory, "text.txt", true)
@@ -268,7 +282,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
   }) 
      var data = new Blob([txt], { type: 'application/json;charset=utf-8'  });
         //  FileSaver.saveAs(data, 'text.txt'); 
-            $location.path("/app1/gallery"); 
+            $location.path("/app/gallery"); 
          }
 
   });
@@ -299,12 +313,27 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab('right');
-  
+ 
 
+  document.addEventListener('deviceready', function () {
+$cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "mobile.txt") 
+                   .then(function (success) {
+                 alert("mobilewrite" + success) 
+                 var st = JSON.stringify(success);
+                  
+           }, function (error) {
+                 alert("write" + success)
+              });
 
+})
 
 document.addEventListener('deviceready', function () {
              
+   
+
+
+
+
     $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 
       .then(function (success) {
          
@@ -368,7 +397,7 @@ document.addEventListener('deviceready', function () {
                    else
                   { 
                       $ionicLoading.hide();
-                      $location.path("/app1/gallery");                           
+                      $location.path("/app/gallery");                           
 
                    }
          
@@ -1165,36 +1194,6 @@ document.addEventListener('deviceready', function () {
 
 
 
-/*====================================
-=            Service Ctrl            =
-====================================*/
-
-.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
-
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight({
-            startVelocity: 3000
-        });
-    }, 700);
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-})
-/*=====  End of Service Ctrl  ======*/
-
 
 
 
@@ -1212,7 +1211,7 @@ document.addEventListener('deviceready', function () {
     
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
-   
+    $scope.hide  = false ;
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
@@ -1257,12 +1256,7 @@ document.addEventListener('deviceready', function () {
 
 .factory('blob',['$rootScope' , 'FileSaver' , '$window',function($rootScope , FileSaver,$window) {
     var messages = {};
-     var user = {
-             mobileno:'',
-             loginid: '',
-             branchid: '',
-             userid : ''
-        };
+   
     $rootScope.isFBLoggedin = false; 
     return {
           register : function()
@@ -1343,7 +1337,7 @@ document.addEventListener('deviceready', function () {
  var object = {};
   object.text = "";
   object.id = "";
-
+  
   return object;
 
  

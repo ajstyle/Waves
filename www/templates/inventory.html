@@ -1,33 +1,22 @@
-<ion-view view-title="Inventory">
+<ion-view view-title="Debtors">
+    <ion-content >
     
 
-
-                              
-           <div class = "Searchcheque">
-
-
-
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
-            </div>      
-
-
-
+                     
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
-               
-
-                  
-               
+              
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      
-                         <div class="divider"></div>
+                        
+                         <div class="divider"></div>   
+                            
+                <a href="" >
+                       
 
-                <a href="#"   >
-          
-       
-                   
-                  <div class = "row" >
+                   <div class = "row" >
                    
                         
                   <div class = "col-50">
@@ -45,30 +34,20 @@
                     </div>
                     <div class = "col-50">
                     
-                 <div class = "balance">   {{responses.baltype}} </div>
+                 <div class = "balance"> <b>  {{responses.baltype}} </b></div>
                 
                   </div>
 
                   </div>
-
-                      
-               
-                      
-                
-               
-               
-              
-
-
-                 
-                   
+                    
                 </a>
-              
+
             
 
                    </div>
-      
-
+               </div>
+   
+     
 
                   <!--
                   
