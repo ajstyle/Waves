@@ -21,7 +21,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
     $scope.isExpanded = false;
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
-
+   $scope.enable = false ; 
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
@@ -78,7 +78,8 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
         }
 
     };
-
+    
+    
     $scope.hideHeader = function() {
         $scope.hideNavBar();
         $scope.noHeader();
@@ -161,7 +162,7 @@ else
                });
                 $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "mobile.txt", mobile , true)
                    .then(function (success) {
-                 alert("successwrite" + success) 
+                
            }, function (error) {
                  alert("write" + success)
               });
@@ -219,7 +220,7 @@ $scope.register = function(user) {
 
    
      $ionicLoading.show({
-          templateUrl: 'templates/loader.html',
+          template: '<ion-spinner icon="spiral"></ion-spinner>',
             hideOnStateChange : 'true',
           noBackdrop : 'true'
        });
@@ -318,8 +319,12 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
   document.addEventListener('deviceready', function () {
 $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "mobile.txt") 
                    .then(function (success) {
-                 alert("mobilewrite" + success) 
-                 var st = JSON.stringify(success);
+                    var res1 =  JSON.parse(success)
+                    
+               
+                      $scope.output = Mobile;
+                   
+                      $scope.output.mobile = res1 ;
                   
            }, function (error) {
                  alert("write" + success)
@@ -329,18 +334,14 @@ $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "mobile.txt")
 
 document.addEventListener('deviceready', function () {
              
-   
-
-
-
 
     $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 
       .then(function (success) {
          
         var res =  JSON.parse(success)
-     
+
         $scope.obj  = res ; 
-          alert("res");
+          
           $scope.output = Mobile;
         
          
@@ -358,7 +359,7 @@ document.addEventListener('deviceready', function () {
                          
                   $scope.password = angular.copy(password);
                         
-                 // alert($scope.password);
+               
 
               var res =  JSON.parse(success)
               $scope.obj  = res ; 
@@ -368,9 +369,9 @@ document.addEventListener('deviceready', function () {
            $scope.loginid =  $scope.obj.loginid ;
              $scope.branchid =  $scope.obj.branchid ;
              $scope.userid =  $scope.obj.userid ;
-             console.log( $scope.userid);
-             $scope.Mobile   = "917877361402";
-             console.log($scope.Mobile);
+          
+             $scope.Mobile   = $scope.output.mobile;
+         
             $scope.password1  = $scope.password ;
             $scope.id       =  $scope.output.id ;
           
@@ -380,18 +381,15 @@ document.addEventListener('deviceready', function () {
              testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password1,$scope.Mobile,"1234").then(function(response){
                     var response = Response.response(response); 
                    
-                   ///  alert(response);
+               
                     var res1 =  response["login"];
-
-                        // alert(res.ip);
+                   
                         $scope.service = Services;
                 $scope.service.login = res1 ;
-                alert($scope.service.login);
-                  
-
+             
                     if(res1.ip == "0")
                    {  $ionicLoading.hide();
-                     alert(res.us);
+                
                       $location.path("/app/registertxt"); 
                   }
                    else
@@ -451,7 +449,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+       
           
     // Set Motion
     $timeout(function() {
@@ -478,7 +476,7 @@ document.addEventListener('deviceready', function () {
 
       $timeout(function() {
          
-     testService.GetCustomer($scope.ip , $scope.db , $scope.us , $scope.ps).then(function(response)
+     testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430").then(function(response)
       {
          
          $scope.showme = true;
@@ -548,7 +546,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+        
           
     // Set Motion
     $timeout(function() {
@@ -574,7 +572,7 @@ document.addEventListener('deviceready', function () {
 
       $timeout(function() {
          
-     testService.GetSupplier($scope.ip , $scope.db , $scope.us , $scope.ps).then(function(response)
+  testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430").then(function(response)
       {
          
          $scope.showme = true;
@@ -641,7 +639,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+  
           
     // Set Motion
     $timeout(function() {
@@ -735,7 +733,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+        
           
     // Set Motion
     $timeout(function() {
@@ -820,7 +818,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+      
           
     // Set Motion
     $timeout(function() {
@@ -910,7 +908,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+    
           
     // Set Motion
     $timeout(function() {
@@ -998,7 +996,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+         
           
     // Set Motion
     $timeout(function() {
@@ -1088,7 +1086,7 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-         alert( $scope.ip);
+         
           
     // Set Motion
     $timeout(function() {
@@ -1212,7 +1210,7 @@ document.addEventListener('deviceready', function () {
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.hide  = false ;
-
+    $scope.enable = true ;
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 
@@ -1337,7 +1335,7 @@ document.addEventListener('deviceready', function () {
  var object = {};
   object.text = "";
   object.id = "";
-  
+  object.mobile = "";
   return object;
 
  

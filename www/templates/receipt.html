@@ -10,29 +10,27 @@
 
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
             </div>      
-
-     <div class = "container1">
+ <div class = "container1">
             <div class = "row">
           
-                    <div class = "col col-0">   
+                    <div class = "col-25">   
                    Date 
                      </div>
-                     <div class = "col "> 
-                      VCH
+                     <div class = "col-25"> 
+                     VCH
                       </div>
                     
 
-                       <div class = "col"> 
-                 Credit
+                       <div class = "col-25"> 
+                Credit
                       </div>
-                       <div class = "col"> 
-                  Balance
+                       <div class = "col-25"> 
+                 Balance
                       </div>
                     
 
                       </div>
                       </div>
-
 
 
                        <div ng-show="showme" class="boxme">
@@ -48,18 +46,18 @@
                      
                         
                       
-                <a href="#" class=" waves-effect waves-green   item">
-               <p>    
+                <a href="#">
+                <div class = "divider"></div>   
 
                   <div class = "row">
                   
-                  <div class = "col">
+                  <div class = "col-25">
                 <div class = "date"> <b>{{responses.date}}</b></div>
                                               
                       </div>
                       
                   
-                   <div class = "col">
+                   <div class = "col-25">
                     
                      <div class = "vch">   <b> {{responses.vchno}} </b></div>
                 
@@ -68,11 +66,11 @@
                       
                 
                   
-                  <div class = "col">
+                  <div class = "col-25">
 
                 <div class = "credit">    <b> {{responses.credit}}</b> </div>
                    </div>
-                   <div class = "col">
+                   <div class = "col-25">
 
               
                 <div class = "balance">    <b>{{responses.balance}} </b> </div>
