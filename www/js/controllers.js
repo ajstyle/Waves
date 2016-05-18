@@ -432,7 +432,7 @@ document.addEventListener('deviceready', function () {
 =           Debtor Ctrl            =
 ====================================*/
 
-.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -449,7 +449,9 @@ document.addEventListener('deviceready', function () {
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
+
        
+          
           
     // Set Motion
     $timeout(function() {
@@ -472,6 +474,12 @@ document.addEventListener('deviceready', function () {
         });
     }, 700);
 
+      $scope.id = function(data)
+      {
+         $scope.output = transid;
+          $scope.output.transid = data ;
+       
+      }
 
 
       $timeout(function() {
@@ -529,7 +537,7 @@ document.addEventListener('deviceready', function () {
 ====================================*/
 
 
-.controller('CreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+.controller('CreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -568,11 +576,15 @@ document.addEventListener('deviceready', function () {
         });
     }, 700);
 
-
+$scope.id = function(data)
+      {
+         $scope.output = transid;
+          $scope.output.transid = data ;
+      }
 
       $timeout(function() {
          
-  testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430").then(function(response)
+  testService.GetSupplier("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430").then(function(response)
       {
          
          $scope.showme = true;
@@ -1107,7 +1119,7 @@ document.addEventListener('deviceready', function () {
 
      
          
-     testService. GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , "P" ).then(function(response)
+     testService.GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , "P" ).then(function(response)
       {
          console.log(response);
 
@@ -1154,6 +1166,93 @@ document.addEventListener('deviceready', function () {
 
 
 
+/*====================================
+=     transaction  Ctrl            =
+====================================*/
+
+
+.controller('transactionCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = transid;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.id  = $scope.output.transid
+          console.log( $scope.id);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of  Transaction Ctrl   ======*/
 
 
 
@@ -1162,18 +1261,93 @@ document.addEventListener('deviceready', function () {
 
 
 
+/*====================================
+=     transactionCreditor  Ctrl            =
+====================================*/
+
+
+.controller('transactionCreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = transid;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.id  = $scope.output.transid;
+          console.log( $scope.id);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
 
 
 
+ 
 
+})
 
-
-
-
-
-
-
-
+/*=====  End of  Transaction Ctrl   ======*/
 
 
 
@@ -1202,11 +1376,6 @@ document.addEventListener('deviceready', function () {
 
 .controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion,connection,$location) {
   
-
-  
-
-  
-    
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.hide  = false ;
@@ -1336,10 +1505,13 @@ document.addEventListener('deviceready', function () {
   object.text = "";
   object.id = "";
   object.mobile = "";
+
+ 
   return object;
 
  
 })
+
 
 .factory('Services', function () {
   
@@ -1353,6 +1525,11 @@ document.addEventListener('deviceready', function () {
  
 })
 
+.factory('transid', function () {
+   var object = {};
+  object.transid = "";
+  return object;
+})
 
 
 

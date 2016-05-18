@@ -80,6 +80,7 @@ if( connection.checkconnection() == 'No network connection' )
     var action5 = "GetReceipts";
     var action6 = "GetSalesPurchase" ; 
       var action7 = "GetItems" ; 
+      var action8 = "GetTransaction" ; 
      return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
@@ -116,7 +117,13 @@ if( connection.checkconnection() == 'No network connection' )
          Getinventory :  function(Ip,Db,Us,Psw)
         {
                 return $soap.post(base_url, action7 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw });
+        } ,
+           GetTransaction :  function(Ip,Db,Us,Psw,id)
+        {
+                return $soap.post(base_url, action8 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw ,id : id });
         } 
+
+
 
 
 
@@ -324,7 +331,24 @@ if( connection.checkconnection() == 'No network connection' )
         }
     })
 
-
+.state('app.transaction', {
+        url: '/transaction',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/transaction.html',
+                controller: 'transactionCtrl'
+            }
+        }
+    })
+.state('app.transactionCreditors', {
+        url: '/transactionCreditor',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/transactionCreditor.html',
+                controller: 'transactionCreditorCtrl'
+            }
+        }
+    })
 
 
 
