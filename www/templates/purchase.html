@@ -1,4 +1,7 @@
 <ion-view view-title="Purchase">
+   <ion-nav-bar class="bar bar-header bar-calm"  align-title="left">
+
+</ion-nav-bar>
     <ion-content >
     
 
@@ -27,7 +30,7 @@
                  Status
                       </div>
                        <div class = "col-25"> 
-                  Amount
+                   <div class = "amount"> Amount</div>
                       </div>
                     
 
@@ -47,7 +50,7 @@
                      
                         
                       
-                  <a href="#">
+                  <a ui-sref="app.purchaseVoucher" ng-click="voucher(responses.voucher)" >
                
                    <div class = "divider"></div>
                   <div class = "row">

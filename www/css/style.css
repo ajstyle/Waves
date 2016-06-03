@@ -346,13 +346,14 @@ word-wrap: break-word;
 .balance
 {
   color : #0059b3 ;
+  text-align: right;
 }
 .container2
 {
   margin: 0;
 padding: 0;
-text-align: left
-
+width : 100% ;
+height : 60%;
 }
 
 .divider
@@ -389,4 +390,20 @@ margin-top  :90px ;
 .rowCheque {
   line-height: .8 ;
  
+}
+.amount
+{
+  text-align : right ;
+}
+
+.date1
+{
+  text-align : right ;
+}
+.container3
+{
+ 
+background :pink ;
+margin-top : 100px;
+
 }

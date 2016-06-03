@@ -1,4 +1,7 @@
-<ion-view view-title="Sales">
+<ion-view view-title="{{name}}">
+    
+ <ion-nav-bar class="bar bar-header bar-assertive"  align-title="left">
+      </ion-nav-bar>
     <ion-content >
     
 
@@ -11,29 +14,30 @@
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
             </div>      
 
+   
      <div class = "container1">
             <div class = "row">
           
-                    <div class = "col-25">   
+                    <div class = "col-20">   
                    Date 
                      </div>
-                     <div class = "col-25"> 
-                      Number
+                     <div class = "col-20"> 
+                      type
                       </div>
                     
 
-                       <div class = "col-25"> 
-                 Status
+                       <div class = "col-20"> 
+                 Debit
                       </div>
-                       <div class = "col-25"> 
-                  <div class = "amount"> Amount</div>
+                       <div class = "col-20"> 
+                 Credit
                       </div>
-                    
+                       <div class = "col-20"> 
+                Balance
+                      </div>
 
                       </div>
                       </div>
-
-
 
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
@@ -42,50 +46,54 @@
 
 
 
-                   
+                     <div class = "container2">
                
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      
                         
                       
-                <a ui-sref = "app.saleVoucher" ng-click="voucher(responses.voucher)">
+                  <a href="#">
                
                    <div class = "divider"></div>
                   <div class = "row">
                   
-                  <div class = "col-25">
+                  <div class = "col-20">
                 <div class = "date"> <b>{{responses.date}}</b></div>
                                               
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col-20">
                     
-                     <div class = "vch">   <b> {{responses.vcn}} </b></div>
+                     <div class = "vch">   <b> {{responses.typ}} </b></div>
                 
                   </div>
                    
                       
                 
                   
-                  <div class = "col-25">
+                  <div class = "col-20">
 
-                <div class = "credit">    <b> {{responses.status}}</b> </div>
+                <div class = "credit">    <b> {{responses.debit}}</b> </div>
                    </div>
-                   <div class = "col-25">
+                   <div class = "col-20">
 
               
-                <div class = "balance">    <b>{{responses.amount}} </b> </div>
+                <div class = "balance">    <b>{{responses.credit}} </b> </div>
                    </div>
 
-                
+                  <div class = "col-20">
+
+              
+                <div class = "balance">    <b>{{responses.balance}} </b> </div>
+                   </div>
 
                    </div>
                 
                    
                   <div class = "col col-70" >
-             <div class = "company"><b>   {{responses.lname}} </b></div>
-              <div class = "Add">  {{responses.ladd}} </div>
+             <div class = "company"><b>   {{responses.nera}} </b></div>
+            
                                               
                       </div>
                    
@@ -94,6 +102,8 @@
                  
                    
                 </a>
+              
+            
               
             
 

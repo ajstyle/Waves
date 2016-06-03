@@ -1,4 +1,10 @@
 <ion-view view-title="Debtors">
+ <ion-nav-bar class="bar bar-header bar-calm"  align-title="left">
+
+</ion-nav-bar>
+     <ion-nav-back-button class="no-text">
+           
+            </ion-nav-back-button>
     <ion-content >
     
 
@@ -13,7 +19,7 @@
                         
                            
                             
-                <a  ui-sref="app.transaction" ng-click="id(responses.id)" >
+                <a  ui-sref="app.transaction" ng-click="id(responses.id,responses.lname)" >
                            <div class  = "divider"></div>
                            <div class = "row">
                               <div class = "col-50">
@@ -29,7 +35,7 @@
                      </div>
                      <div class = "col-30">
 
-                        <div class = "credit"> <b>{{responses.baltype}}</b></div>
+                        <div class = "balance"> <b>{{responses.baltype}}</b></div>
                      </div>
             
 

@@ -1,4 +1,6 @@
-<ion-view view-title="Purchase">
+<ion-view view-title="{{name}}">
+      <ion-nav-bar class="bar bar-header bar-assertive"  align-title="left">
+      </ion-nav-bar>
     <ion-content >
     
 
@@ -49,7 +51,7 @@
                      
                         
                       
-                  <a href="#">
+                  <a ui-sref="app.Creditorvoucher" ng-click="voucher(responses.voucher)">
                
                    <div class = "divider"></div>
                   <div class = "row">
@@ -76,7 +78,7 @@
                    <div class = "col-20">
 
               
-                <div class = "balance">    <b>{{responses.credit}} </b> </div>
+                <div class = "credit">    <b>{{responses.credit}} </b> </div>
                    </div>
 
                   <div class = "col-20">

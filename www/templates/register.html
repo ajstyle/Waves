@@ -1,9 +1,11 @@
-<ion-side-menus  enable-menu-with-back-views="false" >
-</ion-side-menus>
-<ion-view view-title="Login">
-  
-<form name = "myform" novalidate>
 
+<ion-view view-title="Login">
+   <ion-nav-bar class="bar bar-header bar-balanced"  align-title="left">
+
+</ion-nav-bar>
+<form name = "myform" novalidate>
+    <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
+    </ion-side-menu>
 <ion-content ng-class="{expanded:isExpanded}" >
 
 
@@ -14,10 +16,9 @@
 
      <div class="input-field col s12">
              
-           <input type = "number" name = "login" ng-model="blob.user.loginid"  ng-maxlength = "6" ng-minlength = "6"  >
+           <input type = "number" name = "login" ng-model="blob.user.loginid"  ng-maxlength = "6" ng-minlength = "6"  placeholder = "Login_id" required>
            
-         <label  for="Login id">Loginid</label>
-        
+               
           <div ng-messages="myform.login.$error" ng-messages-multiple>
       <div ng-message="required">
          <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id  required</div>
@@ -42,8 +43,8 @@
 
      <div class="input-field col s12">
          
-          <input type = "text" name = "branch" ng-model = "blob.user.branchid" ng-required = "true" class = "active" autofocus />
-         <label for="Branch">Branch</label>
+          <input type = "text" name = "branch" ng-model = "blob.user.branchid" ng-required = "true" class = "active"  placeholder = "Branch" />
+        
          <div ng-messages="myform.branch.$error" ng-messages-multiple>
       <div ng-message="required">
          <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.branch.$touched">branch id required</div>
@@ -58,8 +59,8 @@
      <div class="input-field col s12">
           
 
-        <input type = "text" name = "userid" id = "userid"  ng-model = "blob.user.userid" class = "active" ng-required = "true" autofocus >
-         <label for="user id">Userid</label>
+        <input type = "text" name = "userid" id = "userid"  ng-model = "blob.user.userid" class = "active" ng-required = "true" placeholder = "Userid"  >
+         
          <div ng-messages="myform.userid.$error" ng-messages-multiple>
       <div ng-message="required">
          <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.userid.$touched">User id required</div>
@@ -75,8 +76,8 @@
      <div class="input-field col s12">
 
       <input type = "password" name = "password" id = "password"  ng-model = "blob.user.password" 
-            ng-required = "true" class = "active" autofocus >
-         <label for="user id">Password</label>
+            ng-required = "true" class = "active" autofocus placeholder = "Password"  >
+         
         <div ng-messages="myform.password.$error" ng-messages-multiple>
       <div ng-message="required">
          <div class = "error-messages1"  ng-show = "myform.password.$invalid&&myform.password.$touched">Password to be required</div>
@@ -89,7 +90,7 @@
       <div class="padding">
             
 
-            <button   ng-click="register(blob)"  class="button button-full button-royal in" ng-disabled = "myform.$invalid" >Register</button>                  
+            <button   ng-click="register(blob)"  class="button button-full button-royal in" ng-disabled = "myform.$invalid" >Login</button>                  
         </div>   
 
  

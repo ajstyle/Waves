@@ -5,29 +5,30 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-mate
 
 app.run(['$ionicPlatform','$ionicLoading','$location' , '$http' , '$cordovaFile','connection', 'Mobile' , function($ionicPlatform,$ionicLoading,$location,$http,$cordovaFile,connection,Mobile) {
     $ionicPlatform.ready(function() {
+       
 $ionicPlatform.onHardwareBackButton(function(){
-Materialize.updateTextFields();
+
   $ionicLoading.hide();
  
 });
 
 
- 
+ navigator.splashscreen.hide();
 var uuid =  window.device.uuid;
 
       var output = Mobile;
    
      output.id=uuid ;
 
-          navigator.splashscreen.hide();
+          
        document.addEventListener('deviceready', function () {
-
+         
       $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "text.txt")
       .then(function (success) {
        $location.url("/app/registertxt"); 
       }, function (error) {
        
-        //$location.url("/app/login"); 
+      //  $location.url("/app1/login"); 
       });
 
   })
@@ -81,6 +82,8 @@ if( connection.checkconnection() == 'No network connection' )
     var action6 = "GetSalesPurchase" ; 
       var action7 = "GetItems" ; 
       var action8 = "GetTransaction" ; 
+      var action9 = "GetAccountingVoucher";
+    var action10  =  "GetInventoryVoucher";
      return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
@@ -121,8 +124,15 @@ if( connection.checkconnection() == 'No network connection' )
            GetTransaction :  function(Ip,Db,Us,Psw,id)
         {
                 return $soap.post(base_url, action8 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw ,id : id });
-        } 
-
+        } ,
+        GetAccountingVoucher : function(Ip,Db,Us,Psw,voucher) 
+         {
+                return $soap.post(base_url, action9 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw ,voucher : voucher });
+        },
+        GetInventoryVoucher : function(Ip,Db,Us,Psw,voucher) 
+         {
+                return $soap.post(base_url, action10 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw ,voucher : voucher });
+        }
 
 
 
@@ -154,7 +164,13 @@ if( connection.checkconnection() == 'No network connection' )
         controller: 'AppCtrl'
     })
 
-  
+    $stateProvider.state('app1', {
+        url: '/app1',
+        abstract: true,
+        templateUrl: 'templates/menu.html',
+        controller: 'AppCtrl'
+    })
+
    
 
      .state('app.register', {
@@ -349,14 +365,66 @@ if( connection.checkconnection() == 'No network connection' )
             }
         }
     })
+.state('app.transactionCheque', {
+        url: '/transactionCheque',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/transactionCheque.html',
+                controller: 'transactionChequeCtrl'
+            }
+        }
+    })
+.state('app.transactionOther', {
+        url: '/transactionOther',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/transactionOther.html',
+                controller: 'transactionOtherCtrl'
+            }
+        }
+    })
+.state('app.voucher', {
+        url: '/voucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/voucher.html',
+                controller: 'voucherCtrl'
+            }
+        }
+    })
 
+.state('app.Creditorvoucher', {
+        url: '/Creditorvoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/Creditorvoucher.html',
+                controller: 'CreditorvoucherCtrl'
+            }
+        }
+    })
+.state('app.purchaseVoucher', {
+        url: '/purchaseVoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/purchaseVoucher.html',
+                controller: 'purchaseVoucherCtrl'
+            }
+        }
+    })
 
-
-
+.state('app.saleVoucher', {
+        url: '/saleVoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/saleVoucher.html',
+                controller: 'saleVoucherCtrl'
+            }
+        }
+    })
 
 
     // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
+$urlRouterProvider.otherwise('/app/login');
 
 
 

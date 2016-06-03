@@ -1,4 +1,7 @@
-<ion-view view-title="Sales">
+<ion-view view-title="Voucher">
+    <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
+
+</ion-nav-bar>
     <ion-content >
     
 
@@ -9,31 +12,66 @@
 
 
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
-            </div>      
+            </div> 
+<div class = "container3">
+     <div class = "row">
+   <div class = "col-20">
+   <b>Date:</b> </br></br>  
+   <b>No.</b>
+   </div>     
+   </div>       
+   </div>
+<div class = "container3">
+  <div ng-animate="'animate'"  ng-repeat= "responses in response"  class="repeated-item" >
+<div class = "row">
+   <div class = "col-20">
+   <div class = "date"> <b>{{responses.date}}</b></div></br>
+  <div class = "vch">  <b> {{responses.vchno}}</b></div>
+   </div>
+<div class = "col-20">
+  
+   </div>
+<div class = "col-20">
+  <b>Type:</b> 
+   </div>
+<div class = "col-20">
+ <div class = "balance"> <b> {{responses.typ}}</b></div>
+   </div>
 
+<div class = "col-10">
+    
+   </div>
+<div class = "col-10">
+     
+   </div>
+   
+   
+   
+   </div>
+   </div>
+   </div>
+
+
+   
      <div class = "container1">
+          
+
             <div class = "row">
           
-                    <div class = "col-25">   
-                   Date 
+                    <div class = "col-33">   
+                   Description
                      </div>
-                     <div class = "col-25"> 
-                      Number
+                     <div class = "col-33"> 
+                      Debit
                       </div>
                     
 
-                       <div class = "col-25"> 
-                 Status
+                       <div class = "col-33"> 
+                       Credit
                       </div>
-                       <div class = "col-25"> 
-                  <div class = "amount"> Amount</div>
-                      </div>
-                    
-
+                       
                       </div>
                       </div>
-
-
 
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
@@ -42,58 +80,52 @@
 
 
 
-                   
+                     <div class = "container2">
                
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      
                         
                       
-                <a ui-sref = "app.saleVoucher" ng-click="voucher(responses.voucher)">
+                  <a href="#">
                
                    <div class = "divider"></div>
-                  <div class = "row">
+                   <div class = "row">
                   
-                  <div class = "col-25">
-                <div class = "date"> <b>{{responses.date}}</b></div>
-                                              
+                  <div class = "col-33">
+                <div class = "date">{{responses.cd}} </div>   
+                <div class = "company"><b>   {{responses.lname}} </b></div>                    
+                      
+                <div class = "Add"><b>   {{responses.ladd}} </b></div>                    
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col-33">
                     
-                     <div class = "vch">   <b> {{responses.vcn}} </b></div>
+                     <div class = "vch">   <b> {{responses.debit}} </b></div>
                 
                   </div>
                    
                       
                 
                   
-                  <div class = "col-25">
+                  <div class = "col-33">
 
-                <div class = "credit">    <b> {{responses.status}}</b> </div>
+                <div class = "credit">    <b> {{responses.credit}}</b> </div>
                    </div>
-                   <div class = "col-25">
-
-              
-                <div class = "balance">    <b>{{responses.amount}} </b> </div>
-                   </div>
-
-                
+               
 
                    </div>
                 
                    
-                  <div class = "col col-70" >
-             <div class = "company"><b>   {{responses.lname}} </b></div>
-              <div class = "Add">  {{responses.ladd}} </div>
-                                              
-                      </div>
+                 
                    
 
 
                  
                    
                 </a>
+              
+            
               
             
 

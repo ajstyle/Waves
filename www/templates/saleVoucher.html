@@ -1,0 +1,287 @@
+<ion-view view-title="Invoice">
+    <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
+
+</ion-nav-bar>
+    <ion-content >
+    
+
+
+          
+ <div class = "container4">
+            <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+
+
+             <div class = "row">
+             <div class = "col-50">
+            <b> <div class = "credit"> {{responses.tranhead}}</div></b>
+             </div>
+             <div class = "col-50">
+           <b>  <div class = "balance"> {{responses.transtatus}} </div></b>
+             </div>
+             </div>
+
+            
+            <div class = "row">
+            <div class = "col-25">
+            <b> <div class = "credit">Number:</div></b>
+             </div>
+             <div class = "col-25">
+           <b>  <div class = "vch"> {{responses.vcn}} </div></b>
+             </div>
+             <div class = "col-25">
+            <b> <div class = "balance"> Date:</div></b>
+             </div>
+             <div class = "col-25">
+           <b>  <div class = "date1"> {{responses.date}} </div></b>
+             </div>
+            </div>
+           
+            </div> 
+            </div>  
+     <div class = "container1">
+          
+
+            <div class = "row">
+          
+                    <div class = "col-25">   
+                  PRODUCT NAME  
+                     </div>
+                     <div class = "col-25"> 
+                      QTY
+                      </div>
+                    
+
+                       <div class = "col-25"> 
+                      RATE
+                      </div>
+                       <div class = "col-25"> 
+                     <div class = "amount"> AMOUNT</div>
+                      </div>
+                       
+                      </div>
+                      </div>
+
+                       <div ng-show="showme" class="boxme">
+                         <div ng-switch = "(response| filter:search).length">
+                         <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
+               
+
+
+
+                     <div class = "container2">
+               
+                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                     
+                        
+                      
+                  <a href="#">
+               
+                   <div class = "divider"></div>
+                   <div class = "row">
+                  
+                  <div class = "col-25">
+                
+
+                <div class = "company"><b>   {{responses.billname}} </b></div>                    
+                      
+                 
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                     <div class = "vch">   <b> {{responses.qty}} </b></div>
+                
+                  </div>
+                   
+                       
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "credit">    <b> {{responses.rate}}</b> </div>
+                   </div>
+                    <div class = "col-25">
+
+                <div class = "balance">    <b> {{responses.amount}}</b> </div>
+                   </div>
+
+                   </div>
+                
+                   
+                 
+                   
+
+
+                 
+                   
+                </a>
+              
+            
+            
+
+                   </div>
+               </div>
+<div class = "container3">
+  <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+              <div class = "row">
+              <div class = "col-25">
+                
+                <div class = "company"><b>  Order no. :</b></div>                    
+                      
+                 
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                     <div class = "vch">   <b> {{responses.orderno}} </b></div>
+                
+                  </div>
+                   
+                       
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "credit">    <b> Dis. :</b> </div>
+                   </div>
+                    <div class = "col-25">
+
+                <div class = "balance">    <b> {{responses.amount}}</b> </div>
+                   </div>
+              </div>
+              <div class = "row">
+               <div class = "col-25">
+                
+                <div class = "company"><b>  L.R. No. :</b></div>                    
+                      
+                 
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                     <div class = "vch">   <b> {{responses.lrno}} </b></div>
+                
+                  </div>
+                   
+                       
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "credit">    <b> TAX :</b> </div>
+                   </div>
+                    <div class = "col-25">
+
+                <div class = "balance">    <b> {{responses.tax}}</b> </div>
+                   </div>
+              </div>
+              <div class = "row">
+               <div class = "col-25">
+                
+                <div class = "company"><b>  Parcels : </b></div>                    
+                      
+                 
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                     <div class = "vch">   <b> {{responses.nocs}} </b></div>
+                
+                  </div>
+                   
+                       
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "credit">    <b> Other A/L :</b> </div>
+                   </div>
+                    <div class = "col-25">
+
+                <div class = "balance">    <b> {{responses.other}}</b> </div>
+                   </div>
+              </div>
+              <div class = "row">
+               <div class = "col-25">
+                
+                <div class = "company"><b>  Transp :</b></div>                    
+                      
+                 
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                     <div class = "vch">   <b> {{responses.tpt}} </b></div>
+                
+                  </div>
+                   
+                       
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "credit">    <b> Cash :</b> </div>
+                   </div>
+                    <div class = "col-25">
+
+                <div class = "balance">    <b> {{responses.cash}}</b> </div>
+                   </div>
+              </div>
+              <div class = "row">
+               <div class = "col-25">
+                
+                <div class = "company"><b>  Remark :</b></div>                    
+                      
+                 
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                     <div class = "vch">   <b> {{responses.remark1}} </b></div>
+                
+                  </div>
+                   
+                       
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "credit">    <b> Credit :</b> </div>
+                   </div>
+                    <div class = "col-25">
+
+                <div class = "balance">    <b> {{responses.credit}}</b> </div>
+                   </div>
+
+              </div>
+
+
+            </div>
+              </div>
+
+                  <!--
+                  
+                 <a class="waves-effect waves-green " href="#/app/profile">
+       
+                
+       
+                 
+                  <li class="collection-item">   
+                    <h3>{{responses.lname}}</h3>
+                    <p>{{responses.city}}</p>
+                
+                  </li>     
+                  </a>
+                  !-->
+                
+        
+   
+       
+    </ion-content>
+</ion-view>
