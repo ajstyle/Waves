@@ -84,6 +84,7 @@ if( connection.checkconnection() == 'No network connection' )
       var action8 = "GetTransaction" ; 
       var action9 = "GetAccountingVoucher";
     var action10  =  "GetInventoryVoucher";
+     var action11  =  "GetItemTransaction";
      return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
@@ -132,6 +133,10 @@ if( connection.checkconnection() == 'No network connection' )
         GetInventoryVoucher : function(Ip,Db,Us,Psw,voucher) 
          {
                 return $soap.post(base_url, action10 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw ,voucher : voucher });
+        },
+        GetItemTransaction : function(Ip,Db,Us,Psw,id) 
+         {
+                return $soap.post(base_url, action11 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw ,id:id });
         }
 
 
@@ -374,6 +379,15 @@ if( connection.checkconnection() == 'No network connection' )
             }
         }
     })
+.state('app.transactionInventory', {
+        url: '/transactionInventory',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/transactionInventory.html',
+                controller: 'transactionInventoryCtrl'
+            }
+        }
+    })
 .state('app.transactionOther', {
         url: '/transactionOther',
         views: {
@@ -421,8 +435,33 @@ if( connection.checkconnection() == 'No network connection' )
             }
         }
     })
-
-
+.state('app.inventoryVoucher', {
+        url: '/inventoryVoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/inventoryVoucher.html',
+                controller: 'inventoryVoucherCtrl'
+            }
+        }
+    })
+.state('app.receiptVoucher', {
+        url: '/receiptVoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/receiptVoucher.html',
+                controller: 'receiptVoucherCtrl'
+            }
+        }
+    })
+.state('app.chequeVoucher', {
+        url: '/chequeVoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/chequeVoucher.html',
+                controller: 'chequeVoucherCtrl'
+            }
+        }
+    })
     // if none of the above states are matched, use this as the fallback
 $urlRouterProvider.otherwise('/app/login');
 

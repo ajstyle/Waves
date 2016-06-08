@@ -51,7 +51,7 @@
                      
                         
                       
-                  <a ui-sref="app.voucher" ng-click="voucher(responses.voucher)">
+                  <a ui-sref="app.voucher" ng-click="voucher(responses.voucher,responses.date,responses.typ,responses.vchno)">
                
                    <div class = "divider"></div>
                   <div class = "row">
@@ -73,12 +73,12 @@
                   
                   <div class = "col-20">
 
-                <div class = "credit">    <b> {{responses.debit}}</b> </div>
+                <div class = "debit">    <b> {{responses.debit}}</b> </div>
                    </div>
                    <div class = "col-20">
 
               
-                <div class = "balance">    <b>{{responses.credit}} </b> </div>
+                <div class = "credit">    <b>{{responses.credit}} </b> </div>
                    </div>
 
                   <div class = "col-20">

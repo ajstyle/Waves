@@ -189,7 +189,7 @@ else
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading' , '$ionicPopup' ,  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading,$ionicPopup)
 {
      
         $scope.$parent.showHeader();
@@ -256,7 +256,10 @@ $scope.service = Services;
  if(res["ip"] == "0")
         {
            $ionicLoading.hide();
-              alert(res["us"]);
+              $ionicPopup.alert({
+                title : 'Error',
+                template : res["us"]
+              });
             $location.path("/app/register"); 
         }
          else
@@ -733,7 +736,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('ChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+.controller('ChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -758,7 +761,12 @@ $scope.id = function(data,name)
             selector: '.slide-up'
         });
     }, 300);
-
+    $scope.voucher = function(data)
+      {
+          $scope.output = voucher;
+          $scope.output.voucher = data ;
+          
+      }
    
       $ionicLoading.show({
           templateUrl: 'templates/loader.html',
@@ -818,7 +826,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('receiptCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+.controller('receiptCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -835,7 +843,11 @@ $scope.id = function(data,name)
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-      
+       $scope.voucher = function(data)
+      {
+          $scope.output = voucher;
+          $scope.output.voucher = data ;
+      }
           
     // Set Motion
     $timeout(function() {
@@ -908,7 +920,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('inventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) {
+.controller('inventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -918,6 +930,13 @@ $scope.id = function(data,name)
     $scope.$parent.setHeaderFab(false);
 
     $scope.service = Services;
+     $scope.id = function(data,name)
+      {
+         $scope.output = transid;
+
+          $scope.output.transid = data ;
+          $scope.output.name = name ;
+      }
     console.log(  $scope.service);
         var data = $scope.service.login ;
           
@@ -1112,7 +1131,7 @@ $scope.id = function(data,name)
       {
          $scope.output = voucher;
           $scope.output.voucher = data ;
-       
+          
       }
           
     // Set Motion
@@ -1219,9 +1238,9 @@ $scope.id = function(data,name)
     
           $scope.voucher = function(data)
       {
-         $scope.output = voucher;
+          $scope.output = voucher;
           $scope.output.voucher = data ;
-       
+
       }
        console.log(  $scope.output.transid);
       $ionicLoading.show({
@@ -1231,7 +1250,7 @@ $scope.id = function(data,name)
 
        });
 
-     console.log($scope.id);
+   
          
      testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
       {
@@ -1469,6 +1488,100 @@ $scope.id = function(data,name)
 /*=====  End of  Transaction Chqeue Ctrl   ======*/
 
 
+/*====================================
+=     transaction Inventory  Ctrl            =
+====================================*/
+
+
+.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = transid;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.id  = $scope.output.transid;
+           $scope.name =   $scope.output.name ; 
+          console.log( $scope.id);
+            $scope.voucher = function(data)
+      {
+          $scope.output = voucher;
+           $scope.output.voucher = data ;
+      }
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetItemTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of  Transaction Inventory Ctrl   ======*/
+
 
 
 
@@ -1588,7 +1701,11 @@ $scope.id = function(data,name)
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
            $scope.voucher  = $scope.output.voucher;
-          
+           $scope.date  = $scope.output.date;
+           $scope.type = $scope.output.typ ;
+           $scope.vchno = $scope.output.vchno ;
+           
+          console.log(  $scope.date);
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -1621,6 +1738,8 @@ $scope.id = function(data,name)
      console.log(response1.length);
    
    $scope.response = response1; 
+     console.log( $scope.response);
+   
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
     $scope.$watch('search', function(val)
@@ -1739,8 +1858,267 @@ $scope.id = function(data,name)
 
 })
 
-/*=====  End of Creditorvoucher Ctrl   ======*/
+/*=====  End of Inventory voucher Ctrl   ======*/
 
+
+.controller('inventoryVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = voucher
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.voucher  = $scope.output.voucher;
+          console.log($scope.voucher);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher  ).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of Inventory voucher Ctrl   ======*/
+
+/*====================================
+=    Receipt voucher Ctrl     =
+====================================*/
+
+
+.controller('receiptVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = voucher
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.voucher  = $scope.output.voucher;
+          console.log($scope.voucher);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of Receipt voucher Ctrl   ======*/
+
+/*====================================
+=    Cheque voucher Ctrl     =
+====================================*/
+
+
+.controller('chequeVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = voucher
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.voucher  = $scope.output.voucher;
+          console.log($scope.voucher);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of Cheque voucher Ctrl   ======*/
 
 
 /*====================================

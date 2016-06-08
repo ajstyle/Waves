@@ -343,11 +343,16 @@ word-wrap: break-word;
    color :  #660033;
 
 }
+.debit
+{
+   color : #700000 ;
+}
 .balance
 {
   color : #0059b3 ;
   text-align: right;
 }
+
 .container2
 {
   margin: 0;
@@ -398,7 +403,7 @@ margin-top  :90px ;
 
 .date1
 {
-  text-align : right ;
+  text-align : left ;
 }
 .container3
 {

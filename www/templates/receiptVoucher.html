@@ -1,5 +1,5 @@
-<ion-view view-title="Receipt">
-     <ion-nav-bar class="bar bar-header bar-calm"  align-title="left">
+<ion-view view-title="Voucher">
+    <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
 
 </ion-nav-bar>
     <ion-content >
@@ -12,29 +12,63 @@
 
 
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
-            </div>      
- <div class = "container1">
+            </div> 
+
+<div class = "container4">
+ <div ng-animate="'animate'"  ng-repeat= "responses in response|limitTo : 1"  class="repeated-item" >
+
+<div class = "row">
+   <div class = "col-25">
+   <div class = "date"> <b>Date:</b></div></br>
+   </div>
+<div class = "col-25">
+  <div class = "date1">  <b> {{responses.date}}</b></div>
+   </div>
+<div class = "col-25">
+  <b><div class = "balance">Type:</div></b> 
+   </div>
+<div class = "col-25">
+ <div class = "balance"> <b> {{responses.typ}}</b></div>
+   </div>
+  
+   
+   
+   
+    </div>
+ 
+<div class = "row">
+   <div class = "col-25">
+   <div class = "date"> <b>Number:</b></div></br>
+</div>
+   <div class = "col-25">
+   <div class = "vchno"> <b>{{responses.voucher}}</b></div></br>
+</div>
+
+</div>
+
+   </div>
+ </div>
+
+   
+     <div class = "container1">
+          
+
             <div class = "row">
           
-                    <div class = "col-25">   
-                   Date 
+                    <div class = "col-33">   
+                   Description
                      </div>
-                     <div class = "col-25"> 
-                     VCH
+                     <div class = "col-33"> 
+                      Debit
                       </div>
                     
 
-                       <div class = "col-25"> 
-                Credit
+                       <div class = "col-33"> 
+                       Credit
                       </div>
-                       <div class = "col-25"> 
-                 Balance
-                      </div>
-                    
-
+                       
                       </div>
                       </div>
-
 
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
@@ -49,53 +83,46 @@
                      
                         
                       
-                <a ui-sref="app.receiptVoucher" ng-click="voucher(responses.voucher)">
-                <div class = "divider"></div>   
-
-                  <div class = "row">
+                  <a href="#">
+               
+                   <div class = "divider"></div>
+                   <div class = "row">
                   
-                  <div class = "col-25">
-                <div class = "date"> <b>{{responses.date}}</b></div>
-                                              
+                  <div class = "col-33">
+                <div class = "date">{{responses.cd}} </div>   
+                <div class = "company"><b>   {{responses.lname}} </b></div>                    
+                      
+                <div class = "Add"><b>   {{responses.ladd}} </b></div>                    
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col-33">
                     
-                     <div class = "vch">   <b> {{responses.vchno}} </b></div>
+                     <div class = "vch">   <b> {{responses.debit}} </b></div>
                 
                   </div>
                    
                       
                 
                   
-                  <div class = "col-25">
+                  <div class = "col-33">
 
                 <div class = "credit">    <b> {{responses.credit}}</b> </div>
                    </div>
-                   <div class = "col-25">
+               
 
-              
-                <div class = "balance">    <b>{{responses.balance}} </b> </div>
                    </div>
-
                 
-
-                   </div>
-                 </p>
-                 <p>
                    
-                  <div class = "col col-70" >
-             <div class = "company"><b>   {{responses.ledName}} </b></div>
-              <div class = "Add">  {{responses.ledAdd}} </div>
-                                              
-                      </div>
-                   </p>
+                 
+                   
 
 
                  
                    
                 </a>
+              
+            
               
             
 

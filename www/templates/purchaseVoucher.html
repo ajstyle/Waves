@@ -8,7 +8,7 @@
 
           
  <div class = "container4">
-            <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+            <div ng-animate="'animate'"  ng-repeat= "responses in response | limitTo : 1"  class="repeated-item" >
 
 
              <div class = "row">
