@@ -8,7 +8,7 @@
 
           
  <div class = "container4">
-            <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+            <div ng-animate="'animate'"  ng-repeat= "responses in response |limitTo:1"  class="repeated-item" >
 
 
              <div class = "row">
@@ -32,7 +32,7 @@
             <b> <div class = "balance"> Date:</div></b>
              </div>
              <div class = "col-25">
-           <b>  <div class = "date1"> {{responses.date}} </div></b>
+           <b>  <div class = "balance"> {{responses.date}} </div></b>
              </div>
             </div>
            

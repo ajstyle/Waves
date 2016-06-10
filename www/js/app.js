@@ -13,6 +13,7 @@ $ionicPlatform.onHardwareBackButton(function(){
 });
 
 
+
  navigator.splashscreen.hide();
 var uuid =  window.device.uuid;
 
@@ -25,6 +26,7 @@ var uuid =  window.device.uuid;
          
       $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "text.txt")
       .then(function (success) {
+      
        $location.url("/app/registertxt"); 
       }, function (error) {
        
@@ -459,6 +461,15 @@ if( connection.checkconnection() == 'No network connection' )
             'menuContent': {
                 templateUrl: 'templates/chequeVoucher.html',
                 controller: 'chequeVoucherCtrl'
+            }
+        }
+    })
+.state('app.CreditorAVoucher', {
+        url: '/CreditorAVoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/receiptVoucher.html',
+                controller: 'CreditorAVoucherCtrl'
             }
         }
     })

@@ -255,6 +255,7 @@ $scope.service = Services;
 
  if(res["ip"] == "0")
         {
+          
            $ionicLoading.hide();
               $ionicPopup.alert({
                 title : 'Error',
@@ -264,6 +265,7 @@ $scope.service = Services;
         }
          else
          {
+        
               $ionicLoading.hide();
              var txt = blob.register() ; 
             
@@ -271,16 +273,17 @@ $scope.service = Services;
 
         $cordovaFile.createFile(cordova.file.applicationStorageDirectory, "text.txt", true)
       .then(function (success) {
-      
-      }, function (error) {
        
+      }, function (error) {
+         alert(" error Creater file"+error);
       });
 
 $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt , true)
       .then(function (success) {
        
       }, function (error) {
-       
+         alert(" error write file"+success);
+
       });
 
   }) 
@@ -322,6 +325,8 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
   document.addEventListener('deviceready', function () {
 $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "mobile.txt") 
                    .then(function (success) {
+                          
+
                     var res1 =  JSON.parse(success)
                     
                
@@ -330,7 +335,7 @@ $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "mobile.txt")
                       $scope.output.mobile = res1 ;
                   
            }, function (error) {
-                 alert("write" + success)
+                 alert("error read write file" + error)
               });
 
 })
@@ -340,7 +345,7 @@ document.addEventListener('deviceready', function () {
 
     $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "text.txt") 
       .then(function (success) {
-         
+          
         var res =  JSON.parse(success)
 
         $scope.obj  = res ; 
@@ -389,7 +394,10 @@ document.addEventListener('deviceready', function () {
              
                     if(res1.ip == "0")
                    {  $ionicLoading.hide();
-                
+                       $ionicPopup.alert({
+                         title : 'Error',
+                         template : res1.ip
+                        });         
                       $location.path("/app/registertxt"); 
                   }
                    else
@@ -404,7 +412,7 @@ document.addEventListener('deviceready', function () {
            
      }
       }, function (error) {
-         
+          alert(" error text read write file"+error);
       });
      
 });
@@ -1335,11 +1343,11 @@ $scope.id = function(data,name)
         });
     }, 300);
 
-     $scope.voucher = function(data)
+     $scope.voucher = function(data,acc)
       {
          $scope.output = voucher;
           $scope.output.voucher = data ;
-       
+           $scope.output.acc = acc ;
       }
          
      
@@ -1777,8 +1785,16 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('CreditorvoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('CreditorvoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,$location,voucher) {
     // Set Header
+    $scope.output = voucher
+    var acc =  $scope.output.acc 
+    if(acc == "A")
+          {
+              $location.url("/app/CreditorAVoucher"); 
+          }
+          else
+          {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
       
@@ -1787,7 +1803,7 @@ $scope.id = function(data,name)
     $scope.$parent.setHeaderFab(false);
 
     $scope.service = Services;
-    $scope.output = voucher
+   
     console.log(  $scope.service);
         var data = $scope.service.login ;
           
@@ -1796,7 +1812,10 @@ $scope.id = function(data,name)
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
            $scope.voucher  = $scope.output.voucher;
-          console.log($scope.voucher);
+            
+          
+
+          
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -1816,7 +1835,7 @@ $scope.id = function(data,name)
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,   "3" ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,   $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -1854,7 +1873,7 @@ $scope.id = function(data,name)
 
 
 
- 
+ }
 
 })
 
@@ -2298,6 +2317,93 @@ $scope.id = function(data,name)
 
 /*=====  End of Sale voucher Ctrl   ======*/
 
+/*====================================
+=    CreditorA Voucher Ctrl     =
+====================================*/
+
+
+.controller('CreditorAVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = voucher
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.voucher  = $scope.output.voucher;
+          console.log($scope.voucher);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+    $scope.$watch('search', function(val)
+    { 
+        
+        console.log($filter('filter')($scope.responseSearch, val));
+        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+       
+        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
+           $scope.nodata = true;
+        }
+        else{
+          $scope.nodata = false;   
+        }
+    });
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End ofCreditorA Voucher Ctrl   ======*/
 
 
 
