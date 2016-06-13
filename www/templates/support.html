@@ -1,0 +1,65 @@
+
+<ion-view view-title="Support">
+   <ion-nav-bar class="bar  bar-header bar-balanced"  align-title="left">
+
+</ion-nav-bar>
+<form name = "myform" novalidate>
+    <ion-nav-back-button class="no-text">
+           
+            </ion-nav-back-button>
+    <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "false">
+                </button>
+            </ion-nav-buttons>
+<ion-content ng-class="{expanded:isExpanded}" >
+
+
+
+
+
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+        <i class="icon ion-edit material-icons prefix" ></i>
+         
+          <textarea  name = "login" ng-model="blob.user.loginid" class="materialize-textarea"  required></textarea>
+          <label for="icon_prefix2">Enter Comment</label>
+        </div>
+      </div>
+    </form>
+  </div>
+        
+               
+          <div ng-messages="myform.login.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Comment required</div>
+         </div>
+     
+     </div>    
+</div>
+ </div>
+
+
+ 
+
+
+         
+        
+
+
+
+      <div class="padding">
+            
+
+            <button   ng-click="register(blob)"  class="button button-full button-balanced in" ng-disabled = "myform.$invalid" >Submit</button>                  
+        </div>   
+
+ 
+<div class="app-icon1"></div>
+<center><div class = "p1">Waves Compusoft </div></center>
+</ion-content>
+</form>
+</body>
+</ion-view>
+ 

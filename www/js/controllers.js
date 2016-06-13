@@ -444,7 +444,8 @@ document.addEventListener('deviceready', function () {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       $scope.hide  = false ;
+
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -550,7 +551,7 @@ document.addEventListener('deviceready', function () {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+      $scope.hide  = false ; 
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -648,7 +649,7 @@ $scope.id = function(data,name)
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       $scope.hide  = false ;
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -748,7 +749,7 @@ $scope.id = function(data,name)
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       $scope.hide  = false ;
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -838,7 +839,7 @@ $scope.id = function(data,name)
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       $scope.hide  = false ;
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -932,7 +933,7 @@ $scope.id = function(data,name)
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       $scope.hide  = false ;
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -1027,7 +1028,7 @@ $scope.id = function(data,name)
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       $scope.hide  = false ;
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -1122,7 +1123,7 @@ $scope.id = function(data,name)
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       $scope.hide  = false ;
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
@@ -1205,6 +1206,26 @@ $scope.id = function(data,name)
 
 /*=====  End of  Purchase Ctrl  ======*/
 
+/*====================================
+=    Support  Ctrl            =
+====================================*/
+
+
+.controller('SupportCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+       $scope.hide  = false ;
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+
+ 
+
+})
+
+/*=====  End of  Support Ctrl  ======*/
 
 
 
@@ -1785,10 +1806,12 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('CreditorvoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,$location,voucher) {
+.controller('CreditorvoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,$location,voucher,transid) {
     // Set Header
     $scope.output = voucher
     var acc =  $scope.output.acc 
+      $scope.output1 = transid;
+ $scope.name = $scope.output1.name ;
     if(acc == "A")
           {
               $location.url("/app/CreditorAVoucher"); 
@@ -2402,9 +2425,6 @@ $scope.id = function(data,name)
  
 
 })
-
-/*=====  End ofCreditorA Voucher Ctrl   ======*/
-
 
 
 

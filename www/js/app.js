@@ -354,6 +354,15 @@ if( connection.checkconnection() == 'No network connection' )
         }
     })
 
+.state('app.support', {
+        url: '/support',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/support.html',
+                controller: 'SupportCtrl'
+            }
+        }
+    })
 .state('app.transaction', {
         url: '/transaction',
         views: {
@@ -473,6 +482,7 @@ if( connection.checkconnection() == 'No network connection' )
             }
         }
     })
+
     // if none of the above states are matched, use this as the fallback
 $urlRouterProvider.otherwise('/app/login');
 

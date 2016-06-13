@@ -10,7 +10,7 @@
  <div class = "container4">
             <div ng-animate="'animate'"  ng-repeat= "responses in response |limitTo:1"  class="repeated-item" >
 
-
+            
              <div class = "row">
              <div class = "col-50">
             <b> <div class = "credit"> {{responses.tranhead}}</div></b>
@@ -19,7 +19,7 @@
            <b>  <div class = "balance"> {{responses.transtatus}} </div></b>
              </div>
              </div>
-
+           
             
             <div class = "row">
             <div class = "col-25">
@@ -27,6 +27,7 @@
              </div>
              <div class = "col-25">
            <b>  <div class = "vch"> {{responses.vcn}} </div></b>
+                                       
              </div>
              <div class = "col-25">
             <b> <div class = "balance"> Date:</div></b>
@@ -35,10 +36,14 @@
            <b>  <div class = "balance"> {{responses.date}} </div></b>
              </div>
             </div>
-           
+             <div class = "row">
+             <div class = "col-60">
+            <b> <div class = "credit">{{name}}</div></b>
+             </div>
+             </div>
             </div> 
             </div>  
-     <div class = "container1">
+     <div class = "container5">
           
 
             <div class = "row">
@@ -123,7 +128,7 @@
                    </div>
                </div>
 <div class = "container3">
-  <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+  <div ng-animate="'animate'"  ng-repeat= "responses in response |limitTo:1"  class="repeated-item" >
               <div class = "row">
               <div class = "col-25">
                 

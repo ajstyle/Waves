@@ -2,6 +2,13 @@
     <ion-nav-bar class="bar bar-header bar-calm"  align-title="left">
 
 </ion-nav-bar>
+<ion-nav-back-button class="no-text">
+           
+            </ion-nav-back-button>
+    <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "{{hide}}">
+                </button>
+            </ion-nav-buttons>
     <ion-content >
     
 
@@ -24,7 +31,7 @@
                         
                   <div class = "col-50">
             
-             <div class = "company">  <b>{{responses.lname}}</b></div>
+             <div class = "vchno">  <b>{{responses.lname}}</b></div>
                           {{responses.add}}       
                   </div>
                    

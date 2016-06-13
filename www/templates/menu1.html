@@ -17,39 +17,73 @@
        
         <ion-nav-view name="menuContent"  ></ion-nav-view>
     </ion-side-menu-content>
-    <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
+    <ion-side-menu side="left"   is-enabled = "{{enable}}">
         
-                <ion-header-bar  class="bar-balanced">
-      <h1 class="title"><center><h5>Services</h5></center></h1>
-    </ion-header-bar>
+                  <ion-header-bar class="  expanded">
+              
+              <span class="avatar" style="background: url('img/waveslogo.png'); background-size: cover; width : 90px; height : 80px"></span>
+            
+           
+                   <h2> Services </h2>
+        </ion-header-bar>
      
-    <ion-content>
-      <ion-list>
-        <ion-item  ui-sref = "app.debtors"  menu-toggle="left">
-          <img src= "img/debtor.jpg" alt="" class="circle" width = "40px" height="40px"><span class="title" >Debtors</span>
+    <ion-content class=" has-expanded-header">
 
+      <ion-list>
+         <ion-item  ui-sref = "app.gallery"  menu-toggle="left" ui-sref-active="active">
+         
+            <i class="icon ion-android-document" ></i> &nbsp; &nbsp; Dashboard 
         </ion-item>
-        <ion-item  ui-sref = "app.creditor"  menu-toggle="left">
-          <img src="img/creditors.jpg" alt="" class="circle" width = "40px" height="40px"><span class="title" >Creditors</span>
+
+        <ion-item  ui-sref = "app.debtors"  menu-toggle="left" ui-sref-active="active">
+         
+            <i class="icon ion-social-usd" ></i> &nbsp; &nbsp; Debtors
         </ion-item>
-        <ion-item  ui-sref = "app.cheque"  menu-toggle="left">
-             <img src="img/cheq.png" alt="" class="circle" width = "40px" height="40px"><span class="title">Cheque</span>
+        <ion-item  ui-sref = "app.creditor"  menu-toggle="left" ui-sref-active="active">
+       
+         <i class="icon ion-person-stalker"></i> &nbsp; &nbsp;Creditors 
         </ion-item>
-        <ion-item ui-sref = "app.inventory" menu-toggle="left" >
-          <img src="img/inventory.png" alt="" class="circle" width = "40px" height="40px"><span class="title">Inventory</span>
+         
+        <ion-item  ui-sref = "app.cheque"  menu-toggle="left" ui-sref-active="active">
+             
+              <i class="icon ion-cash" ></i> &nbsp; &nbsp; Cheque 
+            
         </ion-item>
-        <ion-item ui-sref = "app.sales" menu-toggle="left" >
-         <img  src="img/sale.png" alt="" class="circle" width = "40px" height="40px"><span class="title">Sales</span>
+        
+        <ion-item ui-sref = "app.inventory" menu-toggle="left" ui-sref-active="active">
+           
+           
+          <i class="icon ion-social-dropbox"></i>&nbsp; &nbsp;&nbsp;Inventory
         </ion-item>
-        <ion-item ui-sref = "app.purchase" menu-toggle="left" >
-           <img src="img/Cart.png" alt="" class="circle" width = "40px" height="40px"><span class="title">Purchase</span>
+        <ion-item ui-sref = "app.sales" menu-toggle="left"  ui-sref-active="active">
+       
+         <i class="icon ion-bag"></i>&nbsp; &nbsp;Sales
         </ion-item>
-         <ion-item ui-sref = "app.receipt" menu-toggle="left" >
-          <img src="img/receipt1.png" alt="" class="circle" width = "40px" height="40px"><span class="title">Receipt</span>
+        <ion-item ui-sref = "app.purchase" menu-toggle="left" ui-sref-active="active" >
+            
+             <i class="icon ion-ios-cart"></i> &nbsp; &nbsp;Purchase
         </ion-item>
-         <ion-item ui-sref = "app.other" menu-toggle="left" >
-            <img src="img/others.png" alt="" class="circle" width = "40px" height="40px"><span class="title">Others</span>
+         <ion-item ui-sref = "app.receipt" menu-toggle="left"  ui-sref-active="active">
+       
+          <i class="icon ion-ios-book"></i>&nbsp; &nbsp; Receipt
         </ion-item>
+         <ion-item ui-sref = "app.other" menu-toggle="left" ui-sref-active="active">
+        
+          <i class="icon ion-android-person-add"></i>&nbsp; &nbsp;Others
+                  </ion-item>
+        <ion-item ui-sref = "app.other" menu-toggle="left" ui-sref-active="active">
+        
+          <i class="icon ion-arrow-graph-up-right"></i>&nbsp; &nbsp;Version
+        </ion-item>
+         <ion-item ui-sref = "app.support" menu-toggle="left" ui-sref-active="active" >
+        
+         <i class="icon ion-ios-telephone"></i>&nbsp; &nbsp;Support
+        </ion-item>
+        <ion-item ui-sref = "app.register" menu-toggle="left" ui-sref-active="active">
+        
+          <i class="icon icon ion-log-out"></i>&nbsp; &nbsp;Logout
+        </ion-item>
+      
       </ion-list>
     </ion-content>
            
