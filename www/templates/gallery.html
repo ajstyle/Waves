@@ -13,16 +13,53 @@
 
 
 
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+    <ion-content >
      
-        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" 
-                chart-legend="true" chart-series="series" chart-click="onClick"></canvas> 
+    
+  
+<center><p><b>Cash Status In Laks</p></b></center>
+<canvas id="bar" class="chart chart-bar"
+ chart-data="cashdata" chart-labels="labels" chart-legend="true" chart-series="series"
+  >
+</canvas>
+</br>
+</br>
+<center><p><b>Bank Status In Laks</p><b></center>
+<canvas id="bar" class="chart chart-bar"
+ chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series"
+  >
+</canvas>
 
-   
- 
+</br>
+</br>
+<center><p><b>Sale and Purchase Status In Laks</b></p></center>
+
+<canvas id="bar" class="chart chart-bar"
+ chart-data="PSdata" chart-labels="labels" chart-legend="true" chart-series="PSseries"
+  >
+</canvas>
+
+</br>
+</br>
+<center><b><p>Debtors Status In Laks</p></b></center>
+
+<canvas id="bar" class="chart chart-bar"
+ chart-data="dbdata" chart-labels="labels" chart-legend="true" chart-series="series"
+  >
+</canvas>
+
+</br>
+</br>
+<center><b><p>Creditors Status In Laks</p></b></center>
+
+<canvas id="bar" class="chart chart-bar"
+ chart-data="credata" chart-labels="labels" chart-legend="true" chart-series="series"
+  >
+</canvas>
+
+
 
 
    </ion-content>
-
 
 </ion-view>

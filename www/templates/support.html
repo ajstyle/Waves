@@ -3,19 +3,17 @@
    <ion-nav-bar class="bar  bar-header bar-balanced"  align-title="left">
 
 </ion-nav-bar>
-<form name = "myform" novalidate>
-    <ion-nav-back-button class="no-text">
-           
-            </ion-nav-back-button>
+
+    
     <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "false">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide =  "false">
                 </button>
             </ion-nav-buttons>
-<ion-content ng-class="{expanded:isExpanded}" >
+<ion-content  >
 
 
 
-
+<form name = "myform" novalidate>
 
   <div class="row">
     <form class="col s12">
@@ -23,7 +21,7 @@
         <div class="input-field col s6">
         <i class="icon ion-edit material-icons prefix" ></i>
          
-          <textarea  name = "login" ng-model="blob.user.loginid" class="materialize-textarea"  required></textarea>
+          <textarea  name = "login" ng-model="blob.user.comment" class="materialize-textarea"  required></textarea>
           <label for="icon_prefix2">Enter Comment</label>
         </div>
       </div>

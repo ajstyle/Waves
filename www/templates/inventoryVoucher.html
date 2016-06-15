@@ -13,7 +13,7 @@
 
              <div class = "row">
              <div class = "col-50">
-            <b> <div class = "credit"> {{responses.tranhead}}</div></b>
+            <b> <div class = "vch"> {{responses.tranhead}}</div></b>
              </div>
              <div class = "col-50">
            <b>  <div class = "balance"> {{responses.transtatus}} </div></b>
@@ -23,7 +23,7 @@
             
             <div class = "row">
             <div class = "col-25">
-            <b> <div class = "credit">Number:</div></b>
+            <b> <div class = "vch">Number:</div></b>
              </div>
              <div class = "col-25">
            <b>  <div class = "vch"> {{responses.vcn}} </div></b>
@@ -52,7 +52,7 @@
                     
 
                        <div class = "col-25"> 
-                      RATE
+                     <div class = "credit1"> RATE </div>
                       </div>
                        <div class = "col-25"> 
                      <div class = "amount"> AMOUNT</div>
@@ -122,8 +122,8 @@
 
                    </div>
                </div>
-<div class = "container3">
-  <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+<div class = "container6">
+  <div ng-animate="'animate'"  ng-repeat= "responses in response | limitTo : 1"  class="repeated-item" >
               <div class = "row">
               <div class = "col-25">
                 

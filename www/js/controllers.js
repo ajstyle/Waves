@@ -189,7 +189,7 @@ else
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading' , '$ionicPopup' ,  function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading,$ionicPopup)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading' , '$ionicPopup' , 'loginid' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading,$ionicPopup,loginid)
 {
      
         $scope.$parent.showHeader();
@@ -212,6 +212,8 @@ else
  $scope.blob = blob;  
 console.log(blob);
     $scope.output = Mobile;
+    $scope.login = loginid ; 
+
 $scope.Mobile   = $scope.output.text;
 console.log($scope.Mobile);
           
@@ -231,9 +233,10 @@ $scope.register = function(user) {
                $scope.master = angular.copy(user);
                                
               
-                              console.log(user);
+           console.log(user);
            $scope.loginid = $scope.master.user.loginid;
-           $scope.branchid = $scope.master.user.branchid;
+               $scope.login.id = $scope.loginid
+              $scope.branchid = $scope.master.user.branchid;
            $scope.userid = $scope.master.user.userid;
             $scope.password = $scope.master.user.password;
             $scope.Mobile   = $scope.output.text;
@@ -255,7 +258,7 @@ $scope.service = Services;
 
  if(res["ip"] == "0")
         {
-          
+         
            $ionicLoading.hide();
               $ionicPopup.alert({
                 title : 'Error',
@@ -313,7 +316,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 =            Main Ctrl 1            =
 ===================================*/
 
-.controller('MainCtrl1',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  , 'connection' , '$ionicLoading' ,'$ionicPlatform', function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services,connection,$ionicLoading,$ionicPlatform){
+.controller('MainCtrl1',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  , 'connection' , '$ionicLoading' ,'$ionicPlatform', '$ionicPopup' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services,connection,$ionicLoading,$ionicPlatform,$ionicPopup){
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -396,7 +399,7 @@ document.addEventListener('deviceready', function () {
                    {  $ionicLoading.hide();
                        $ionicPopup.alert({
                          title : 'Error',
-                         template : res1.ip
+                         template : res1.us
                         });         
                       $location.path("/app/registertxt"); 
                   }
@@ -518,8 +521,8 @@ document.addEventListener('deviceready', function () {
            $scope.nodata = true;
         }
         else{
-          $scope.nodata = false;   
-        }
+          $scope.nodata = false;  
+        } 
     });
 
 
@@ -1211,7 +1214,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('SupportCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('SupportCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher,$ionicPopup,Mobile,loginid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1219,7 +1222,29 @@ $scope.id = function(data,name)
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
+     $scope.output = Mobile;
+$scope.Mobile   = $scope.output.text;
 
+
+ $scope.login = loginid ;
+ 
+ $scope.login1 = $scope.login.id 
+
+
+    $scope.register = function(blob)
+    {
+      $scope.comment = blob.user.comment  ; 
+
+     testService.mySupport($scope.login1 ,$scope.Mobile,  $scope.comment ).then(function(response)
+      {
+         $ionicPopup.alert({
+                title : 'Success',
+                template : response
+              });
+
+
+   })
+  }
 
  
 
@@ -2437,13 +2462,27 @@ $scope.id = function(data,name)
 =            Gallery Ctrl            =
 ====================================*/
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion,connection,$location) {
-  
+.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) 
+  {
+
+
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.hide  = false ;
     $scope.enable = true ;
     // Activate ink for controller
+     $scope.service = Services;
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+          console.log( $scope.ip);
+          console.log( $scope.db);
+          console.log($scope.us );
+          console.log($scope.ps);
+
     ionicMaterialInk.displayEffect();
 
     ionicMaterialMotion.pushDown({
@@ -2452,24 +2491,84 @@ $scope.id = function(data,name)
     ionicMaterialMotion.fadeSlideInRight({
         selector: '.animate-fade-slide-in .item'
     });
-     $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
+      
 
-  // Simulate async data update
-  $timeout(function () {
-    $scope.data = [
-      [28, 48, 40, 19, 86, 27, 90],
-      [65, 59, 80, 81, 56, 55, 40]
-    ];
-  }, 3000);
+var bankB = new Array();
+var bankC = new Array();
+var bankD = new Array();
+var purchase = new Array();
+var sale = new Array();
+var cashB = new Array();
+var cashC = new Array();
+var cashD = new Array();
+var creB = new Array();
+var creC = new Array();
+var creD = new Array();
+var debB = new Array();
+var debC = new Array();
+var debD = new Array();
+   $scope.labels = [ "April", "May", "June", "July","August","September","October","November","December","January", "February", "March"];
+  $scope.series = ['Debit', 'Credit','Balance'];
+  $scope.PSseries = ['Sale','Purchase'];
+     
 
+   testService.DesignGraphs("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ).then(function(response)
+      {
+        
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+ 
+        var response1 = Response.response(response); 
+    
+ console.log(response1);
+   for(var i=0;i<response1.length;i++)
+   {
+     
+    bankB.push(response1[i].bankB);
+     bankC.push(response1[i].bankC);
+      bankD.push(response1[i].bankD);
+       purchase.push(response1[i].purc);
+       sale.push(response1[i].sale);
+       cashB.push(response1[i].cashB);
+     cashC.push(response1[i].cashC);
+      cashD.push(response1[i].cashD);
+      creB.push(response1[i].creB);
+     creC.push(response1[i].creC);
+      creD.push(response1[i].creD);
+        debB.push(response1[i].debB);
+     debC.push(response1[i].debC);
+      debD.push(response1[i].debD);
+
+   
+  $scope.data = [bankD,bankC,bankB];
+ 
+
+ 
+   
+  $scope.PSdata = [sale,purchase];
+
+
+  $scope.cashdata = [cashD,cashC,cashB];
+
+
+
+  $scope.credata = [creD,creC,creB];
+
+
+
+  $scope.dbdata = [debD,debC,debB];
+
+  
+  
+  }
+   
+
+
+   })
+
+     
 
 })
 
@@ -2601,5 +2700,10 @@ $scope.id = function(data,name)
   return object;
 })
 
+.factory('loginid', function () {
+   var object = {};
+  object.loginid = "";
+  return object;
+})
 
 /*=====  End of FACTORIES  ======*/

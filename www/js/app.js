@@ -62,13 +62,14 @@ if( connection.checkconnection() == 'No network connection' )
 .config(['ChartJsProvider', function (ChartJsProvider) {
     // Configure all charts
     ChartJsProvider.setOptions({
-      colours: ['#FF5252', 'green'],
-      responsive: false
+       colours : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] ,
+      responsive: true
     });
     // Configure all line charts
     ChartJsProvider.setOptions('Line', {
       datasetFill: false
     });
+
   }])
 
 
@@ -87,6 +88,9 @@ if( connection.checkconnection() == 'No network connection' )
       var action9 = "GetAccountingVoucher";
     var action10  =  "GetInventoryVoucher";
      var action11  =  "GetItemTransaction";
+      var action12  =  "DesignGraphs";
+      var action13   =  "mySupport";
+      
      return {
         HelloWorld: function(orderTo,branch,userId,password,mobileNo,deviceID){
             return $soap.post(base_url, action , {info1 : orderTo ,  info2 : branch , info3 : userId , info4 : password , info5 : mobileNo , info6 : deviceID});
@@ -139,7 +143,16 @@ if( connection.checkconnection() == 'No network connection' )
         GetItemTransaction : function(Ip,Db,Us,Psw,id) 
          {
                 return $soap.post(base_url, action11 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw ,id:id });
-        }
+        },
+         DesignGraphs : function(Ip,Db,Us,Psw) 
+         {
+                return $soap.post(base_url, action12 , {serIp : Ip , serDb : Db , serUs : Us ,serPsw : Psw  });
+        },
+        mySupport : function(logn,mob,comment) 
+         {
+                return $soap.post(base_url, action13 , {logn : logn , mob : mob ,comment :comment});
+         }
+
 
 
 
