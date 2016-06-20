@@ -24,7 +24,7 @@ var uuid =  window.device.uuid;
           
        document.addEventListener('deviceready', function () {
          
-    $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "file.pdf")
+    $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "example.pdf")
       .then(function (success) {
       
       alert(success) ; 

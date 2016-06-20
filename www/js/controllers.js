@@ -1549,7 +1549,7 @@ $scope.Mobile   = $scope.output.text;
 ====================================*/
 
 
-.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaSocialSharing,$cordovaFile) {
+.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaSocialSharing,$cordovaFile, $ionicModal) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1673,7 +1673,7 @@ var dd = {
         table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] )
     ]
 }
- alert(dd);
+ 
 
  
  pdfMake.createPdf(dd).getBuffer(function (buffer){
@@ -1681,8 +1681,11 @@ var dd = {
     var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
     alert("utf"+ utf8);
    
-    binaryArray = utf8.buffer; // Convert to Binary...
-    
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+    $scope.pdfUrl = URL.createObjectURL( blob);
+
     $cordovaFile.writeFile(cordova.file.dataDirectory, "example.pdf", binaryArray, true)
         .then(function (success) {
             alert("pdf created");
@@ -1696,6 +1699,7 @@ var dd = {
 
 
    }})
+     
  $scope.shareAnywhere = function() {
         $cordovaSocialSharing.share("This is your message", "This is your subject", "www/imagefile.png", "https://www.thepolyglotdeveloper.com");
     }
