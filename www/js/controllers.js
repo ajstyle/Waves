@@ -2,7 +2,7 @@
 
 
 
-angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','ngAnimate','chart.js'])
+angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','ngAnimate','chart.js','pdf'])
 .run(function() {
    
 })
@@ -245,6 +245,7 @@ $scope.register = function(user) {
             testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,"1234").then(function(response){
    
     var response = Response.response(response); 
+    console.log(response );
     var res =  response["login"];
                             console.log(res);
 
@@ -331,7 +332,7 @@ $cordovaFile.readAsText(cordova.file.applicationStorageDirectory , "mobile.txt")
                           
 
                     var res1 =  JSON.parse(success)
-                    
+
                
                       $scope.output = Mobile;
                    
@@ -497,7 +498,7 @@ document.addEventListener('deviceready', function () {
 
       $timeout(function() {
          
-     testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430").then(function(response)
+     testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
       {
          
          $scope.showme = true;
@@ -598,7 +599,7 @@ $scope.id = function(data,name)
 
       $timeout(function() {
          
-  testService.GetSupplier("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430").then(function(response)
+  testService.GetSupplier("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
       {
          
          $scope.showme = true;
@@ -791,7 +792,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetPDC("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , " " , " ").then(function(response)
+     testService.GetPDC("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , " " , " ").then(function(response)
       {
          console.log(response);
          $scope.showme = true;
@@ -880,7 +881,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetReceipts("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , " " , " ").then(function(response)
+     testService.GetReceipts("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , " " , " ").then(function(response)
       {
          console.log(response);
 
@@ -977,7 +978,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.Getinventory("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430").then(function(response)
+     testService.Getinventory("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
       {
          console.log(response);
 
@@ -1070,7 +1071,7 @@ $scope.id = function(data,name)
 
      
          
-     testService. GetSales("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , "S" ).then(function(response)
+     testService. GetSales("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , "S" ).then(function(response)
       {
          console.log(response);
 
@@ -1165,7 +1166,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" , "P" ).then(function(response)
+     testService.GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , "P" ).then(function(response)
       {
          console.log(response);
 
@@ -1306,7 +1307,7 @@ $scope.Mobile   = $scope.output.text;
 
    
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1338,7 +1339,7 @@ $scope.Mobile   = $scope.output.text;
 
    })
 
-
+ 
     // Set Ink
     ionicMaterialInk.displayEffect();
 
@@ -1406,7 +1407,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1458,7 +1459,7 @@ $scope.Mobile   = $scope.output.text;
 ====================================*/
 
 
-.controller('transactionChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+.controller('transactionChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,$cordovaSocialSharing) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1497,7 +1498,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1532,7 +1533,8 @@ $scope.Mobile   = $scope.output.text;
 
     // Set Ink
     ionicMaterialInk.displayEffect();
-
+    
+    
 
 
  
@@ -1547,7 +1549,7 @@ $scope.Mobile   = $scope.output.text;
 ====================================*/
 
 
-.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher) {
+.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaSocialSharing,$cordovaFile) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1555,10 +1557,14 @@ $scope.Mobile   = $scope.output.text;
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-
+   var response1 ; 
     $scope.service = Services;
     $scope.output = transid;
-    console.log(  $scope.service);
+
+
+
+
+    
         var data = $scope.service.login ;
           
           $scope.ip = data.ip;
@@ -1567,6 +1573,7 @@ $scope.Mobile   = $scope.output.text;
           $scope.ps = data.ps ; 
            $scope.id  = $scope.output.transid;
            $scope.name =   $scope.output.name ; 
+           $scope.hide = false ;
           console.log( $scope.id);
             $scope.voucher = function(data)
       {
@@ -1592,8 +1599,8 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetItemTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,  $scope.id ).then(function(response)
-      {
+     testService.GetItemTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+      { 
          console.log(response);
 
          $scope.showme = true;
@@ -1602,27 +1609,106 @@ $scope.Mobile   = $scope.output.text;
        
 
         var response1 = Response.response(response); 
-     console.log(response1.length);
-   
-   $scope.response = response1; 
+           console.log(response1);
+           $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
-    console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
+    
+
+    $scope.doc = function(){
+
+  
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+
+
+for(var i in response1) {
+
+    var item = response1[i];
+
+    Inventorydata.accounting.push({ 
+        "Date" : item.date,
+        "Type"  : item.typ,
+        "Receive"  : item.debit ,
+        "Issue"    : item.credit , 
+        "Balance" : item.balance
+    });
+}
+
+
+
+function buildTableBody(data, columns) {
+    var body = [];
+
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
+
+        body.push(dataRow);
     });
 
+    return body;
+}
 
-   })
+function table(data, columns) {
+    return {
+        table: {
+            headerRows: 1,
+            body: buildTableBody(data, columns)
+        }
+    };
+}
+
+var dd = {
+  
+    content: [
+        { text: 'Dynamic parts', style: 'header' },
+        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] )
+    ]
+}
+ alert(dd);
+
+ 
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+    alert("enter buffer");
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+    alert("utf"+ utf8);
+   
+    binaryArray = utf8.buffer; // Convert to Binary...
+    
+    $cordovaFile.writeFile(cordova.file.dataDirectory, "example.pdf", binaryArray, true)
+        .then(function (success) {
+            alert("pdf created");
+        }, function (error) {
+            alert("error");
+    });
+});
+ 
+ pdfMake.createPdf(dd).download();
+
+
+
+   }})
+ $scope.shareAnywhere = function() {
+        $cordovaSocialSharing.share("This is your message", "This is your subject", "www/imagefile.png", "https://www.thepolyglotdeveloper.com");
+    }
+ $scope.sendSMS = function (message, number) {
+    $cordovaSocialSharing.shareViaSMS(message, number);
+}
+    $scope.shareViaTwitter = function(message, image, link) {
+        $cordovaSocialSharing.canShareVia("twitter", message, image, link).then(function(result) {
+            $cordovaSocialSharing.shareViaTwitter(message, image, link);
+        }, function(error) {
+            alert("Cannot share on Twitter");
+        });
+    }
 
 
     // Set Ink
@@ -1685,7 +1771,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.id ).then(function(response)
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1779,7 +1865,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,   $scope.voucher ).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,   $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -1883,7 +1969,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,   $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,   $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -1967,7 +2053,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher  ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher  ).then(function(response)
       {
          console.log(response);
 
@@ -2055,7 +2141,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
       {
          console.log(response);
 
@@ -2143,7 +2229,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
       {
          console.log(response);
 
@@ -2232,7 +2318,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -2321,7 +2407,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -2409,7 +2495,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
       {
          console.log(response);
 
@@ -2512,7 +2598,7 @@ var debD = new Array();
   $scope.PSseries = ['Sale','Purchase'];
      
 
-   testService.DesignGraphs("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04" ,"waves77430@77430" ).then(function(response)
+   testService.DesignGraphs("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
       {
         
 

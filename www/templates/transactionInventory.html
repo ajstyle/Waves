@@ -1,7 +1,17 @@
 
 <ion-view view-title="{{name}}">
       <ion-nav-bar class="bar bar-header bar-assertive"  align-title="left">
+      <i class="icon ion-android-share-alt"></i>
       </ion-nav-bar>
+  <ion-nav-buttons side="right">
+       <button class="button button-icon button-clear icon ion-document-text" menu-toggle="right"  
+       ng-click = "doc()" ng-hide = "{{hide}}">
+                </button>
+
+        <button class="button button-icon button-clear icon ion-android-share-alt" menu-toggle="right"  ng-click = "shareAnywhere()" ng-hide = "{{hide}}">
+                </button>        
+
+                            </ion-nav-buttons>
     <ion-content >
     
 
@@ -14,7 +24,6 @@
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
             </div>      
 
-   
      <div class = "container1">
             <div class = "row">
           
@@ -104,27 +113,23 @@
                 </a>
               
             
-              
+              <script id="pdf-viewer.html" type="text/ng-template">  
+    <ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Invoice</h1> 
+        <button ng-click="vm.modal.hide()" class="button button-icon icon ion-android-close"></button>
+    </ion-header-bar>
+    <ion-content>
+        <ng-pdf ng-if="pdfUrl" template-url="partials/viewer.html" canvasid="pdf" scale="page-fit"></ng-pdf>  
+    </ion-content>
+    </ion-modal-view>
+</script>  
             
 
                    </div>
                </div>
 
 
-                  <!--
-                  
-                 <a class="waves-effect waves-green " href="#/app/profile">
-       
-                
-       
-                 
-                  <li class="collection-item">   
-                    <h3>{{responses.lname}}</h3>
-                    <p>{{responses.city}}</p>
-                
-                  </li>     
-                  </a>
-                  !-->
                 
         
    

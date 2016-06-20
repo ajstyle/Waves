@@ -1,7 +1,7 @@
 (function(){
 
  
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' , 'ngAnimate','chart.js'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' , 'ngAnimate','chart.js','pdf'])
 
 app.run(['$ionicPlatform','$ionicLoading','$location' , '$http' , '$cordovaFile','connection', 'Mobile' , function($ionicPlatform,$ionicLoading,$location,$http,$cordovaFile,connection,Mobile) {
     $ionicPlatform.ready(function() {
@@ -24,6 +24,17 @@ var uuid =  window.device.uuid;
           
        document.addEventListener('deviceready', function () {
          
+    $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "file.pdf")
+      .then(function (success) {
+      
+      alert(success) ; 
+      alert("found file"); 
+      }, function (error) {
+       
+     alert("file not found");
+      //  $location.url("/app1/login"); 
+      });
+
       $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "text.txt")
       .then(function (success) {
       

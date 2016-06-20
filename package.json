@@ -3,6 +3,7 @@
   "version": "0.4.0",
   "description": "Ionic Material - Material Design for the Ionic Framework",
   "dependencies": {
+    "cordova": "^6.2.0",
     "gulp": "^3.7.0",
     "gulp-concat": "^2.1.7",
     "gulp-connect": "^2.2.0",
