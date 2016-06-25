@@ -518,7 +518,12 @@ h2
   font-family: 'Open Sans', sans-serif;
 }
 
-
+.pdfloader
+{
+  color : #1a1a1a;
+  width : auto ;
+  height : 50px;
+}
 ion-list ion-item.active a {
 background: #ddd !important;
 }

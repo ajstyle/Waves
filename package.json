@@ -22,7 +22,9 @@
     "node-libs-browser": "^0.5.0",
     "webpack": "^1.9.7"
   },
-  "cordovaPlugins": [],
+  "cordovaPlugins": [
+    "cordova-plugin-x-socialsharing"
+  ],
   "cordovaPlatforms": [
     "android"
   ],

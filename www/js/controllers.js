@@ -164,7 +164,8 @@ else
                    .then(function (success) {
                 
            }, function (error) {
-                 alert("write" + success)
+                 
+
               });
 
                 
@@ -279,7 +280,7 @@ $scope.service = Services;
       .then(function (success) {
        
       }, function (error) {
-         alert(" error Creater file"+error);
+         
       });
 
 $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt , true)
@@ -699,7 +700,7 @@ $scope.id = function(data,name)
 
       $timeout(function() {
          
-     testService.GetOtherLedgers($scope.ip , $scope.db , $scope.us , $scope.ps).then(function(response)
+     testService.GetOtherLedgers("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
       {
          console.log(response);
          $scope.showme = true;
@@ -1549,7 +1550,7 @@ $scope.Mobile   = $scope.output.text;
 ====================================*/
 
 
-.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaSocialSharing,$cordovaFile, $ionicModal) {
+.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1561,8 +1562,13 @@ $scope.Mobile   = $scope.output.text;
     $scope.service = Services;
     $scope.output = transid;
 
+ 
 
 
+
+ var vm = this;
+ // Initialize the modal view.
+    
 
     
         var data = $scope.service.login ;
@@ -1591,14 +1597,17 @@ $scope.Mobile   = $scope.output.text;
          
        console.log(  $scope.output.transid);
       $ionicLoading.show({
-          templateUrl: 'templates/loader.html',
+          template: 'templates/loader.html',
           hideOnStateChange : 'true',
           noBackdrop : 'true'
 
        });
 
      console.log($scope.id);
-         
+          
+        
+
+
      testService.GetItemTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
       { 
          console.log(response);
@@ -1612,34 +1621,50 @@ $scope.Mobile   = $scope.output.text;
            console.log(response1);
            $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
-    
-
-    $scope.doc = function(){
-
   
+    
+ 
+    $scope.doc = function(){
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"> Creating PDF....</div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+
+ var name =   $scope.output.name ; 
 var Inventorydata = [];
 var Inventorydata = {
     accounting: []
 };
-
-
+var value = [];
+value.push({ text: name});
+console.log(value);
 for(var i in response1) {
 
     var item = response1[i];
-
+  console.log(item);
+    
     Inventorydata.accounting.push({ 
         "Date" : item.date,
         "Type"  : item.typ,
         "Receive"  : item.debit ,
         "Issue"    : item.credit , 
         "Balance" : item.balance
-    });
+       
+     });
 }
 
 
 
 function buildTableBody(data, columns) {
-    var body = [];
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                  {text : 'Type' , style: 'subheader'} ,
+                  {text : 'Receive' , style: 'subheader'},
+                  {text : 'Issue' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+                  ]];
 
     data.forEach(function(row) {
         console.log(row);
@@ -1660,69 +1685,138 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-            headerRows: 1,
-            body: buildTableBody(data, columns)
+              widths: [200, '*', 100, '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
         }
     };
 }
-
-var dd = {
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
   
+var dd = {
+ 
     content: [
-        { text: 'Dynamic parts', style: 'header' },
-        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] )
-    ]
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'Inventory Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
 }
  
 
  
  pdfMake.createPdf(dd).getBuffer(function (buffer){
-    alert("enter buffer");
+    
     var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
-    alert("utf"+ utf8);
-   
+  
    var binaryArray = utf8.buffer; // Convert to Binary...
     var blob = new Blob([binaryArray], {type: 'application/pdf'});
   
-    $scope.pdfUrl = URL.createObjectURL( blob);
+  var pdfUrl = URL.createObjectURL( blob);
+   
+      $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", false)
+      .then(function (success) {
+     
+      }, function (error) {
+     
+      });
 
-    $cordovaFile.writeFile(cordova.file.dataDirectory, "example.pdf", binaryArray, true)
+
+    $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/", "inventory.pdf", binaryArray, true)
         .then(function (success) {
-            alert("pdf created");
+           
+           
         }, function (error) {
-            alert("error");
+           
     });
+
+     $ionicLoading.hide();
+
+ $cordovaFileOpener2.open(
+    './sdcard/waves/inventory.pdf',
+    'application/pdf'
+  ).then(function() {
+   
+        }, function(err) {
+  
+   
+  });
 });
- 
+
+
+  
  pdfMake.createPdf(dd).download();
 
+  }
+ 
+$scope.share = function () {
 
-
-   }})
-     
- $scope.shareAnywhere = function() {
-        $cordovaSocialSharing.share("This is your message", "This is your subject", "www/imagefile.png", "https://www.thepolyglotdeveloper.com");
-    }
- $scope.sendSMS = function (message, number) {
-    $cordovaSocialSharing.shareViaSMS(message, number);
+  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+.then(function (data) {
+ 
+$cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
+  .then(function(result) {
+  
+  
+  }, function(err) {
+    alert(err);
+    
+  });
+ 
+}, function (error) {
+  
+});
 }
-    $scope.shareViaTwitter = function(message, image, link) {
-        $cordovaSocialSharing.canShareVia("twitter", message, image, link).then(function(result) {
-            $cordovaSocialSharing.shareViaTwitter(message, image, link);
-        }, function(error) {
-            alert("Cannot share on Twitter");
-        });
-    }
 
+ })
+     
 
-    // Set Ink
+  
     ionicMaterialInk.displayEffect();
 
-
-
- 
-
-})
+   })                             
 
 /*=====  End of  Transaction Inventory Ctrl   ======*/
 
@@ -2543,9 +2637,68 @@ var dd = {
 
 
 
+/*====================================
+=    Logout Ctrl     =
+====================================*/
 
 
+.controller('logoutCtrl', function($location,$ionicHistory, $ionicLoading, $timeout) {
+      $ionicLoading.show({template:'Logging out....'});
+    
 
+    $timeout(function () {
+        $ionicLoading.hide();
+        $ionicHistory.clearCache();
+        $ionicHistory.clearHistory();
+        $ionicHistory.nextViewOptions({ disableBack: true, historyRoot: true });
+         $location.path("/app/registertxt"); 
+
+        }, 30);
+  
+
+ 
+
+})
+
+
+/*====================================
+=  End of   Logout Ctrl     =
+====================================*/
+
+
+/*====================================
+=    Version Ctrl     =
+====================================*/
+
+
+.controller('versionCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+      
+      $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+       $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+  cordova.getAppVersion.getVersionNumber(function (version) {
+   $scope.version = version ;
+
+});
+  
+ 
+
+})
+
+
+/*====================================
+=  End of   Logout Ctrl     =
+====================================*/
 
 
 /*====================================

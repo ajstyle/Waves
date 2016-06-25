@@ -24,16 +24,7 @@ var uuid =  window.device.uuid;
           
        document.addEventListener('deviceready', function () {
          
-    $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "example.pdf")
-      .then(function (success) {
-      
-      alert(success) ; 
-      alert("found file"); 
-      }, function (error) {
-       
-     alert("file not found");
-      //  $location.url("/app1/login"); 
-      });
+   
 
       $cordovaFile.checkFile(cordova.file.applicationStorageDirectory, "text.txt")
       .then(function (success) {
@@ -235,23 +226,6 @@ if( connection.checkconnection() == 'No network connection' )
 
 
 
-.state('app.customer', {
-        url: '/customer',
-        views: {
-            'menuContent': {
-                templateUrl: 'text.txt',
-                controller: 'customersController'
-            },
-            'fabContent': {
-                template: '<button id="fab-gallery" class="button button-fab button-fab-top-right expanded button-energized-900 drop"><i class="icon ion-heart"></i></button>',
-                controller: function ($timeout) {
-                    $timeout(function () {
-                        document.getElementById('fab-gallery').classList.toggle('on');
-                    }, 600);
-                }
-            }
-        }
-    })
 
 
 
@@ -506,7 +480,25 @@ if( connection.checkconnection() == 'No network connection' )
             }
         }
     })
+.state('app.logout', {
+        url: '/logout',
+        views: {
+            'menuContent': {
+                templateUrl: '',
+                controller: 'logoutCtrl'
+            }
+        }
+    })
 
+ .state('app.version', {
+        url: '/version',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/version.html',
+                controller: 'versionCtrl'
+            }
+        }
+    })
     // if none of the above states are matched, use this as the fallback
 $urlRouterProvider.otherwise('/app/login');
 
