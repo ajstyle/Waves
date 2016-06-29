@@ -545,13 +545,25 @@ h2
 
 .pdfloader
 {
-  color : #1a1a1a;
+ position:fixed;
+ top:0;
+ left:0;
+ background:#000;
+ opacity:0.8;
+ z-index:998;
+ height:100%;
+ width:100%;
+  
+}
+.loader1
+{
  
-  position: relative;
-  margin: 0px auto;
-  width: 100px;
-  height: 100px;
-  zoom: 1.7;
+
+ color : white;
+ margin-top : 360px ;
+ font-size : 20px;
+
+        
 }
 ion-list ion-item.active a {
 background: #ddd !important;

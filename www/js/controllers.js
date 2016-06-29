@@ -1243,14 +1243,6 @@ $scope.Mobile   = $scope.output.text;
      $scope.doc = function(){
 
 
- $ionicLoading.show({
-         template: '<div class = "pdfloader"> Creating PDF....</div>',
-          hideOnStateChange : 'true',
-          noBackdrop : 'true',
-          duration :  5000
-  });
-
-
  var name =   $scope.output.name ; 
 var Inventorydata = [];
 var Inventorydata = {
@@ -1267,9 +1259,11 @@ for(var i in response1) {
     Inventorydata.accounting.push({ 
         "Date" : item.date,
         "Type"  : item.typ,
-        "Receive"  : item.debit ,
-        "Issue"    : item.credit , 
-        "Balance" : item.balance
+        "Nera"  : item.nera ,
+        "Debit"  : item.debit ,
+        "Credit"    : item.credit , 
+        "Balance" : item.balance,
+
        
      });
 }
@@ -1278,10 +1272,12 @@ for(var i in response1) {
 
 function buildTableBody(data, columns) {
     var body = [[ {text : 'Date', style: 'subheader'}, 
-                  {text : 'Type' , style: 'subheader'} ,
-                  {text : 'Receive' , style: 'subheader'},
-                  {text : 'Issue' , style: 'subheader' } ,
+                  {text : 'Type',style : 'subheader'} , 
+                  {text : 'Narration' , style: 'subheader'} ,
+                  {text : 'Debit' , style: 'subheader'},
+                  {text : 'Credit' , style: 'subheader' } ,
                   {text :  'Balance' , style: 'subheader'} 
+
                   ]];
 
     data.forEach(function(row) {
@@ -1303,7 +1299,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [200, '*', 100, '*','*'],
+              widths: [100, '*',200, '*', '*','*'],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
@@ -1325,11 +1321,11 @@ var dd = {
         { text: 'Waves Compusoft', style: 'header' },
         { text: '', style: 'margin' },
         
-        { text: 'Inventory Report', style: 'header1' },
+        { text: 'DEBTORS Report', style: 'header1' },
          { text: '', style: 'margin' },
          text(value),
 
-        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+        table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
       
  
     ],
@@ -1365,6 +1361,9 @@ var dd = {
 }
  
 
+
+
+
  
  pdfMake.createPdf(dd).getBuffer(function (buffer){
      
@@ -1388,7 +1387,7 @@ var dd = {
       .then(function (success) {
 
 
-         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/debtors", pdfname , binaryArray, true)
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/debtors/", pdfname , binaryArray, true)
         .then(function (success) {
            
  $cordovaFileOpener2.open(
@@ -1433,35 +1432,228 @@ var dd = {
 
 });
 
-
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
   
  pdfMake.createPdf(dd).download();
 
   }
 
-   })
+ 
 
  //--------------Share Function------------------------//
 
- $scope.share = function () {
+$scope.share = function () {
 
-  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+
+console.log(response1);
+  
+ var name =   $scope.output.name ; 
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+var value = [];
+value.push({ text: name});
+console.log(value);
+for(var i in response1) {
+
+    var item = response1[i];
+  console.log(item);
+    
+  Inventorydata.accounting.push({ 
+        "Date" : item.date,
+        "Type"  : item.typ,
+        "Nera"  : item.nera , 
+        "Debit"  : item.debit ,
+        "Credit"    : item.credit , 
+        "Balance" : item.balance,
+
+       
+     });
+}
+
+
+
+function buildTableBody(data, columns) {
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                  {text : 'Type',style : 'subheader'} , 
+                  {text : 'Narration' , style: 'subheader'} ,
+                  {text : 'Debit' , style: 'subheader'},
+                  {text : 'Credit' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+
+                  ]];
+
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
+
+        body.push(dataRow);
+    });
+
+    return body;
+}
+
+function table(data, columns) {
+    return {
+        table: {
+              widths: [100, '*',200, '*', '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
+        }
+    };
+}
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
+  
+
+var dd = {
+ 
+    content: [
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'DEBTORS Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
+}
+
+ 
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+    
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
+  
+
+      var name =   $scope.output.name ; 
+     var filename = name + " DEBTORS.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+     
+
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+  
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+  var pdfUrl = URL.createObjectURL( blob);
+     
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
+      .then(function (success) {
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/debtors", true)
+      .then(function (success) {
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/debtors/", pdfname , binaryArray, true)
+        .then(function (success) {
+    $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/debtors/", pdfname)
 .then(function (data) {
  
-$cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
+$cordovaSocialSharing.shareViaEmail('Debtors Report ', 'Debtors Report', null, null, null, data)
   .then(function(result) {
   
   
   }, function(err) {
-    alert(err);
+   var err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error4"); 
     
   });
  
 }, function (error) {
+   var err = JSON.stringify(error) ; 
+         alert(err) ;
+         alert("error3"); 
+});        
+ 
+           
+        }, function (error) {
+           var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error5"); 
+           
+    });
+     }, function(err) {
   
+     var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+
+
+
+
+      }, function (error) {
+     
+      });
 });
+
+
+ pdfMake.createPdf(dd).download();
+
+
+
+
+
+
+
+ 
 }
 
+
+  })
 
     
     // Set Ink
@@ -1551,13 +1743,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
 
     $scope.doc = function(){
-  $ionicLoading.show({
-         template: '<div class = "pdfloader"> Creating PDF....</div>',
-          hideOnStateChange : 'true',
-          noBackdrop : 'true',
-          duration : 3000 
-          
-       });
+ 
 
 
  var name =   $scope.output.name ; 
@@ -1572,13 +1758,15 @@ for(var i in response1) {
 
     var item = response1[i];
   console.log(item);
-    
-    Inventorydata.accounting.push({ 
+  Inventorydata.accounting.push({ 
         "Date" : item.date,
+       
         "Type"  : item.typ,
-        "Receive"  : item.debit ,
-        "Issue"    : item.credit , 
-        "Balance" : item.balance
+         "Nera"  : item.nera , 
+        "Debit"  : item.debit ,
+        "Credit"    : item.credit , 
+        "Balance" : item.balance,
+
        
      });
 }
@@ -1587,10 +1775,13 @@ for(var i in response1) {
 
 function buildTableBody(data, columns) {
     var body = [[ {text : 'Date', style: 'subheader'}, 
-                  {text : 'Type' , style: 'subheader'} ,
-                  {text : 'Receive' , style: 'subheader'},
-                  {text : 'Issue' , style: 'subheader' } ,
+                   {text : 'Type' , style: 'subheader'} ,
+                  {text : 'Narration',style : 'subheader'} , 
+                 
+                  {text : 'Debit' , style: 'subheader'},
+                  {text : 'Credit' , style: 'subheader' } ,
                   {text :  'Balance' , style: 'subheader'} 
+
                   ]];
 
     data.forEach(function(row) {
@@ -1612,7 +1803,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [200, '*', 100, '*','*'],
+              widths: [100, '*',200, '*', '*',100],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
@@ -1627,17 +1818,18 @@ function text(data)
   }
 }
   
+
 var dd = {
  
     content: [
         { text: 'Waves Compusoft', style: 'header' },
         { text: '', style: 'margin' },
         
-        { text: 'Inventory Report', style: 'header1' },
+        { text: 'Creditor Report', style: 'header1' },
          { text: '', style: 'margin' },
          text(value),
 
-        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+        table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
       
  
     ],
@@ -1728,33 +1920,229 @@ var dd = {
 
 });
 
-
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
   
  pdfMake.createPdf(dd).download();
 
   }
 
+
+ //--------------Share Function------------------------//
+
 $scope.share = function () {
 
-  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+
+console.log(response1);
+
+ var name =   $scope.output.name ; 
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+var value = [];
+value.push({ text: name});
+console.log(value);
+for(var i in response1) {
+
+    var item = response1[i];
+  console.log(item);
+    
+   Inventorydata.accounting.push({ 
+        "Date" : item.date,
+       "Type"  : item.typ,
+        "Nera"  : item.nera , 
+        
+        "Debit"  : item.debit ,
+        "Credit"    : item.credit , 
+        "Balance" : item.balance,
+
+       
+     });
+}
+
+
+
+function buildTableBody(data, columns) {
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                 
+                  {text : 'Type' , style: 'subheader'} ,
+                   {text : 'Narration',style : 'subheader'} , 
+                  {text : 'Debit' , style: 'subheader'},
+                  {text : 'Credit' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+
+                  ]];
+
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
+
+        body.push(dataRow);
+    });
+
+    return body;
+}
+
+function table(data, columns) {
+    return {
+        table: {
+              widths: [100, '*',200, '*', '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
+        }
+    };
+}
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
+  
+
+var dd = {
+ 
+    content: [
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'Creditors Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date','Type','Nera'  , 'Debit' , 'Credit' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
+}
+ 
+
+ 
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+   var name =   $scope.output.name ; 
+     var filename = name + " CREDITORS.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+     
+     
+
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+  
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+  var pdfUrl = URL.createObjectURL( blob);
+     
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
+      .then(function (success) {
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/creditors", true)
+      .then(function (success) {
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/creditors/", pdfname , binaryArray, true)
+        .then(function (success) {
+    $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/creditors/", pdfname)
 .then(function (data) {
  
-$cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
+$cordovaSocialSharing.shareViaEmail('Creditor Report ', 'Creditor Report', null, null, null, data)
   .then(function(result) {
   
   
   }, function(err) {
-    alert(err);
+   var err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error4"); 
     
   });
  
 }, function (error) {
+   var err = JSON.stringify(error) ; 
+         alert(err) ;
+         alert("error3"); 
+});        
+ 
+           
+        }, function (error) {
+           var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error5"); 
+           
+    });
+     }, function(err) {
   
+     var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+
+
+
+
+      }, function (error) {
+     
+      });
 });
+  $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
+
+ pdfMake.createPdf(dd).download();
+
+
+
+
+
+
+
+ 
 }
-   })
 
 
+  })
+
+    
     // Set Ink
     ionicMaterialInk.displayEffect();
 
@@ -1928,13 +2316,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
  
     $scope.doc = function(){
  
-  $ionicLoading.show({
-         template: '<div class = "pdfloader"> Creating PDF....</div>',
-          hideOnStateChange : 'true',
-          noBackdrop : 'true',
-          duration : 3000
-
-       });
+ 
  var name =   $scope.output.name ; 
 var Inventorydata = [];
 var Inventorydata = {
@@ -2095,7 +2477,12 @@ var dd = {
      
       });
 });
-
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
  pdfMake.createPdf(dd).download();
 
  }
@@ -2104,14 +2491,141 @@ $scope.share = function () {
 
 
 
+  
+ var name =   $scope.output.name ; 
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+var value = [];
+value.push({ text: name});
+console.log(value);
+for(var i in response1) {
+
+    var item = response1[i];
+  console.log(item);
+    
+    Inventorydata.accounting.push({ 
+        "Date" : item.date,
+        "Type"  : item.typ,
+        "Receive"  : item.debit ,
+        "Issue"    : item.credit , 
+        "Balance" : item.balance
+       
+     });
+}
 
 
 
+function buildTableBody(data, columns) {
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                  {text : 'Type' , style: 'subheader'} ,
+                  {text : 'Receive' , style: 'subheader'},
+                  {text : 'Issue' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+                  ]];
 
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
 
+        body.push(dataRow);
+    });
 
+    return body;
+}
 
-  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+function table(data, columns) {
+    return {
+        table: {
+              widths: [200, '*', 100, '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
+        }
+    };
+}
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
+  
+var dd = {
+ 
+    content: [
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'Inventory Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
+}
+ 
+
+ 
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+     var name =   $scope.output.name ; 
+     var filename = name + " INVENTORY.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+   console.log(pdfname);
+
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+  
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+  var pdfUrl = URL.createObjectURL( blob);
+     
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
+      .then(function (success) {
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/inventory", true)
+      .then(function (success) {
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/inventory/", pdfname , binaryArray, true)
+        .then(function (success) {
+    $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/inventory/", pdfname)
 .then(function (data) {
  
 $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
@@ -2119,13 +2633,56 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
   
   
   }, function(err) {
-    alert(err);
+   var err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error4"); 
     
   });
  
 }, function (error) {
+   var err = JSON.stringify(error) ; 
+         alert(err) ;
+         alert("error3"); 
+});        
+ 
+           
+        }, function (error) {
+           var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error5"); 
+           
+    });
+     }, function(err) {
   
+     var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+
+
+
+
+      }, function (error) {
+     
+      });
 });
+
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
+
+ pdfMake.createPdf(dd).download();
+
+
+
+
+
+
+
+ 
 }
 
  })
@@ -2211,13 +2768,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
     
     $scope.doc = function(){
 
-  $ionicLoading.show({
-         template: '<div class = "pdfloader"> Creating PDF....</div>',
-          hideOnStateChange : 'true',
-          noBackdrop : 'true',
-          duration : 3000
 
-       });
 
  var name =  "Others" ; 
 var Inventorydata = [];
@@ -2353,15 +2904,15 @@ var dd = {
   $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
       .then(function (success) {
  
-   $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/debtors", true)
+   $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/others", true)
       .then(function (success) {
 
 
-         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/debtors/", pdfname , binaryArray, true)
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/others/", pdfname , binaryArray, true)
         .then(function (success) {
            
  $cordovaFileOpener2.open(
-    './sdcard/waves/debtors/'+pdfname,
+    './sdcard/waves/others/'+pdfname,
     'application/pdf'
   ).then(function() {
    
@@ -2401,15 +2952,158 @@ var dd = {
 
 });
 
-
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
   
  pdfMake.createPdf(dd).download();
 
   }
  
+
+ //--------------Share Function------------------------//
+
 $scope.share = function () {
 
-  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+
+console.log(response1);
+ 
+ var name =   $scope.output.name ; 
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+var value = [];
+value.push({ text: name});
+console.log(value);
+for(var i in response1) {
+
+    var item = response1[i];
+  console.log(item);
+    
+    Inventorydata.accounting.push({ 
+        "Date" : item.date,
+        "Type"  : item.typ,
+        "Receive"  : item.debit ,
+        "Issue"    : item.credit , 
+        "Balance" : item.balance
+       
+     });
+}
+
+
+
+function buildTableBody(data, columns) {
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                  {text : 'Type' , style: 'subheader'} ,
+                  {text : 'Receive' , style: 'subheader'},
+                  {text : 'Issue' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+                  ]];
+
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
+
+        body.push(dataRow);
+    });
+
+    return body;
+}
+
+function table(data, columns) {
+    return {
+        table: {
+              widths: [200, '*', 100, '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
+        }
+    };
+}
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
+  
+var dd = {
+ 
+    content: [
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'Inventory Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
+}
+ 
+
+ 
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+       var name =   $scope.output.name ; 
+     var filename = name + " OTHERS.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+  
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+  var pdfUrl = URL.createObjectURL( blob);
+     
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
+      .then(function (success) {
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/others", true)
+      .then(function (success) {
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/others/", pdfname , binaryArray, true)
+        .then(function (success) {
+    $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/others/", pdfname)
 .then(function (data) {
  
 $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
@@ -2417,19 +3111,61 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
   
   
   }, function(err) {
-    alert(err);
+   var err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error4"); 
     
   });
  
 }, function (error) {
+   var err = JSON.stringify(error) ; 
+         alert(err) ;
+         alert("error3"); 
+});        
+ 
+           
+        }, function (error) {
+           var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error5"); 
+           
+    });
+     }, function(err) {
   
+     var  err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+
+
+
+
+      }, function (error) {
+     
+      });
 });
+
+  $ionicLoading.show({
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  3000
+  });
+ pdfMake.createPdf(dd).download();
+
+
+
+
+
+
+
+ 
 }
 
 
-   })
+  })
 
-
+    
     // Set Ink
     ionicMaterialInk.displayEffect();
 
@@ -2438,6 +3174,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
  
 
 })
+
 
 /*=====  End of  Transaction Other Ctrl   ======*/
 
