@@ -1,9 +1,17 @@
 
 <ion-view view-title="{{name}}">
      <ion-nav-bar class="bar bar-header bar-assertive"  align-title="left">
-
+ <i class="icon ion-android-share-alt"></i>
 </ion-nav-bar>
+ <ion-nav-buttons side="right">
+       <button class="button button-icon button-clear icon ion-document-text" menu-toggle="right"  
+      ng-click="doc()" ng-hide = "{{hide}}">
+                </button>
 
+        <button class="button button-icon button-clear icon ion-android-share-alt" menu-toggle="right"  ng-click = "share()" ng-hide = "{{hide}}">
+                </button>        
+
+     </ion-nav-buttons>
     <ion-content >
 
                               
@@ -52,7 +60,7 @@
                      
                         
                       
-                  <a ui-sref="app.voucher" ng-click="voucher(responses.voucher,responses.date,responses.typ,responses.vchno)">
+                  <a ui-sref="app.voucher" ng-click="voucher(responses.voucher,responses.acc)">
                
                    <div class = "divider"></div>
                   <div class = "row">

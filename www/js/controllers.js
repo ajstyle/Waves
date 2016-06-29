@@ -1,3 +1,4 @@
+
 'use strict';
 
 
@@ -499,15 +500,13 @@ document.addEventListener('deviceready', function () {
 
       $timeout(function() {
          
-     testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
+     testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
       {
          
          $scope.showme = true;
          $scope.nodata = false;  
         $ionicLoading.hide(); 
-        $scope.hide = function(){
-       $ionicLoading.hide();
-      };
+      
 
         var response1 = Response.response(response); 
     $scope.response = response1; 
@@ -600,33 +599,19 @@ $scope.id = function(data,name)
 
       $timeout(function() {
          
-  testService.GetSupplier("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
+  testService.GetSupplier("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
       {
          
          $scope.showme = true;
          $scope.nodata = false;  
         $ionicLoading.hide(); 
-        $scope.hide = function(){
-       $ionicLoading.hide();
-      };
+      
 
         var response1 = Response.response(response); 
     $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -700,33 +685,18 @@ $scope.id = function(data,name)
 
       $timeout(function() {
          
-     testService.GetOtherLedgers("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
+     testService.GetOtherLedgers("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
       {
          console.log(response);
          $scope.showme = true;
          $scope.nodata = false;  
         $ionicLoading.hide(); 
-        $scope.hide = function(){
-       $ionicLoading.hide();
-      };
-
+     
         var response1 = Response.response(response); 
     $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -793,7 +763,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetPDC("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , " " , " ").then(function(response)
+     testService.GetPDC("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , " " , " ").then(function(response)
       {
          console.log(response);
          $scope.showme = true;
@@ -805,19 +775,7 @@ $scope.id = function(data,name)
     $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -882,7 +840,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetReceipts("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , " " , " ").then(function(response)
+     testService.GetReceipts("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , " " , " ").then(function(response)
       {
          console.log(response);
 
@@ -897,19 +855,7 @@ $scope.id = function(data,name)
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -979,7 +925,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.Getinventory("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430").then(function(response)
+     testService.Getinventory("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
       {
          console.log(response);
 
@@ -994,19 +940,7 @@ $scope.id = function(data,name)
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -1072,7 +1006,7 @@ $scope.id = function(data,name)
 
      
          
-     testService. GetSales("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , "S" ).then(function(response)
+     testService. GetSales("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , "S" ).then(function(response)
       {
          console.log(response);
 
@@ -1087,19 +1021,7 @@ $scope.id = function(data,name)
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -1167,7 +1089,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" , "P" ).then(function(response)
+     testService.GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , "P" ).then(function(response)
       {
          console.log(response);
 
@@ -1182,19 +1104,7 @@ $scope.id = function(data,name)
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -1261,7 +1171,7 @@ $scope.Mobile   = $scope.output.text;
 ====================================*/
 
 
-.controller('transactionCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher) {
+.controller('transactionCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1272,6 +1182,7 @@ $scope.Mobile   = $scope.output.text;
 
     $scope.service = Services;
     $scope.output = transid;
+    $scope.hide = "false";
     console.log(  $scope.service);
         var data = $scope.service.login ;
           
@@ -1291,13 +1202,15 @@ $scope.Mobile   = $scope.output.text;
         });
     }, 300);
 
-    
-          $scope.voucher = function(data)
+     $scope.voucher = function(data,acc)
       {
-          $scope.output = voucher;
+         $scope.output = voucher;
           $scope.output.voucher = data ;
-
+           $scope.output.acc = acc ;
+           console.log($scope.output.acc);
       }
+         
+
        console.log(  $scope.output.transid);
       $ionicLoading.show({
           templateUrl: 'templates/loader.html',
@@ -1308,7 +1221,7 @@ $scope.Mobile   = $scope.output.text;
 
    
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,  $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1323,24 +1236,234 @@ $scope.Mobile   = $scope.output.text;
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+    
+
+//--------------------DOC Function -------------------------------------------------------------//
+
+     $scope.doc = function(){
+
+
+ $ionicLoading.show({
+         template: '<div class = "pdfloader"> Creating PDF....</div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration :  5000
+  });
+
+
+ var name =   $scope.output.name ; 
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+var value = [];
+value.push({ text: name});
+console.log(value);
+for(var i in response1) {
+
+    var item = response1[i];
+  console.log(item);
+    
+    Inventorydata.accounting.push({ 
+        "Date" : item.date,
+        "Type"  : item.typ,
+        "Receive"  : item.debit ,
+        "Issue"    : item.credit , 
+        "Balance" : item.balance
        
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
+     });
+}
+
+
+
+function buildTableBody(data, columns) {
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                  {text : 'Type' , style: 'subheader'} ,
+                  {text : 'Receive' , style: 'subheader'},
+                  {text : 'Issue' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+                  ]];
+
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
+
+        body.push(dataRow);
     });
 
+    return body;
+}
+
+function table(data, columns) {
+    return {
+        table: {
+              widths: [200, '*', 100, '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
+        }
+    };
+}
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
+  
+
+var dd = {
+ 
+    content: [
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'Inventory Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
+}
+ 
+
+ 
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+     
+
+     var name =   $scope.output.name ; 
+     var filename = name + " DEBTORS.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+     
+
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+  
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+  var pdfUrl = URL.createObjectURL( blob);
+   
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
+      .then(function (success) {
+ 
+   $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/debtors", true)
+      .then(function (success) {
+
+
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/debtors", pdfname , binaryArray, true)
+        .then(function (success) {
+           
+ $cordovaFileOpener2.open(
+    './sdcard/waves/debtors/'+pdfname,
+    'application/pdf'
+  ).then(function() {
+   
+        }, function(err) {
+  
+        err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error2"); 
+  });
+           
+        }, function (error) {
+           
+        
+        err = JSON.stringify(error) ; 
+         alert("error1");
+         alert(err) ; 
+    });
+}, function(err) {
+  
+        err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+ 
+
+     
+      }, function (error) {
+
+        err = JSON.stringify(error) ; 
+         alert(err) ; 
+         alert("error4");
+     
+      });
+
+
+   
+
+
+});
+
+
+  
+ pdfMake.createPdf(dd).download();
+
+  }
 
    })
 
+ //--------------Share Function------------------------//
+
+ $scope.share = function () {
+
+  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+.then(function (data) {
  
+$cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
+  .then(function(result) {
+  
+  
+  }, function(err) {
+    alert(err);
+    
+  });
+ 
+}, function (error) {
+  
+});
+}
+
+
+    
     // Set Ink
     ionicMaterialInk.displayEffect();
 
@@ -1364,7 +1487,7 @@ $scope.Mobile   = $scope.output.text;
 ====================================*/
 
 
-.controller('transactionCreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher) {
+.controller('transactionCreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1384,6 +1507,7 @@ $scope.Mobile   = $scope.output.text;
           $scope.ps = data.ps ; 
            $scope.id  = $scope.output.transid;
           $scope.name = $scope.output.name ;
+          $scope.hide = "false" ;
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -1408,7 +1532,7 @@ $scope.Mobile   = $scope.output.text;
 
      console.log($scope.id);
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,  $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1423,213 +1547,16 @@ $scope.Mobile   = $scope.output.text;
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
-
-
-   })
-
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-
-
-
- 
-
-})
-
-/*=====  End of  Transaction Creditor Ctrl   ======*/
-
-
-
-
-/*====================================
-=     transaction Cheque  Ctrl            =
-====================================*/
-
-
-.controller('transactionChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,$cordovaSocialSharing) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-      
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-
-    $scope.service = Services;
-    $scope.output = transid;
-    console.log(  $scope.service);
-        var data = $scope.service.login ;
-          
-          $scope.ip = data.ip;
-          $scope.db  = data.db;
-          $scope.us  =  data.us ; 
-          $scope.ps = data.ps ; 
-           $scope.id  = $scope.output.transid;
-          console.log( $scope.id);
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
-
-    
-         
-       console.log(  $scope.output.transid);
-      $ionicLoading.show({
-          templateUrl: 'templates/loader.html',
-          hideOnStateChange : 'true',
-          noBackdrop : 'true'
-
-       });
-
-     console.log($scope.id);
-         
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
-      {
-         console.log(response);
-
-         $scope.showme = true;
-         $scope.nodata = false;  
-       $ionicLoading.hide();
-       
-
-        var response1 = Response.response(response); 
-     console.log(response1.length);
-   
-   $scope.response = response1; 
-    $scope.responseSearch = $scope.response ; 
-    console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
-
-
-   })
-
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-    
-    
-
-
- 
-
-})
-
-/*=====  End of  Transaction Chqeue Ctrl   ======*/
-
-
-/*====================================
-=     transaction Inventory  Ctrl            =
-====================================*/
-
-
-.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-      
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-   var response1 ; 
-    $scope.service = Services;
-    $scope.output = transid;
-
- 
-
-
-
- var vm = this;
- // Initialize the modal view.
-    
-
-    
-        var data = $scope.service.login ;
-          
-          $scope.ip = data.ip;
-          $scope.db  = data.db;
-          $scope.us  =  data.us ; 
-          $scope.ps = data.ps ; 
-           $scope.id  = $scope.output.transid;
-           $scope.name =   $scope.output.name ; 
-           $scope.hide = false ;
-          console.log( $scope.id);
-            $scope.voucher = function(data)
-      {
-          $scope.output = voucher;
-           $scope.output.voucher = data ;
-      }
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
-
-    
-         
-       console.log(  $scope.output.transid);
-      $ionicLoading.show({
-          template: 'templates/loader.html',
-          hideOnStateChange : 'true',
-          noBackdrop : 'true'
-
-       });
-
-     console.log($scope.id);
-          
-        
-
-
-     testService.GetItemTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,  $scope.id ).then(function(response)
-      { 
-         console.log(response);
-
-         $scope.showme = true;
-         $scope.nodata = false;  
-       $ionicLoading.hide();
-       
-
-        var response1 = Response.response(response); 
-           console.log(response1);
-           $scope.response = response1; 
-    $scope.responseSearch = $scope.response ; 
   
-    
- 
+
+
     $scope.doc = function(){
- $ionicLoading.show({
+  $ionicLoading.show({
          template: '<div class = "pdfloader"> Creating PDF....</div>',
           hideOnStateChange : 'true',
-          noBackdrop : 'true'
-
+          noBackdrop : 'true',
+          duration : 3000 
+          
        });
 
 
@@ -1749,33 +1676,28 @@ var dd = {
  
  pdfMake.createPdf(dd).getBuffer(function (buffer){
     
+      var name =   $scope.output.name ; 
+     var filename = name + " CREDITORS.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+     
+
+
     var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
   
    var binaryArray = utf8.buffer; // Convert to Binary...
     var blob = new Blob([binaryArray], {type: 'application/pdf'});
   
   var pdfUrl = URL.createObjectURL( blob);
-   
-      $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", false)
+   $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
       .then(function (success) {
-     
-      }, function (error) {
-     
-      });
+ $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/creditors", true)
+      .then(function (success) {
 
-
-    $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/", "inventory.pdf", binaryArray, true)
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/creditors/", pdfname , binaryArray, true)
         .then(function (success) {
            
-           
-        }, function (error) {
-           
-    });
-
-     $ionicLoading.hide();
-
  $cordovaFileOpener2.open(
-    './sdcard/waves/inventory.pdf',
+    './sdcard/waves/creditors/'+pdfname,
     'application/pdf'
   ).then(function() {
    
@@ -1783,6 +1705,27 @@ var dd = {
   
    
   });
+           
+        }, function (error) {
+           
+    });
+
+}, function(err) {
+  
+        err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+
+     
+      }, function (error) {
+     
+      });
+
+
+   
+
+
 });
 
 
@@ -1790,8 +1733,383 @@ var dd = {
  pdfMake.createPdf(dd).download();
 
   }
+
+$scope.share = function () {
+
+  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+.then(function (data) {
+ 
+$cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
+  .then(function(result) {
+  
+  
+  }, function(err) {
+    alert(err);
+    
+  });
+ 
+}, function (error) {
+  
+});
+}
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of  Transaction Creditor Ctrl   ======*/
+
+
+
+
+/*====================================
+=     transaction Cheque  Ctrl            =
+====================================*/
+
+
+.controller('transactionChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,$cordovaSocialSharing) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = transid;
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.id  = $scope.output.transid;
+          console.log( $scope.id);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,  $scope.id ).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+ 
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+    
+    
+
+
+ 
+
+})
+
+/*=====  End of  Transaction Chqeue Ctrl   ======*/
+
+
+/*====================================
+=     transaction Inventory  Ctrl            =
+====================================*/
+
+
+.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+   var response1 ; 
+    $scope.service = Services;
+    $scope.output = transid;
+
+ 
+
+
+
+ var vm = this;
+ // Initialize the modal view.
+    
+
+    
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.id  = $scope.output.transid;
+           $scope.name =   $scope.output.name ; 
+           $scope.hide = false ;
+          console.log( $scope.id);
+            $scope.voucher = function(data)
+      {
+          $scope.output = voucher;
+           $scope.output.voucher = data ;
+      }
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+        $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+          
+        
+
+
+     testService.GetItemTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,  $scope.id ).then(function(response)
+      { 
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+           console.log(response1);
+           $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+  
+    
+ 
+    $scope.doc = function(){
+ 
+  $ionicLoading.show({
+         template: '<div class = "pdfloader"> Creating PDF....</div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration : 3000
+
+       });
+ var name =   $scope.output.name ; 
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+var value = [];
+value.push({ text: name});
+console.log(value);
+for(var i in response1) {
+
+    var item = response1[i];
+  console.log(item);
+    
+    Inventorydata.accounting.push({ 
+        "Date" : item.date,
+        "Type"  : item.typ,
+        "Receive"  : item.debit ,
+        "Issue"    : item.credit , 
+        "Balance" : item.balance
+       
+     });
+}
+
+
+
+function buildTableBody(data, columns) {
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                  {text : 'Type' , style: 'subheader'} ,
+                  {text : 'Receive' , style: 'subheader'},
+                  {text : 'Issue' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+                  ]];
+
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
+
+        body.push(dataRow);
+    });
+
+    return body;
+}
+
+function table(data, columns) {
+    return {
+        table: {
+              widths: [200, '*', 100, '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
+        }
+    };
+}
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
+  
+var dd = {
+ 
+    content: [
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'Inventory Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
+}
+ 
+
+ 
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+     var name =   $scope.output.name ; 
+     var filename = name + " INVENTORY.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+   
+
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+  
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+  var pdfUrl = URL.createObjectURL( blob);
+     
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
+      .then(function (success) {
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/inventory", true)
+      .then(function (success) {
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/inventory/", pdfname , binaryArray, true)
+        .then(function (success) {
+           
+ $cordovaFileOpener2.open(
+    './sdcard/waves/inventory/'+pdfname,
+    'application/pdf'
+  ).then(function() {
+   
+        }, function(err) {
+    
+  });
+           
+        }, function (error) {
+           
+    });
+     }, function(err) {
+  
+        err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+
+
+
+
+      }, function (error) {
+     
+      });
+});
+
+ pdfMake.createPdf(dd).download();
+
+ }
  
 $scope.share = function () {
+
+
+
+
+
+
+
+
+
 
   $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
 .then(function (data) {
@@ -1828,7 +2146,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 ====================================*/
 
 
-.controller('transactionOtherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+.controller('transactionOtherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1848,6 +2166,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
           $scope.ps = data.ps ; 
            $scope.id  = $scope.output.transid;
            $scope.name = $scope.output.name ;
+           $scope.hide = "false" ; 
          console.log( $scope.id);
           console.log( $scope.id);
     // Set Motion
@@ -1857,19 +2176,24 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
         });
     }, 300);
 
-    
+     $scope.voucher = function(data)
+      {
+          $scope.output = voucher;
+           $scope.output.voucher = data ;
+      }
          
        console.log(  $scope.output.transid);
       $ionicLoading.show({
           templateUrl: 'templates/loader.html',
           hideOnStateChange : 'true',
-          noBackdrop : 'true'
+          noBackdrop : 'true',
+          duration : 3000 
 
        });
 
      console.log($scope.id);
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.id ).then(function(response)
+     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1884,19 +2208,223 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
+    
+    $scope.doc = function(){
+
+  $ionicLoading.show({
+         template: '<div class = "pdfloader"> Creating PDF....</div>',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true',
+          duration : 3000
+
+       });
+
+ var name =  "Others" ; 
+var Inventorydata = [];
+var Inventorydata = {
+    accounting: []
+};
+var value = [];
+value.push({ text: name});
+console.log(value);
+for(var i in response1) {
+
+    var item = response1[i];
+  console.log(item);
+    
+    Inventorydata.accounting.push({ 
+        "Date" : item.date,
+        "Type"  : item.typ,
+        "Receive"  : item.debit ,
+        "Issue"    : item.credit , 
+        "Balance" : item.balance
        
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
+     });
+}
+
+
+ 
+
+function buildTableBody(data, columns) {
+    var body = [[ {text : 'Date', style: 'subheader'}, 
+                  {text : 'Type' , style: 'subheader'} ,
+                  {text : 'Receive' , style: 'subheader'},
+                  {text : 'Issue' , style: 'subheader' } ,
+                  {text :  'Balance' , style: 'subheader'} 
+                  ]];
+
+    data.forEach(function(row) {
+        console.log(row);
+        var dataRow = [];
+ 
+        columns.forEach(function(column) {
+            
+            dataRow.push(row[column].toString());
+       console.log( dataRow);
+        })
+
+        body.push(dataRow);
     });
+
+    return body;
+}
+
+function table(data, columns) {
+    return {
+        table: {
+              widths: [200, '*', 100, '*','*'],
+            headerRows: 2,
+           
+            body: buildTableBody(data, columns),
+            
+        }
+    };
+}
+function text(data)
+{
+  return {
+    text : data , style: 'header2'
+  }
+}
+  
+ 
+var dd = {
+ 
+    content: [
+        { text: 'Waves Compusoft', style: 'header' },
+        { text: '', style: 'margin' },
+        
+        { text: 'Inventory Report', style: 'header1' },
+         { text: '', style: 'margin' },
+         text(value),
+
+        table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
+      
+ 
+    ],
+    styles: {
+    header: {
+      fontSize: 22,
+      bold: true,
+     alignment: 'center' ,
+      
+    },
+     subheader: {
+      fontSize: 14,
+      bold: true,
+       alignment: 'center' ,
+       
+    },
+    margin:{
+      margin: [0, 20, 0, 0],
+    },
+     header1: {
+      fontSize: 16,
+      bold: true,
+     alignment: 'left' ,
+      
+    },
+   header2: {
+      fontSize: 13,
+      bold: true,
+     alignment: 'center' ,
+      
+    }
+  }
+}
+
+
+
+ pdfMake.createPdf(dd).getBuffer(function (buffer){
+    
+   var name =   $scope.output.name ; 
+     var filename = name + " OTHERS.pdf" ; 
+       var pdfname =  filename.replace(/ /g,"_");
+     
+
+
+    var utf8 = new Uint8Array(buffer); // Convert to UTF-8... 
+  
+   var binaryArray = utf8.buffer; // Convert to Binary...
+    var blob = new Blob([binaryArray], {type: 'application/pdf'});
+  
+  var pdfUrl = URL.createObjectURL( blob);
+ 
+  $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves", true)
+      .then(function (success) {
+ 
+   $cordovaFile.createDir(cordova.file.externalRootDirectory, "waves/debtors", true)
+      .then(function (success) {
+
+
+         $cordovaFile.writeFile(cordova.file.externalRootDirectory+"waves/debtors/", pdfname , binaryArray, true)
+        .then(function (success) {
+           
+ $cordovaFileOpener2.open(
+    './sdcard/waves/debtors/'+pdfname,
+    'application/pdf'
+  ).then(function() {
+   
+        }, function(err) {
+  
+        err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error2"); 
+  });
+           
+        }, function (error) {
+           
+        
+        err = JSON.stringify(error) ; 
+         alert("error1");
+         alert(err) ; 
+    });
+}, function(err) {
+  
+        err = JSON.stringify(err) ; 
+         alert(err) ;
+         alert("error3"); 
+  });
+ 
+
+     
+      }, function (error) {
+
+        err = JSON.stringify(error) ; 
+         alert(err) ; 
+         alert("error4");
+     
+      });
+
+   
+
+
+});
+
+
+  
+ pdfMake.createPdf(dd).download();
+
+  }
+ 
+$scope.share = function () {
+
+  $cordovaFile.readAsDataURL(cordova.file.externalRootDirectory+"waves/", 'inventory.pdf')
+.then(function (data) {
+ 
+$cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', null, null, null, data)
+  .then(function(result) {
+  
+  
+  }, function(err) {
+    alert(err);
+    
+  });
+ 
+}, function (error) {
+  
+});
+}
 
 
    })
@@ -1920,17 +2448,27 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 ====================================*/
 
 
-.controller('voucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('voucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$location,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
+   
+  $scope.output = voucher
+     var acc =  $scope.output.acc 
+     if(acc == "I")
+          {
+              $location.url("/app/saleVoucher"); 
+          }
+   else
+   {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
+       
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
 
     $scope.service = Services;
-    $scope.output = voucher
+  
+        
     console.log(  $scope.service);
         var data = $scope.service.login ;
           
@@ -1939,9 +2477,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
            $scope.voucher  = $scope.output.voucher;
-           $scope.date  = $scope.output.date;
-           $scope.type = $scope.output.typ ;
-           $scope.vchno = $scope.output.vchno ;
+ 
            
           console.log(  $scope.date);
     // Set Motion
@@ -1963,7 +2499,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,   $scope.voucher ).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,   $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -1980,19 +2516,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -2003,7 +2527,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
 
 
- 
+ }
 
 })
 
@@ -2067,7 +2591,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,   $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,   $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -2082,19 +2606,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -2151,7 +2663,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher  ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher  ).then(function(response)
       {
          console.log(response);
 
@@ -2166,19 +2678,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -2239,7 +2739,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
       {
          console.log(response);
 
@@ -2254,19 +2754,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -2327,7 +2815,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
       {
          console.log(response);
 
@@ -2342,19 +2830,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -2416,7 +2892,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -2431,19 +2907,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -2505,7 +2969,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher ).then(function(response)
       {
          console.log(response);
 
@@ -2520,20 +2984,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
-
+   
 
    })
 
@@ -2548,6 +2999,109 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 })
 
 /*=====  End of Sale voucher Ctrl   ======*/
+
+
+
+/*====================================
+=   Other voucher Ctrl     =
+====================================*/
+
+
+.controller('otherVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+      
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    $scope.service = Services;
+    $scope.output = voucher
+    console.log(  $scope.service);
+        var data = $scope.service.login ;
+          
+          $scope.ip = data.ip;
+          $scope.db  = data.db;
+          $scope.us  =  data.us ; 
+          $scope.ps = data.ps ; 
+           $scope.voucher  = $scope.output.voucher;
+          console.log($scope.voucher);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    
+         
+       console.log(  $scope.output.transid);
+      $ionicLoading.show({
+          templateUrl: 'templates/loader.html',
+          hideOnStateChange : 'true',
+          noBackdrop : 'true'
+
+       });
+
+     console.log($scope.id);
+         
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
+      {
+         console.log(response);
+
+         $scope.showme = true;
+         $scope.nodata = false;  
+       $ionicLoading.hide();
+       
+
+        var response1 = Response.response(response); 
+     console.log(response1.length);
+   
+   $scope.response = response1; 
+    $scope.responseSearch = $scope.response ; 
+    console.log($scope.responseSearch);
+ 
+
+
+   })
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+
+
+ 
+
+})
+
+/*=====  End of Other voucher Ctrl   ======*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*====================================
 =    CreditorA Voucher Ctrl     =
@@ -2593,7 +3147,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
      console.log($scope.id);
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
       {
          console.log(response);
 
@@ -2608,19 +3162,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
    $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
     console.log($scope.responseSearch);
-    $scope.$watch('search', function(val)
-    { 
-        
-        console.log($filter('filter')($scope.responseSearch, val));
-        $scope.response = $filter('filter')($scope.responseSearch, val); // items return for api after search if array is empty
-       
-        if($filter('filter')($scope.responseSearch, val).length == 0){ // item are empty
-           $scope.nodata = true;
-        }
-        else{
-          $scope.nodata = false;   
-        }
-    });
+ 
 
 
    })
@@ -2755,7 +3297,7 @@ var debD = new Array();
   $scope.PSseries = ['Sale','Purchase'];
      
 
-   testService.DesignGraphs("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
+   testService.DesignGraphs("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ).then(function(response)
       {
         
 

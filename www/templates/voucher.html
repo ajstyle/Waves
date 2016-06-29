@@ -6,13 +6,7 @@
     
 
 
-                              
-           <div class = "Searchcheque">
-
-
-
-          <input type = "text" name = "search" placeholder="Search" ng-model="search">
-            </div> 
+       
 
 <div class = "container4">
  <div ng-animate="'animate'"  ng-repeat= "responses in response|limitTo : 1"  class="repeated-item" >
@@ -22,7 +16,7 @@
    <div class = "date"> <b>Date:</b></div></br>
    </div>
 <div class = "col-25">
-  <div class = "date1">  <b> {{responses.date}}</b></div>
+  <div class = "date">  <b> {{responses.date}}</b></div>
    </div>
 <div class = "col-25">
   <b><div class = "balance">Type:</div></b> 
@@ -41,7 +35,7 @@
    <div class = "date"> <b>Number:</b></div></br>
 </div>
    <div class = "col-25">
-   <div class = "vchno"> <b>{{responses.voucher}}</b></div></br>
+   <div class = "vch"> <b>{{responses.vchno}}</b></div></br>
 </div>
 
 </div>
@@ -55,16 +49,16 @@
 
             <div class = "row">
           
-                    <div class = "col-33">   
+                    <div class = "col-50">   
                    Description
                      </div>
-                     <div class = "col-33"> 
-                      Debit
+                     <div class = "col-25"> 
+                     <div class = "credit1">  Debit</div>
                       </div>
                     
 
-                       <div class = "col-33"> 
-                       Credit
+                       <div class = "col-25"> 
+                     <div class = "credit1">  Credit </div>
                       </div>
                        
                       </div>
@@ -88,24 +82,24 @@
                    <div class = "divider"></div>
                    <div class = "row">
                   
-                  <div class = "col-33">
-                <div class = "date">{{responses.cd}} </div>   
-                <div class = "company"><b>   {{responses.lname}} </b></div>                    
+                  <div class = "col-50">
+             
+                <div class = "company"><b> {{responses.cd}}  {{responses.lname}} </b></div>                    
                       
                 <div class = "Add"><b>   {{responses.ladd}} </b></div>                    
                       </div>
                       
                   
-                   <div class = "col-33">
+                   <div class = "col-25">
                     
-                     <div class = "vch">   <b> {{responses.debit}} </b></div>
+                     <div class = "credit">   <b> {{responses.debit}} </b></div>
                 
                   </div>
                    
                       
                 
                   
-                  <div class = "col-33">
+                  <div class = "col-25">
 
                 <div class = "credit">    <b> {{responses.credit}}</b> </div>
                    </div>
@@ -134,8 +128,8 @@
            <div class = "row">
                   
                   <div class = "col-33">
-                <div class = "company"><b>   {{responses.rem2}} </b></div>
-                <div class = "date">{{responses.rem1}} </div>   
+                <div class = "voucherval"><b>   {{responses.rem2}} </b></div>
+                <div class = "voucherval">{{responses.rem1}} </div>   
                                     
                       
                                
@@ -144,7 +138,7 @@
                   
                    <div class = "col-33">
                     
-                     <div class = "vch">   <b> {{responses.totDebit}} </b></div>
+                     <div class = "voucherval1">   <b> {{responses.totDebit}} </b></div>
                 
                   </div>
                    
@@ -153,7 +147,7 @@
                   
                   <div class = "col-33">
 
-                <div class = "credit">    <b> {{responses.totCredit}}</b> </div>
+                <div class = "voucherval1">    <b> {{responses.totCredit}}</b> </div>
                    </div>
                
           

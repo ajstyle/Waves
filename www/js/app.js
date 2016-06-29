@@ -32,7 +32,7 @@ var uuid =  window.device.uuid;
        $location.url("/app/registertxt"); 
       }, function (error) {
        
-      //  $location.url("/app1/login"); 
+        //$location.url("/app/login"); 
       });
 
   })
@@ -220,20 +220,6 @@ if( connection.checkconnection() == 'No network connection' )
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     .state('app.gallery', {
         url: '/gallery',
         views: {
@@ -252,9 +238,7 @@ if( connection.checkconnection() == 'No network connection' )
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
             },
-            'fabContent': {
-                template: ''
-            }
+           
         }
     })
 
@@ -468,6 +452,15 @@ if( connection.checkconnection() == 'No network connection' )
             'menuContent': {
                 templateUrl: 'templates/chequeVoucher.html',
                 controller: 'chequeVoucherCtrl'
+            }
+        }
+    })
+.state('app.otherVoucher', {
+        url: '/otherVoucher',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/otherVoucher.html',
+                controller: 'otherVoucherCtrl'
             }
         }
     })

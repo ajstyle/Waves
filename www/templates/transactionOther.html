@@ -1,11 +1,18 @@
-<ion-view view-title="{{name}}">
-    
- <ion-nav-bar class="bar bar-header bar-assertive"  align-title="left">
-    <i class="icon ion-android-share-alt"></i>
-      </ion-nav-bar>
-    <ion-content >
-    
 
+<ion-view view-title="{{name}}">
+     <ion-nav-bar class="bar bar-header bar-assertive"  align-title="left">
+ <i class="icon ion-android-share-alt"></i>
+</ion-nav-bar>
+ <ion-nav-buttons side="right">
+       <button class="button button-icon button-clear icon ion-document-text" menu-toggle="right"  
+      ng-click="doc()" ng-hide = "{{hide}}">
+                </button>
+
+        <button class="button button-icon button-clear icon ion-android-share-alt" menu-toggle="right"  ng-click = "share()" ng-hide = "{{hide}}">
+                </button>        
+
+     </ion-nav-buttons>
+    <ion-content >
 
                               
            <div class = "Searchcheque">
@@ -28,13 +35,13 @@
                     
 
                        <div class = "col-20"> 
-               <div class = "debit1">  Debit</div>
+               <div class = "debit1">  Debit </div>
                       </div>
                        <div class = "col-20"> 
-                 <div class = "credit1">Credit </div>
+           <div class = "credit1">      Credit </div>
                       </div>
                        <div class = "col-20"> 
-                  <div class = "credit1">     Balance</div>
+               <div class = "debit1"> Balance </div>
                       </div>
 
                       </div>
@@ -53,7 +60,7 @@
                      
                         
                       
-                  <a href="#">
+                  <a ui-sref="app.voucher" ng-click="voucher(responses.voucher)">
                
                    <div class = "divider"></div>
                   <div class = "row">
@@ -75,12 +82,12 @@
                   
                   <div class = "col-20">
 
-                <div class = "credit">    <b> {{responses.debit}}</b> </div>
+                <div class = "debit">    <b> {{responses.debit}}</b> </div>
                    </div>
                    <div class = "col-20">
 
               
-                <div class = "balance">    <b>{{responses.credit}} </b> </div>
+                <div class = "credit">    <b>{{responses.credit}} </b> </div>
                    </div>
 
                   <div class = "col-20">
