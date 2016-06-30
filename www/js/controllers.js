@@ -507,7 +507,7 @@ document.addEventListener('deviceready', function () {
          $scope.nodata = false;  
         $ionicLoading.hide(); 
       
-
+       $scope.total = "Grand Total" ; 
         var response1 = Response.response(response); 
     $scope.response = response1; 
     $scope.responseSearch = $scope.response ; 
@@ -928,7 +928,7 @@ $scope.id = function(data,name)
      testService.Getinventory("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
       {
          console.log(response);
-
+       
          $scope.showme = true;
          $scope.nodata = false;  
        $ionicLoading.hide();
@@ -4227,5 +4227,28 @@ var debD = new Array();
   object.loginid = "";
   return object;
 })
-
+  .filter('sumOfValue', function () {
+    return function (data, key) {
+        debugger;
+        if (angular.isUndefined(data) && angular.isUndefined(key))
+            return 0;        
+        var sum = 0;
+        
+        angular.forEach(data,function(v,k){
+            sum = sum + parseInt(v[key]);
+        });        
+        return sum;
+    }
+}).filter('totalSumPriceQty', function () {
+    return function (data, key1, key2) {        
+        if (angular.isUndefined(data) && angular.isUndefined(key1)  && angular.isUndefined(key2)) 
+            return 0;
+        
+        var sum = 0;
+        angular.forEach(data,function(v,k){
+            sum = sum + (parseInt(v[key1]) * parseInt(v[key2]));
+        });
+        return sum;
+    }
+})
 /*=====  End of FACTORIES  ======*/
