@@ -3,6 +3,8 @@
        <i class="icon ion-android-share-alt"></i>
 
       </ion-nav-bar>
+       <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
+    </ion-side-menu>
    <ion-nav-buttons side="right">
        <button class="button button-icon button-clear icon ion-document-text" menu-toggle="right"  
       ng-click="doc()" ng-hide = "{{hide}}">
@@ -58,7 +60,7 @@
 
                      <div class = "container2">
                
-                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                      <div ng-animate="'animate'"  ng-repeat= "responses in resultValue = ( response |  filter:search ) "  class="repeated-item" >
                      
                         
                       
@@ -120,7 +122,25 @@
                    </div>
                </div>
 
-
+          <div class = "row">
+</div>
+                <div class = "row">
+             <div class = "col-20">
+              <div class = "total"><b>{{total}} </b></div>
+             </div>
+            <div class = "col-20">
+              
+             </div>
+             <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValuedash:'debit'}}</b></div>
+             </div>
+               <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValuedash:'credit'}}</b></div>
+             </div>
+               <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValue:'balance'}}</b></div>
+             </div>
+            </div>
                   <!--
                   
                  <a class="waves-effect waves-green " href="#/app/profile">

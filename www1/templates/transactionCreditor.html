@@ -1,0 +1,143 @@
+<ion-view view-title="{{name}}">
+      <ion-nav-bar class="bar bar-header bar-assertive"  align-title="left">
+       <i class="icon ion-android-share-alt"></i>
+
+      </ion-nav-bar>
+   <ion-nav-buttons side="right">
+       <button class="button button-icon button-clear icon ion-document-text" menu-toggle="right"  
+      ng-click="doc()" ng-hide = "{{hide}}">
+                </button>
+
+        <button class="button button-icon button-clear icon ion-android-share-alt" menu-toggle="right"  ng-click = "share()" ng-hide = "{{hide}}">
+                </button>        
+
+     </ion-nav-buttons>
+    <ion-content >
+    
+
+
+                              
+           <div class = "Searchcheque">
+
+
+
+          <input type = "text" name = "search" placeholder="Search" ng-model="search">
+            </div>      
+
+   
+     <div class = "container1">
+            <div class = "row">
+          
+                    <div class = "col-20">   
+                 Date 
+                     </div>
+                     <div class = "col-20"> 
+                      Type
+                      </div>
+                    
+
+                       <div class = "col-20"> 
+                 <div class = "debit1"> Debit </div>
+                      </div>
+                       <div class = "col-20"> 
+               <div class = "credit1">   Credit </div>
+                      </div>
+                       <div class = "col-20"> 
+               <div class = "balance1">  Balance</div>
+                      </div>
+
+                      </div>
+                      </div>
+
+                       <div ng-show="showme" class="boxme">
+                         <div ng-switch = "(response| filter:search).length">
+                         <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
+               
+
+
+
+                     <div class = "container2">
+               
+                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                     
+                        
+                      
+                  <a ui-sref="app.Creditorvoucher" ng-click="voucher(responses.voucher,responses.acc)">
+               
+                   <div class = "divider"></div>
+                  <div class = "row">
+                  
+                  <div class = "col-20">
+                <div class = "date"> <b>{{responses.date}}</b></div>
+                                              
+                      </div>
+                      
+                  
+                   <div class = "col-20">
+                    
+                     <div class = "vch">   <b> {{responses.typ}} </b></div>
+                
+                  </div>
+                   
+                      
+                
+                  
+                  <div class = "col-20">
+
+                <div class = "credit">    <b> {{responses.debit}}</b> </div>
+                   </div>
+                   <div class = "col-20">
+
+              
+                <div class = "credit">    <b>{{responses.credit}} </b> </div>
+                   </div>
+
+                  <div class = "col-20">
+
+              
+                <div class = "balance">    <b>{{responses.balance}} </b> </div>
+                   </div>
+
+                   </div>
+                
+                   
+                  <div class = "col col-70" >
+             <div class = "company"><b>   {{responses.nera}} </b></div>
+            
+                                              
+                      </div>
+                   
+
+
+                 
+                   
+                </a>
+              
+            
+              
+            
+
+                   </div>
+               </div>
+
+
+                  <!--
+                  
+                 <a class="waves-effect waves-green " href="#/app/profile">
+       
+                
+       
+                 
+                  <li class="collection-item">   
+                    <h3>{{responses.lname}}</h3>
+                    <p>{{responses.city}}</p>
+                
+                  </li>     
+                  </a>
+                  !-->
+                
+        
+   
+       
+    </ion-content>
+</ion-view>

@@ -1,0 +1,160 @@
+<ion-view view-title="Voucher">
+    <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
+
+</ion-nav-bar>
+    <ion-content >
+    
+
+
+          
+<div class = "container4">
+ <div ng-animate="'animate'"  ng-repeat= "responses in response|limitTo : 1"  class="repeated-item" >
+
+<div class = "row">
+   <div class = "col-25">
+   <div class = "date"> Date:</div></br>
+   </div>
+<div class = "col-25">
+  <div class = "vch">   {{responses.date}}</div>
+   </div>
+<div class = "col-25">
+  <div class = "balance">Type:</div> 
+   </div>
+<div class = "col-25">
+ <div class = "balance">  {{responses.typ}}</div>
+   </div>
+  
+   
+   
+   
+    </div>
+ 
+<div class = "row">
+   <div class = "col-25">
+   <div class = "date"> Number:</div></br>
+</div>
+   <div class = "col-25">
+   <div class = "vchno"> {{responses.voucher}}</div></br>
+</div>
+
+</div>
+
+   </div>
+ </div>
+
+   
+     <div class = "container7">
+          
+
+            <div class = "row">
+          
+                    <div class = "col-50">   
+                   Description
+                     </div>
+                     <div class = "col-25"> 
+                    <div class = "debit1">    Debit </div>
+                      </div>
+                    
+
+                       <div class = "col-25"> 
+                   <div class = "credit1">    Credit </div>
+                      </div>
+                       
+                      </div>
+                      </div>
+
+                       <div ng-show="showme" class="boxme">
+                         <div ng-switch = "(response| filter:search).length">
+                         <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
+               
+
+
+
+                     <div class = "containervoucher">
+               
+               
+                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                     
+                        
+                      
+                  <a href="#">
+               
+                   <div class = "divider"></div>
+                   <div class = "row">
+                  
+                  <div class = "col-50">
+           
+                <div class = "company">  {{responses.cd}} {{responses.lname}} </div>                    
+                      
+                <div class = "Add">   {{responses.ladd}} </div>                    
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                     <div class = "debit">    {{responses.debit}} </div>
+                
+                  </div>
+                   
+                      
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "credit">     {{responses.credit}} </div>
+                   </div>
+               
+
+                   </div>
+                
+                   
+                 
+                   
+
+
+                 
+                   
+                </a>
+              
+            
+              
+            
+
+                   </div>
+               </div>
+  
+          <div class = "container6">
+           <div ng-animate="'animate'"  ng-repeat= "responses in response|limitTo : 1"  class="repeated-item" >
+           <div class = "row">
+                  
+                  <div class = "col-50">
+                <div class = "voucherval">{{responses.rem1}} </div>   
+                <div class = "voucherval">   {{responses.rem2}} </div>                    
+                      
+                               
+                      </div>
+                      
+                  
+                   <div class = "col-25">
+                    
+                  <div class = "voucherval1">   {{responses.totDebit}} </div>
+                
+                  </div>
+                   
+                      
+                
+                  
+                  <div class = "col-25">
+
+                <div class = "voucherval1">     {{responses.totCredit}} </div>
+                   </div>
+               
+          
+          </div>
+       </div>
+                
+        </div>
+   
+       
+    </ion-content>
+</ion-view>

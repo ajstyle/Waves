@@ -2,8 +2,9 @@
     <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
 
 </ion-nav-bar>
-    <ion-content >
-    
+  <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
+    </ion-side-menu>
+     <ion-content overflow-scroll='true'>
 
 
           
@@ -34,7 +35,7 @@
    <div class = "date"> Number:</div></br>
 </div>
    <div class = "col-25">
-   <div class = "vchno"> {{responses.voucher}}</div></br>
+   <div class = "vchno"> {{responses.vchno}}</div></br>
 </div>
 
 </div>
@@ -43,7 +44,7 @@
  </div>
 
    
-     <div class = "container1">
+       <div class = "containervoucher">
           
 
             <div class = "row">
@@ -69,8 +70,7 @@
                
 
 
-
-                     <div class = "container2">
+  <div class = "containervoucher1">
                
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      

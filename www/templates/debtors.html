@@ -26,6 +26,7 @@
                             
                 <a  ui-sref="app.transaction" ng-click="id(responses.id,responses.lname)" >
                            <div class  = "divider"></div>
+                          
                            <div class = "row">
                               <div class = "col-50">
 
@@ -54,16 +55,21 @@
         
       
     </div>
+      <div class = "grandTotal">
     <div class = "row">
         <div class = "col-50">
-       <div class = "vch"> <b>{{total}}</b></div>
+ 
+       <div class = "total"> <b>{{total}}</b></div>
         </div>
         <div class = "col-50">
-       <div class = "balance"><b>{{resultValue |sumOfValue:'balance'}}</b></div>
+       <div class = "sum"><b>{{resultValue |sumOfValue:'baltype'}}</b></div>
        </div>
        </div>
+       
     </div>
-   
+    
+   </div>
+
     </ion-content>
      
 </ion-view>

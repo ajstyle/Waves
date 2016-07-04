@@ -1,0 +1,63 @@
+<ion-view view-title="Creditors">
+    
+     <ion-nav-bar class="bar bar-header bar-calm"  align-title="left">
+
+</ion-nav-bar>
+ <ion-nav-back-button class="no-text">
+           
+            </ion-nav-back-button>
+ <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "{{hide}}">
+                </button>
+            </ion-nav-buttons>
+    <ion-content>
+     
+
+
+          <input type = "text" name = "search" placeholder="Search" ng-model="search">
+                     
+                       <div ng-show="showme" class="boxme">
+                         <div ng-switch = "(response| filter:search).length">
+                         <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
+              
+                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                     
+                        
+                           
+                            
+                           
+                <a ui-sref = "app.transactionCreditors" ng-click="id(responses.id,responses.lname)" >
+                           <div class  = "divider"></div>
+                           <div class = "row">
+                              <div class = "col-50">
+
+                    <div class = "company"><b>{{responses.lname}}</b>  </div>
+                     <div class = "Add"> {{responses.city}} </div>
+                   </div>
+                     <div class = "col">
+                     </div>
+                  <div class = "col">
+                     </div>
+                     <div class = "col-30">
+
+                        <div class = "balance"> <b>{{responses.baltype}}</b></div>
+                     </div>
+            
+
+                   
+               </div>
+      </a>
+
+
+            
+
+                   </div>
+               </div>
+
+     
+                
+        
+   
+       
+    </ion-content>
+</ion-view>

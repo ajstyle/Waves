@@ -59,11 +59,11 @@
 
                    
                
-                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
-                     
+                       <div ng-animate="'animate'"  ng-repeat= "responses in resultValue = ( response |  filter:search ) "  class="repeated-item" >
+                                          
                         
                       
-                <a ui-sref = "app.saleVoucher" ng-click="voucher(responses.voucher)">
+                <a ui-sref = "app.saleVoucher" ng-click="voucher(responses.voucher,responses.lname)">
                
                    <div class = "divider"></div>
                   <div class = "row">
@@ -113,6 +113,23 @@
             
 
                    </div>
+               
+               </div>
+
+                   <div class = "grandTotal">
+   <div class = "row">
+   </div>
+    <div class = "row">
+        <div class = "col-50">
+ 
+       <div class = "total"> <b>{{total}}</b></div>
+        </div>
+        <div class = "col-50">
+       <div class = "sum"><b>{{resultValue |sumOfValue:'amount'}}</b></div>
+       </div>
+       </div>
+       
+    </div>
                </div>
 
 

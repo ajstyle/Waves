@@ -1,0 +1,74 @@
+<ion-view view-title="Inventory">
+    <ion-nav-bar class="bar bar-header bar-calm"  align-title="left">
+
+</ion-nav-bar>
+<ion-nav-back-button class="no-text">
+           
+            </ion-nav-back-button>
+    <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "{{hide}}">
+                </button>
+            </ion-nav-buttons>
+    <ion-content >
+    
+
+          <input type = "text" name = "search" placeholder="Search" ng-model="search">
+                     
+                       <div ng-show="showme" class="boxme">
+                         <div ng-switch = "(response| filter:search).length">
+                         <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
+              
+                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                     
+                        
+                         <div class="divider"></div>   
+                            
+                <a ui-sref="app.transactionInventory" ng-click="id(responses.id,responses.lname)">
+                       
+
+                   <div class = "row" >
+                   
+                        
+                  <div class = "col-50">
+            
+             <div class = "vchno">  <b>{{responses.lname}}</b></div>
+                          {{responses.add}}       
+                  </div>
+                   
+                    <div class = "col-50">
+                    
+                 <div class = "balance"> <b>  {{responses.baltype}} </b></div>
+                
+                  </div>
+
+                  </div>
+                    
+                </a>
+
+            
+
+                   </div>
+               </div>
+   
+     
+
+                  <!--
+                  
+                 <a class="waves-effect waves-green " href="#/app/profile">
+       
+                
+       
+                 
+                  <li class="collection-item">   
+                    <h3>{{responses.lname}}</h3>
+                    <p>{{responses.city}}</p>
+                
+                  </li>     
+                  </a>
+                  !-->
+                
+        
+   
+       
+    </ion-content>
+</ion-view>

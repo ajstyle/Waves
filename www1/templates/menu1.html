@@ -1,0 +1,92 @@
+<ion-side-menus  enable-menu-with-back-views="true" >
+  
+  
+
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-balanced" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+          
+        
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "{{hide}}">
+                </button>
+            </ion-nav-buttons>
+            
+
+
+        </ion-nav-bar>
+       
+        <ion-nav-view name="menuContent"  ></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left"   is-enabled = "{{enable}}">
+        
+                  <ion-header-bar class="  expanded">
+              
+              <span class="avatar" style="background: url('img/waveslogo.png'); background-size: cover; width : 90px; height : 80px"></span>
+            
+           
+                   <h2> Services </h2>
+        </ion-header-bar>
+     
+    <ion-content class=" has-expanded-header">
+
+      <ion-list>
+         <ion-item  ui-sref = "app.gallery"  menu-toggle="left" ui-sref-active="active">
+         
+            <i class="icon ion-android-document" ></i> &nbsp; &nbsp; Dashboard 
+        </ion-item>
+
+        <ion-item  ui-sref = "app.debtors"  menu-toggle="left" ui-sref-active="active">
+         
+            <i class="icon ion-social-usd" ></i> &nbsp; &nbsp; Debtors
+        </ion-item>
+        <ion-item  ui-sref = "app.creditor"  menu-toggle="left" ui-sref-active="active">
+       
+         <i class="icon ion-person-stalker"></i> &nbsp; &nbsp;Creditors 
+        </ion-item>
+         
+        <ion-item  ui-sref = "app.cheque"  menu-toggle="left" ui-sref-active="active">
+             
+              <i class="icon ion-cash" ></i> &nbsp; &nbsp; Cheque 
+            
+        </ion-item>
+        
+        <ion-item ui-sref = "app.inventory" menu-toggle="left" ui-sref-active="active">
+           
+           
+          <i class="icon ion-social-dropbox"></i>&nbsp; &nbsp;&nbsp;Inventory
+        </ion-item>
+        <ion-item ui-sref = "app.sales" menu-toggle="left"  ui-sref-active="active">
+       
+         <i class="icon ion-bag"></i>&nbsp; &nbsp;Sales
+        </ion-item>
+        <ion-item ui-sref = "app.purchase" menu-toggle="left" ui-sref-active="active" >
+            
+             <i class="icon ion-ios-cart"></i> &nbsp; &nbsp;Purchase
+        </ion-item>
+         <ion-item ui-sref = "app.receipt" menu-toggle="left"  ui-sref-active="active">
+       
+          <i class="icon ion-ios-book"></i>&nbsp; &nbsp; Receipt
+        </ion-item>
+         <ion-item ui-sref = "app.other" menu-toggle="left" ui-sref-active="active">
+        
+          <i class="icon ion-android-person-add"></i>&nbsp; &nbsp;Others
+                  </ion-item>
+        <ion-item ui-sref = "app.version" menu-toggle="left" ui-sref-active="active">
+        
+          <i class="icon ion-arrow-graph-up-right"></i>&nbsp; &nbsp;Version
+        </ion-item>
+         <ion-item ui-sref = "app.support" menu-toggle="left" ui-sref-active="active" >
+        
+         <i class="icon ion-ios-telephone"></i>&nbsp; &nbsp;Support
+        </ion-item>
+        <ion-item ui-sref = "app.logout" menu-toggle="left" ui-sref-active="active">
+        
+          <i class="icon icon ion-log-out"></i>&nbsp; &nbsp;Logout
+        </ion-item>
+      
+      </ion-list>
+    </ion-content>
+           
+     
+    </ion-side-menu>
+</ion-side-menus>

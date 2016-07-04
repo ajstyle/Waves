@@ -1,0 +1,102 @@
+
+<ion-view view-title="Login">
+   <ion-nav-bar class="bar bar-header bar-balanced"  align-title="left">
+
+</ion-nav-bar>
+<form name = "myform" novalidate>
+    <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
+    </ion-side-menu>
+<ion-content ng-class="{expanded:isExpanded}" >
+
+
+
+
+
+  <div class="row">
+
+     <div class="input-field col s12">
+             <i class="icon ion-edit material-icons prefix" ></i>
+           <input type = "number" name = "login" ng-model="blob.user.loginid"  ng-maxlength = "6" ng-minlength = "6"  placeholder = "Login_id" autofocus required>
+           
+               
+          <div ng-messages="myform.login.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id  required</div>
+         </div>
+      <div ng-message="minlength">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id Not valid</div>
+         </div>
+      <div ng-message="maxlength">
+         <div class = "error-messages1"  ng-show = "myform.login.$invalid&&myform.login.$touched">Login id  Not valid</div>
+         </div>
+     </div>    
+</div>
+ </div>
+
+
+ 
+
+
+         
+        
+ <div class="row">
+
+     <div class="input-field col s12">
+         <i class="icon ion-home material-icons prefix"></i>
+          <input type = "text" name = "branch" ng-model = "blob.user.branchid" ng-required = "true" class = "active"  placeholder = "Branch" />
+        
+         <div ng-messages="myform.branch.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.branch.$touched">branch id required</div>
+         </div>
+      
+         </div>
+</div>
+ </div>
+
+  <div class="row">
+
+     <div class="input-field col s12">
+           <i class="icon  ion-android-people material-icons prefix" ></i>
+           
+        <input type = "text" name = "userid" id = "userid"  ng-model = "blob.user.userid" class = "active" ng-required = "true" placeholder = "Userid"  >
+         
+         <div ng-messages="myform.userid.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.branch.$invalid&&myform.userid.$touched">User id required</div>
+         </div>
+      
+         </div>
+</div>
+ </div>
+       
+        
+ <div class="row">
+
+     <div class="input-field col s12">
+     <i class="icon ion-locked material-icons prefix" ></i>
+      <input type = "password" name = "password" id = "password"  ng-model = "blob.user.password" ng-required = "true" class = "active"  placeholder = "Password"  >
+         
+        <div ng-messages="myform.password.$error" ng-messages-multiple>
+      <div ng-message="required">
+         <div class = "error-messages1"  ng-show = "myform.password.$invalid&&myform.password.$touched">Password to be required</div>
+         </div>
+         
+      
+         </div>
+</div>
+ </div>
+      <div class="padding">
+            
+
+            <button   ng-click="register(blob)"  class="button button-full button-balanced in" ng-disabled = "myform.$invalid" >Login</button>                  
+        </div>   
+
+ 
+<div class="app-icon1"></div>
+<center><div class = "p1">Waves Compusoft </div></center>
+</ion-content>
+</form>
+</body>
+</ion-view>
+ 

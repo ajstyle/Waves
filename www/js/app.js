@@ -5,6 +5,9 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-mate
 
 app.run(['$ionicPlatform','$ionicLoading','$location' , '$http' , '$cordovaFile','connection', 'Mobile' , function($ionicPlatform,$ionicLoading,$location,$http,$cordovaFile,connection,Mobile) {
     $ionicPlatform.ready(function() {
+
+
+
        
 $ionicPlatform.onHardwareBackButton(function(){
 
@@ -383,21 +386,27 @@ if( connection.checkconnection() == 'No network connection' )
     })
 .state('app.transactionOther', {
         url: '/transactionOther',
-        views: {
+         views: {
             'menuContent': {
                 templateUrl: 'templates/transactionOther.html',
                 controller: 'transactionOtherCtrl'
             }
         }
+       
     })
 .state('app.voucher', {
-        url: '/voucher',
-        views: {
+        url: '/voucher/:acc',
+         controller: 'voucherCtrl',
+           views: {
             'menuContent': {
+              
                 templateUrl: 'templates/voucher.html',
                 controller: 'voucherCtrl'
             }
-        }
+        }    
+                
+               
+            
     })
 
 .state('app.Creditorvoucher', {

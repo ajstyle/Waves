@@ -373,7 +373,9 @@ word-wrap: break-word;
 padding: 0;
 width : auto ;
 height :auto ;
-overflow-y: scroll;
+
+
+overflow-x: hidden;
 
 
 }
@@ -463,10 +465,12 @@ margin-top  :90px ;
 .container4
 {
  
-     
+     position : fixed;
+     width : 100% ;
     top: 0;
     line-height: 1px;
     top: 0px;
+  
  }
 .debit1
 {
@@ -560,7 +564,7 @@ h2
  
 
  color : white;
- margin-top : 360px ;
+ margin-top : 340px ;
  font-size : 20px;
 
         
@@ -605,4 +609,39 @@ color : white;
 {
   color : yellow;
   text-align : right;
+}
+.total
+{
+  font-size : 20px ;
+color : green;
+}
+.sum
+{
+  font-size : 20px;
+   text-align : right ;
+color : green ;
+
+}
+.grandTotal
+{
+ 
+  width : 100% ;
+}
+.containervoucher
+{
+  color : white; 
+  background: black ;
+  position : fixed ;
+  width : 100% ;
+  margin-top : 60px;
+  height: 50px ; 
+}
+.containervoucher1
+{
+  position : fixed ;  
+  overflow-y : scroll ;
+  width : 100% ;
+  height : 60% ; 
+  position : fixed;
+  margin-top : 110px;
 }

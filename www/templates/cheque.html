@@ -53,7 +53,7 @@
 
 
                
-                    <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                      <div ng-animate="'animate'"  ng-repeat= "responses in resultValue = ( response |  filter:search ) "  class="repeated-item" >
                      
                         
                          <div class="divider"></div>   
@@ -99,9 +99,27 @@
 
                    
                    </a>
+</div>
 
-
-                  
+          <div class = "row">
+</div>
+                <div class = "row">
+             <div class = "col-20">
+              <div class = "total"><b>{{total}} </b></div>
+             </div>
+            <div class = "col-20">
+              
+             </div>
+             <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValuedash:'debit'}}</b></div>
+             </div>
+               <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValuedash:'credit'}}</b></div>
+             </div>
+               <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValue:'balance'}}</b></div>
+             </div>
+            </div>        
              
                 
         

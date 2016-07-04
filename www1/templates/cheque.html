@@ -1,0 +1,112 @@
+<ion-view view-title="Cheque">
+     <ion-nav-bar class="bar bar-header bar-calm"  align-title="left">
+
+</ion-nav-bar>
+<ion-nav-back-button class="no-text">
+           
+            </ion-nav-back-button>
+             <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" ng-hide = "{{hide}}">
+                </button>
+            </ion-nav-buttons>
+    <ion-content >
+    
+
+
+                              
+           <div class = "Searchcheque">
+
+
+
+          <input type = "text" name = "search" placeholder="Search" ng-model="search">
+            </div>          
+     <div class = "container1">
+            <div class = "row">
+                    <div class = "col-20 ">   
+                     Date
+                     </div>
+                     <div class = "col-20"> 
+                   Voucher
+                      </div>
+                       <div class = "col-20 "> 
+                    <div class = "debit1">  Debit </div>
+                      </div>
+
+                       <div class = "col-20 "> 
+                    <div class = "credit1">  Credit </div>
+                      </div>
+                       <div class = "col-20 "> 
+                 <div class = "credit1">   Balance</div>
+                      </div>
+                    
+
+                      </div>
+         </div>                   
+
+
+                       <div ng-show="showme" class="boxme">
+                         <div ng-switch = "(response| filter:search).length">
+                         <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
+               
+
+
+
+
+               
+                    <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                     
+                        
+                         <div class="divider"></div>   
+                            
+                <a ui-sref="app.chequeVoucher" ng-click="voucher(responses.voucher)" >
+                       
+                     <div class = "rowCheque"> 
+                   <div class = "row" >
+                   
+                        
+                  <div class = "col-20">
+            
+             <div class = "company">  <b>{{responses.date}}</b></div>
+                 
+                  </div>
+                    <div class = "col-20">
+                      <div class = "vch">   {{responses.vchno}} </div>
+
+                    </div>
+                <div class = "col-20">
+                   
+                <div class = "debit">       {{responses.debit}} </div>
+                    </div>
+                 <div class = "col-20">
+                     <div class = "credit">     <b> {{responses.credit}}</b> </div>
+
+                    </div>
+                    <div class = "col-20">
+                          <div class = "balance"> <b> {{responses.balance}} </b></div>
+
+                    </div>
+                   </div>
+
+                  </div>
+                      <div class = "col">
+                        <div class = "vch">  <b> {{responses.rem1}}</b> </div>
+                       <div class = "company"> <b> {{responses.ledName}}</b></div>
+                     <div class = "Add">    {{responses.ledAdd}} </div>
+                     </div>
+               
+
+            
+
+                   
+                   </a>
+
+
+                  
+             
+                
+        
+   
+       
+    </ion-content>
+</ion-view>
+

@@ -1,0 +1,59 @@
+
+<ion-view view-title="Waves Compusoft">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+ 
+     <div class = "app-icon"></div>
+        <div class = "login-container">
+         <form name = "form1" >
+      
+      <div class="row">
+         
+    
+     <div class="input-field col s12">
+          <i class="icon ion-ios-telephone material-icons prefix" ></i>
+           <input type = "number" name = "mobile"  ng-model = "mobile"  id = "FieldText"   required autofocus >
+     
+         <label for="email">Mobile_no.</label>
+        <div ng-messages="form1.mobile.$error" ng-messages-multiple>
+      <div ng-message="required">
+        <div class = "error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. required</div>
+      </div>
+    
+      <!--      
+      <div ng-message="minlength">
+        <div class="error-messages"  ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>
+      </div>
+       
+      
+       <div ng-message="maxlength">
+        <div class = "error-messages" ng-show = "form1.mobile.$invalid&&form1.mobile.$touched">Mobile No. Not valid</div>!-->
+      </div>
+      
+     
+  
+
+       <header></header>
+        <div class="padding">
+
+            <center>
+             </br>
+            <button ui-sref="app.register" class="waves-effect waves-light btn" ng-click = "getMobile(mobile)" ng-disabled = "form1.$invalid">Verify</button>
+            </center>
+
+
+
+         </div>
+         </div>
+         </div>
+
+
+
+</form>
+</div>
+</body>
+
+
+
+
+    </ion-content>
+</ion-view>

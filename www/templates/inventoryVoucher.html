@@ -2,7 +2,9 @@
     <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
 
 </ion-nav-bar>
-    <ion-content >
+     <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
+    </ion-side-menu>
+    <ion-content overflow-scroll='true'>
     
 
 
@@ -35,10 +37,14 @@
            <b>  <div class = "balance"> {{responses.date}} </div></b>
              </div>
             </div>
-           
+           <div class = "row">
+              <div class = "col-75">
+               <b>  <div class = "vch"> {{name}} </div></b>
+          </div>
+           </div>
             </div> 
             </div>  
-     <div class = "container1">
+     <div class = "containervoucher">
           
 
             <div class = "row">
@@ -68,7 +74,7 @@
 
 
 
-                     <div class = "container2">
+                     <div class = "containervoucher1">
                
                      <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
                      
@@ -111,10 +117,13 @@
                 </a>
                    </div>
                </div>
-<div class = "container6">
-  <div ng-animate="'animate'"  ng-repeat= "responses in response | limitTo : 1"  class="repeated-item" >
+
+              
+
+ <div class = "container6">
+ <div ng-animate="'animate'"  ng-repeat= "responses in response | limitTo : 1"  class="repeated-item" >
               <div class = "row" class =  "vch">
-              <div class = "col-25">
+              <div class = "col col-25">
                 
                 <div class = "vouchertext">  Order no. :</div>                    
                       
@@ -122,7 +131,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-33 ">
                     
                      <div class = "voucherval">    {{responses.orderno}} </div>
                 
@@ -131,11 +140,11 @@
                        
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "vouchertext1">     Dis. : </div>
                    </div>
-                    <div class = "col-25">
+                    <div class = "col col-32">
 
                 <div class =  "voucherval1">    {{responses.amount}} </div>
                    </div>
@@ -143,7 +152,7 @@
 
 
               <div class = "row" class =  "vch">
-               <div class = "col-25">
+              <div class = "col col-20">
                 
                 <div class ="vouchertext">  L.R. No. :</div>                    
                       
@@ -151,7 +160,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-38 ">
                     
                      <div class =  "voucherval">  {{responses.lrno}} </div>
                 
@@ -160,17 +169,17 @@
                        
                 
                   
-                  <div class = "col-25">
-
+                   <div class = "col col-20 ">
+                  
                 <div class = "vouchertext1">    TAX :  </div>
                    </div>
-                    <div class = "col-25">
+                   <div class = "col col-32 ">
 
                 <div class =  "voucherval1">    {{responses.tax}} </div>
                    </div>
               </div>
               <div class = "row">
-               <div class = "col-25">
+               <div class = "col col-20">
                 
                 <div class = "vouchertext">  Parcels : </div>                    
                       
@@ -178,7 +187,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-38">
                     
                      <div class =  "voucherval">    {{responses.nocs}} </div>
                 
@@ -187,17 +196,17 @@
                        
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "vouchertext1">     Other A/L : </div>
                    </div>
-                    <div class = "col-25">
+                    <div class = "col col-32">
 
                 <div class =  "voucherval1">     {{responses.other}}</div>
                    </div>
               </div>
               <div class = "row" class =  "vch">
-               <div class = "col-25">
+               <div class = "col col-20">
                 
                 <div class = "vouchertext"> Transp :</div>                    
                       
@@ -205,7 +214,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-38">
                     
                      <div class =  "voucherval">    {{responses.tpt}} </div>
                 
@@ -214,17 +223,17 @@
                        
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "vouchertext1">    Cash : </div>
                    </div>
-                    <div class = "col-25">
+                    <div class = "col col-32">
 
                 <div class = "voucherval1">     {{responses.cash}} </div>
                    </div>
               </div>
               <div class = "row" class =  "vch">
-               <div class = "col-25">
+               <div class = "col col-25">
                 
                 <div class = "vouchertext"> Remark :</div>                    
                       
@@ -232,7 +241,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-33">
                     
                      <div class =  "voucherval">   {{responses.remark1}}</div>
                 
@@ -241,11 +250,11 @@
                        
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "vouchertext1">     Credit : </div>
                    </div>
-                    <div class = "col-25">
+                    <div class = "col col-32">
 
                 <div class =  "voucherval1">     {{responses.credit}} </div>
                    </div>
@@ -254,7 +263,7 @@
 
 
             </div>
-              </div>
+
 
                   <!--
                   
