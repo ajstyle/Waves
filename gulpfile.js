@@ -10,11 +10,12 @@ const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const gulpWebpack = require('gulp-webpack');
 const webpack = require('webpack');
-
+ 
 var connect = require('gulp-connect');
 
 const distPath = './dist/';
 var minify = false;
+var templateCache = require('gulp-angular-templatecache')
 
 gulp.task('js', function () {
     var src = [
@@ -95,5 +96,32 @@ gulp.task('build', function () {
     return gulp.start(['webpack', 'styles']);
 })
 
-gulp.task('default', ['webpack', 'styles', 'watch'], function () {
+gulp.task('templatecache', function() {
+
+ 
+  gulp.src('./www/templates/*.html')
+    .pipe(templateCache())
+    .pipe(gulp.dest('./www/public/templates.js'))
+    
+  // the result is a file with all templates inside 
+  // registered on module "templates" with the 
+  // path being transformed into "partials/**/*.html" 
+  // and saved to "public/templates.js" 
+})
+
+
+gulp.task('concat', function() {
+  return gulp.src('./www//js/*.js')
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('./www/dist/'));
+});
+
+gulp.task('compress', function() {
+  return gulp.src('./www/dist/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('./www/min/'));
+});
+
+
+gulp.task('default', ['webpack', 'styles', 'watch' , 'templatecache'], function () {
 });

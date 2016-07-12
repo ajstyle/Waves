@@ -42,7 +42,29 @@
 
                       </div>
          </div>                   
-
+<div class = "divider"></div>
+ <div class = "divider"></div>
+ <div class = "grandTotal">
+   <div class = "row">
+   </div>
+   <div class = "row">
+             <div class = "col-20">
+              <div class = "total"><b>{{total}} </b></div>
+             </div>
+            <div class = "col-20">
+              
+             </div>
+             <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValuedash:'debit'}}</b></div>
+             </div>
+               <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValuedash:'credit'}}</b></div>
+             </div>
+               <div class = "col-20">
+                <div class = "sum"><b>{{resultValue |sumOfValue:'balance'}}</b></div>
+             </div>
+            </div>        
+             </div>
 
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
@@ -101,26 +123,7 @@
                    </a>
 </div>
 
-          <div class = "row">
-</div>
-                <div class = "row">
-             <div class = "col-20">
-              <div class = "total"><b>{{total}} </b></div>
-             </div>
-            <div class = "col-20">
-              
-             </div>
-             <div class = "col-20">
-                <div class = "sum"><b>{{resultValue |sumOfValuedash:'debit'}}</b></div>
-             </div>
-               <div class = "col-20">
-                <div class = "sum"><b>{{resultValue |sumOfValuedash:'credit'}}</b></div>
-             </div>
-               <div class = "col-20">
-                <div class = "sum"><b>{{resultValue |sumOfValue:'balance'}}</b></div>
-             </div>
-            </div>        
-             
+      
                 
         
    

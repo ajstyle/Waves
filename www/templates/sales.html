@@ -47,13 +47,28 @@
 
                       </div>
                       </div>
+ <div class = "divider"></div>
+                   <div class = "divider"></div>
+                      <div class = "grandTotal">
+   <div class = "row">
+   </div>
+    <div class = "row">
+        <div class = "col-50">
+ 
+       <div class = "total"> <b>{{total}}</b></div>
+        </div>
+        <div class = "col-50">
+       <div class = "sum"><b>{{resultValue |sumOfValue:'amount'}}</b></div>
+       </div>
+       </div>
+       
+    </div>
 
-
-
+  
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
-               
+                   
 
 
 
@@ -116,20 +131,7 @@
                
                </div>
 
-                   <div class = "grandTotal">
-   <div class = "row">
-   </div>
-    <div class = "row">
-        <div class = "col-50">
- 
-       <div class = "total"> <b>{{total}}</b></div>
-        </div>
-        <div class = "col-50">
-       <div class = "sum"><b>{{resultValue |sumOfValue:'amount'}}</b></div>
-       </div>
-       </div>
-       
-    </div>
+            
                </div>
 
 

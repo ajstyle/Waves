@@ -243,8 +243,8 @@ $scope.register = function(user) {
             $scope.password = $scope.master.user.password;
             $scope.Mobile   = $scope.output.text;
             $scope.id       =  $scope.output.id ;
-                            
-            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,"1234").then(function(response){
+                         
+            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,  $scope.id ).then(function(response){
    
     var response = Response.response(response); 
  
@@ -389,7 +389,7 @@ document.addEventListener('deviceready', function () {
 
                   
 
-             testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password1,$scope.Mobile,"1234").then(function(response){
+             testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password1,$scope.Mobile, $scope.id  ).then(function(response){
                     var response = Response.response(response); 
                    
                
@@ -500,7 +500,7 @@ document.addEventListener('deviceready', function () {
 
       $timeout(function() {
          
-     testService.GetCustomer("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
+     testService.GetCustomer($scope.ip,$scope.db,$scope.us,$scope.ps ).then(function(response)
       {
          
          $scope.showme = true;
@@ -547,7 +547,7 @@ document.addEventListener('deviceready', function () {
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-
+    $scope.total = "Total : " ;
     $scope.service = Services;
  
         var data = $scope.service.login ;
@@ -587,7 +587,7 @@ $scope.id = function(data,name)
 
       $timeout(function() {
          
-  testService.GetSupplier("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
+  testService.GetSupplier($scope.ip,$scope.db,$scope.us,$scope.ps ).then(function(response)
       {
          
          $scope.showme = true;
@@ -638,7 +638,7 @@ $scope.id = function(data,name)
           $scope.db  = data.db;
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
-  
+          $scope.total = "Total : " ;  
           $scope.id = function(data,name)
       {
          $scope.output = transid;
@@ -671,7 +671,7 @@ $scope.id = function(data,name)
 
       $timeout(function() {
          
-     testService.GetOtherLedgers("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
+     testService.GetOtherLedgers($scope.ip,$scope.db,$scope.us,$scope.ps ).then(function(response)
       {
         
          $scope.showme = true;
@@ -750,7 +750,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetPDC("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , " " , " ").then(function(response)
+     testService.GetPDC($scope.ip,$scope.db,$scope.us,$scope.ps  , " " , " ").then(function(response)
       {
          console.log(response);
          $scope.showme = true;
@@ -793,7 +793,7 @@ $scope.id = function(data,name)
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-
+    $scope.total = "Total : " ; 
     $scope.service = Services;
    
         var data = $scope.service.login ;
@@ -827,7 +827,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetReceipts("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , " " , " ").then(function(response)
+     testService.GetReceipts($scope.ip,$scope.db,$scope.us,$scope.ps  , " " , " ").then(function(response)
       {
          console.log(response);
 
@@ -911,7 +911,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.Getinventory("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430" ).then(function(response)
+     testService.Getinventory($scope.ip,$scope.db,$scope.us,$scope.ps ).then(function(response)
       {
          console.log(response);
        
@@ -992,7 +992,7 @@ $scope.id = function(data,name)
 
      
          
-     testService. GetSales("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , "S" ).then(function(response)
+     testService. GetSales($scope.ip,$scope.db,$scope.us,$scope.ps  , "S" ).then(function(response)
       {
          console.log(response);
          $scope.total = "Grand Total";
@@ -1074,7 +1074,7 @@ $scope.id = function(data,name)
 
      
          
-     testService.GetPurchase("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  , "P" ).then(function(response)
+     testService.GetPurchase($scope.ip,$scope.db,$scope.us,$scope.ps  , "P" ).then(function(response)
       {
          console.log(response);
          $scope.total = "Grand Total"; 
@@ -1174,7 +1174,7 @@ $scope.Mobile   = $scope.output.text;
     $scope.output = transid;
     $scope.hide = "false";
      $scope.enable = false ;
-   
+  
         var data = $scope.service.login ;
           
           $scope.ip = data.ip;
@@ -1212,7 +1212,7 @@ $scope.Mobile   = $scope.output.text;
 
    
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,  $scope.id ).then(function(response)
+     testService.GetTransaction($scope.ip,$scope.db,$scope.us,$scope.ps  ,  $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1220,11 +1220,16 @@ $scope.Mobile   = $scope.output.text;
          $scope.nodata = false;  
        $ionicLoading.hide();
        
+    
+      
 
         var response1 = Response.response(response); 
- 
-   
-   $scope.response = response1; 
+       
+     
+        
+         
+
+         $scope.response = response1; 
      
 
 //--------------------DOC Function -------------------------------------------------------------//
@@ -1232,13 +1237,19 @@ $scope.Mobile   = $scope.output.text;
      $scope.doc = function(){
 
 
- var name =   $scope.output.name ; 
+ var name =   $scope.output.name ;
+ var debit = $filter('sumOfValuedash')(response1,'debit');
+ var credit = $filter('sumOfValuedash')(response1,'credit');
+ var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
+         
 var Inventorydata = [];
 var Inventorydata = {
     accounting: []
 };
 var value = [];
-value.push({ text: name});
+value.push({ text: name });
+var total = [] ; 
+total.push({ debit : debit , credit : credit , balance : balance}) ; 
 
 for(var i in response1) {
 
@@ -1288,21 +1299,28 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [65, '*',200, '*', '*','*'],
+              widths: [65, '*',200, '*', '*',100],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
             
-        },
-        style : 'content'
+        }
+      
     };
 }
 function text(data)
 {
   return {
     text : data , style: 'header2'
+     
   }
 }
+function total1(data1)
+{
+ var data  = data1.toString()  ;
+  return {
+          text : data , style: 'subheader' 
+          }}
   
 
 var dd = {
@@ -1313,10 +1331,21 @@ var dd = {
         
         { text: 'DEBTORS Report', style: 'header1' },
          { text: '', style: 'margin' },
+         
          text(value),
-
+        
         table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
-      
+          {
+          
+            table: {
+                 widths: [65, '*',200, '*', '*',95],
+                  
+                body: [
+                  
+                    ['Total', { text: '' },  { text: '' }, total1(total[0].debit) , total1(total[0].credit) , total1(total[0].balance)  ]
+                ]
+            }
+        }
  
     ],
     styles: {
@@ -1452,6 +1481,13 @@ var Inventorydata = [];
 var Inventorydata = {
     accounting: []
 };
+var debit = $filter('sumOfValuedash')(response1,'debit');
+ var credit = $filter('sumOfValuedash')(response1,'credit');
+ var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
+var total = [] ; 
+total.push({ debit : debit , credit : credit , balance : balance}) ; 
+
+
 var value = [];
 value.push({ text: name});
 
@@ -1503,7 +1539,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [65, '*',200, '*', '*','*'],
+              widths:  [65, '*',200, '*', '*',95],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
@@ -1518,7 +1554,12 @@ function text(data)
     text : data , style: 'header2'
   }
 }
-  
+  function total1(data1)
+{
+ var data  = data1.toString()  ;
+  return {
+          text : data , style: 'subheader' 
+          }}
 
 var dd = {
  
@@ -1531,7 +1572,17 @@ var dd = {
          text(value),
 
         table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
-      
+       {
+          
+            table: {
+                 widths: [65, '*',200, '*', '*',95],
+                  
+                body: [
+                  
+                    ['Total', { text: '' },  { text: '' }, total1(total[0].debit) , total1(total[0].credit) , total1(total[0].balance)  ]
+                ]
+            }
+        }
  
     ],
     styles: {
@@ -1725,7 +1776,7 @@ $cordovaSocialSharing.shareViaEmail('Debtors Report ', 'Debtors Report', null, n
 
 
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,  $scope.id ).then(function(response)
+     testService.GetTransaction($scope.ip,$scope.db,$scope.us,$scope.ps  ,  $scope.id ).then(function(response)
       {
          console.log(response);
 
@@ -1751,6 +1802,24 @@ var Inventorydata = {
 };
 var value = [];
 value.push({ text: name});
+ var debit = $filter('sumOfValuedash')(response1,'debit');
+ var credit = $filter('sumOfValuedash')(response1,'credit');
+ var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
+
+
+
+var total = [] ; 
+total.push({ debit : debit , credit : credit , balance : balance}) ; 
+
+function total1(data1)
+{
+ var data  = data1.toString()  ;
+  return {
+          text : data , style: 'subheader' 
+          }}
+
+
+
 
 for(var i in response1) {
 
@@ -1758,7 +1827,6 @@ for(var i in response1) {
   
   Inventorydata.accounting.push({ 
         "Date" : item.date,
-       
         "Type"  : item.typ,
          "Nera"  : item.nera , 
         "Debit"  : item.debit ,
@@ -1801,7 +1869,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [65, '*',200, '*', '*',120],
+              widths: [65, 40,190, 60, 60,110],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
@@ -1813,7 +1881,7 @@ function table(data, columns) {
 function text(data)
 {
   return {
-    text : data , style: 'header2'
+    text : data , style: 'subheader'
   }
 }
   
@@ -1829,7 +1897,18 @@ var dd = {
          text(value),
 
         table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
-      
+        {
+          
+            table: {
+                  widths: [65, 40,190, 60, 60,110],
+
+                  
+                body: [
+                  
+                    ['Total', { text: '' },  { text: ''}, total1(total[0].debit) , total1(total[0].credit) , total1(total[0].balance)  ]
+                ]
+            }
+        }
  
     ],
     styles: {
@@ -1862,7 +1941,7 @@ var dd = {
     } ,content: {
       
       
-     alignment: 'right' ,
+     alignment: 'center' ,
       
     }
   }
@@ -1950,6 +2029,12 @@ var Inventorydata = {
 };
 var value = [];
 value.push({ text: name});
+var debit = $filter('sumOfValuedash')(response1,'debit');
+ var credit = $filter('sumOfValuedash')(response1,'credit');
+ var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
+var total = [] ; 
+total.push({ debit : debit , credit : credit , balance : balance}) ; 
+
 
 for(var i in response1) {
 
@@ -1970,6 +2055,12 @@ for(var i in response1) {
 }
 
 
+function total1(data1)
+{
+ var data  = data1.toString()  ;
+  return {
+          text : data , style: 'subheader' 
+          }}
 
 function buildTableBody(data, columns) {
     var body = [[ {text : 'Date', style: 'subheader'}, 
@@ -2001,19 +2092,19 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-               widths: [65, '*',200, '*', '*',105],
+                 widths: [65, 40,190, 60, 60,110],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
             
-        },
-        style : 'content'
+        }
+       
     };
 }
 function text(data)
 {
   return {
-    text : data , style: 'header2'
+    text : data , style: 'header1'
   }
 }
   
@@ -2029,7 +2120,18 @@ var dd = {
          text(value),
 
         table(Inventorydata.accounting, ['Date','Type','Nera'  , 'Debit' , 'Credit' , 'Balance'] ),
-      
+         
+{
+          
+            table: {
+                  widths: [65, 40,190, 60, 60,110],
+                  
+                body: [
+                  
+                    ['Total', { text: '' },  { text: '' }, total1(total[0].debit) , total1(total[0].credit) , total1(total[0].balance)  ]
+                ]
+            }
+        }  
  
     ],
     styles: {
@@ -2058,11 +2160,6 @@ var dd = {
       fontSize: 13,
       bold: true,
      alignment: 'center' ,
-      
-    }, content: {
-      
-      
-     alignment: 'right' ,
       
     }
   }
@@ -2231,7 +2328,7 @@ $cordovaSocialSharing.shareViaEmail('Creditor Report ', 'Creditor Report', null,
         
 
 
-     testService.GetItemTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,  $scope.id ).then(function(response)
+     testService.GetItemTransaction($scope.ip,$scope.db,$scope.us,$scope.ps  ,  $scope.id ).then(function(response)
       { 
        
 
@@ -2703,7 +2800,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
     
          
-     testService.GetTransaction("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.id ).then(function(response)
+     testService.GetTransaction($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.id ).then(function(response)
       {
         
 
@@ -2722,6 +2819,9 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
     $scope.doc = function(){
 
 
+var debit = $filter('sumOfValuedash')(response1,'debit');
+ var credit = $filter('sumOfValuedash')(response1,'credit');
+ var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
 
  var name =  "Others" ; 
 var Inventorydata = [];
@@ -2730,7 +2830,8 @@ var Inventorydata = {
 };
 var value = [];
 value.push({ text: name});
-
+var total = [] ; 
+total.push({ debit : debit , credit : credit , balance : balance}) ; 
 for(var i in response1) {
 
     var item = response1[i];
@@ -2745,6 +2846,7 @@ for(var i in response1) {
        
      });
 }
+
 
 
  
@@ -2776,7 +2878,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [70, '*', 100, '*','*'],
+              widths: [60, 60, 90, 90,90],
             headerRows: 2,
            
             body: buildTableBody(data, columns)
@@ -2792,7 +2894,13 @@ function text(data)
     text : data , style: 'header2'
   }
 }
-  
+  function total1(data1)
+{
+ var data  = data1.toString()  ;
+  return {
+          text : data , style: 'subheader' 
+          }}
+
  
 var dd = {
  
@@ -2803,9 +2911,20 @@ var dd = {
         { text: 'Inventory Report', style: 'header1' },
          { text: '', style: 'margin' },
          text(value),
-
+           
         table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
-      
+        {
+          
+            table: {
+                 widths:  [60, 60,  90, 90,90],
+                  
+                body: [
+                  
+                    ['Total', { text: '' }, total1(total[0].debit) , total1(total[0].credit) , total1(total[0].balance)  ]
+                ]
+            }
+        }  
+
  
     ],
     styles: {
@@ -2839,7 +2958,7 @@ var dd = {
     content: {
       
       
-     alignment: 'right' ,
+     alignment: 'center' ,
       
     }
   
@@ -2931,7 +3050,9 @@ var dd = {
  //--------------Share Function------------------------//
 
 $scope.share = function () {
-
+ var debit = $filter('sumOfValuedash')(response1,'debit');
+ var credit = $filter('sumOfValuedash')(response1,'credit');
+ var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
 
 
  
@@ -2943,6 +3064,8 @@ var Inventorydata = {
 var value = [];
 value.push({ text: name});
 
+var total = [] ; 
+total.push({ debit : debit , credit : credit , balance : balance}) ; 
 for(var i in response1) {
 
     var item = response1[i];
@@ -2987,7 +3110,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [200, '*', 100, '*','*'],
+              widths:  [60, 60,  90, 90,90],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
@@ -3002,7 +3125,13 @@ function text(data)
     text : data , style: 'header2'
   }
 }
-  
+  function total1(data1)
+{
+ var data  = data1.toString()  ;
+  return {
+          text : data , style: 'subheader' 
+}}
+
 var dd = {
  
     content: [
@@ -3014,7 +3143,18 @@ var dd = {
          text(value),
 
         table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
-      
+      {
+          
+            table: {
+                 widths:  [60, 60,  90, 90,90],
+                  
+                body: [
+                  
+                    ['Total', { text: '' },   total1(total[0].debit) , total1(total[0].credit) , total1(total[0].balance)  ]
+                ]
+            }
+        }  
+
  
     ],
     styles: {
@@ -3047,7 +3187,7 @@ var dd = {
     }, content: {
       
       
-     alignment: 'right' ,
+     alignment: 'center' ,
       
     }
   }
@@ -3157,7 +3297,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
 .controller('voucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$location,$ionicLoading,$filter,connection,Services,Response,voucher,transid) {
     // Set Header
-   
+      $scope.title = "Invoice" ; 
   $scope.output = voucher;
     $scope.acc1 =  $scope.output.acc ;
    var acc =  $scope.output.acc 
@@ -3192,6 +3332,7 @@ $scope.template1 = function()
 
      if(acc == "I")
           {
+           
              $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
       
@@ -3227,7 +3368,7 @@ $scope.template1 = function()
 
   
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher ).then(function(response)
       {
         
 
@@ -3252,6 +3393,8 @@ $scope.template1 = function()
           }
    else
    {
+     $scope.title = "Voucher" ; 
+    
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
        
@@ -3290,7 +3433,7 @@ $scope.template1 = function()
        });
 
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,   $scope.voucher ).then(function(response)
+     testService.GetAccountingVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,   $scope.voucher ).then(function(response)
       {
        
 
@@ -3366,6 +3509,7 @@ $scope.template1 = function()
 
     if(acc == "A")
           {
+              $scope.title = "Voucher" ; 
              $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
       
@@ -3403,7 +3547,7 @@ $scope.template1 = function()
 
   
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher).then(function(response)
       {
      
          $scope.showme = true;
@@ -3428,6 +3572,8 @@ $scope.template1 = function()
           }
           else
           {
+                $scope.title = "Invoice" ; 
+
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
       
@@ -3467,7 +3613,7 @@ $scope.template1 = function()
        });
 
      
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,   $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,   $scope.voucher ).then(function(response)
       {
       
 
@@ -3503,8 +3649,7 @@ $scope.template1 = function()
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-      
-    $scope.isExpanded = false;
+        $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
      $scope.enable = false ;
@@ -3544,7 +3689,7 @@ $scope.template1 = function()
 
     
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher  ).then(function(response)
+     testService.GetInventoryVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher  ).then(function(response)
       {
       
 
@@ -3619,7 +3764,7 @@ $scope.template1 = function()
        });
 
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher).then(function(response)
       {
      
 
@@ -3695,7 +3840,7 @@ $scope.template1 = function()
 
    
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher ).then(function(response)
       {
         
 
@@ -3772,7 +3917,7 @@ $scope.template1 = function()
 
  
          
-     testService.GetInventoryVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher ).then(function(response)
+     testService.GetInventoryVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher ).then(function(response)
       {
     
 
@@ -3846,7 +3991,7 @@ $scope.template1 = function()
 
     
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher).then(function(response)
       {
     
 
@@ -3877,27 +4022,6 @@ $scope.template1 = function()
 })
 
 /*=====  End of Other voucher Ctrl   ======*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -3946,7 +4070,7 @@ $scope.template1 = function()
 
   
          
-     testService.GetAccountingVoucher("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ,    $scope.voucher).then(function(response)
+     testService.GetAccountingVoucher($scope.ip,$scope.db,$scope.us,$scope.ps  ,    $scope.voucher).then(function(response)
       {
        
 
@@ -4091,7 +4215,7 @@ var debD = new Array();
   $scope.PSseries = ['Sale','Purchase'];
      
 
-   testService.DesignGraphs("108.178.25.54" , "waves_SyncData", "wavesUser2;;125066;;A04;;OFFLINE" ,"waves77430@77430"  ).then(function(response)
+   testService.DesignGraphs($scope.ip,$scope.db,$scope.us,$scope.ps  ).then(function(response)
       {
         
 
@@ -4283,6 +4407,10 @@ var debD = new Array();
   object.loginid = "";
   return object;
 })
+
+
+
+
   .filter('sumOfValue', function () {
     return function (data, key) {
        
@@ -4300,11 +4428,45 @@ var debD = new Array();
     return function (data, key1, key2) {        
         if (angular.isUndefined(data) && angular.isUndefined(key1)  && angular.isUndefined(key2)) 
             return 0;
-     
-
-        var sum = 0;
+        
+        
+        var sum1 = 0;
+        var sum2 = 0 ; 
+        var sum  = 0 ;
+        
+        
         angular.forEach(data,function(v,k){
-            sum = sum + (parseInt(v[key1]) * parseInt(v[key2]));
+               if(v[key1] =='-')
+         {
+            v[key1] = v[key1].replace("-", "0");
+            
+         }
+          if(v[key2] =='-')
+         {
+            v[key2] = v[key2].replace("-", "0");
+            
+         }
+
+
+               
+              sum1 = sum1 + parseInt(v[key1]);
+                 
+                 sum2 = sum2 + parseInt(v[key2]);
+             
+            sum =  sum1 - sum2;
+             if(sum > 0)
+             {
+                sum = sum+" Dr";
+             }        
+             else if(sum < 0 ) {
+               
+              sum = Math.abs(sum); 
+              
+              sum = sum + " Cr";
+             }else
+             {
+              sum = 0 ; 
+             }
         });
         return sum;
     }
@@ -4314,14 +4476,21 @@ var debD = new Array();
         if (angular.isUndefined(data) && angular.isUndefined(key))
             return 0;        
         var sum = 0;
-         
+
+
+        
         angular.forEach(data,function(v,k){
+        
          if(v[key]=='-')
-         {
+         {  
             v[key] = v[key].replace("-", "0");
             
          }
-         
+          if(v[key]=='---')
+         {  
+            v[key] = v[key].replace("---", "0");
+            
+         }
             sum = sum + parseInt(v[key]);
          
          
@@ -4329,4 +4498,11 @@ var debD = new Array();
         return sum;
     }
 })
+
+
+
+
+
+
+
 /*=====  End of FACTORIES  ======*/

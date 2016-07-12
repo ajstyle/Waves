@@ -3,10 +3,8 @@
  
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput' , 'angularSoap' , 'ngCordova' , 'ngMessages' ,  'filereader' , 'ngAnimate','chart.js','pdf'])
 
-app.run(['$ionicPlatform','$ionicLoading','$location' , '$http' , '$cordovaFile','connection', 'Mobile' , function($ionicPlatform,$ionicLoading,$location,$http,$cordovaFile,connection,Mobile) {
+app.run(['$ionicPlatform','$ionicLoading','$location' , '$http' , '$cordovaFile','connection', '$templateCache','Mobile' , function($ionicPlatform,$ionicLoading,$location,$http,$cordovaFile,connection,$templateCache,Mobile) {
     $ionicPlatform.ready(function() {
-
-
 
        
 $ionicPlatform.onHardwareBackButton(function(){
@@ -35,7 +33,7 @@ var uuid =  window.device.uuid;
        $location.url("/app/registertxt"); 
       }, function (error) {
        
-        //$location.url("/app/login"); 
+        $location.url("/app/login"); 
       });
 
   })
@@ -44,7 +42,7 @@ if( connection.checkconnection() == 'No network connection' )
 {
 
    alert("No Network Connection ") ; 
-
+ ionic.Platform.exitApp();
 }
  
 
@@ -502,7 +500,7 @@ if( connection.checkconnection() == 'No network connection' )
         }
     })
     // if none of the above states are matched, use this as the fallback
-$urlRouterProvider.otherwise('/app/login');
+//$urlRouterProvider.otherwise('/app/login');
 
 
 

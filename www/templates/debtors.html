@@ -11,14 +11,36 @@
             </ion-nav-buttons>
 
     <ion-content >
-    
+     
 
           <input type = "text" name = "search" placeholder="Search" ng-model="search">
-                     
+                      <div class = "divider"></div>
+             <div class = "divider"></div>
+                       <div class = "grandTotal">
+      
+    <div class = "row">
+        <div class = "col-50">
+ 
+       <div class = "total"> <b>{{total}}</b></div>
+        </div>
+        <div class = "col-50">
+       <div class = "sum"><b>{{resultValue |sumOfValue:'baltype'}}</b></div>
+       </div>
+       </div>
+       
+    </div>
+           
+
+
+
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
               
+                    
+
+
+
                      <div ng-animate="'animate'"  ng-repeat= "responses in resultValue = ( response |  filter:search ) "  class="repeated-item" >
                      
                         
@@ -55,18 +77,7 @@
         
       
     </div>
-      <div class = "grandTotal">
-    <div class = "row">
-        <div class = "col-50">
- 
-       <div class = "total"> <b>{{total}}</b></div>
-        </div>
-        <div class = "col-50">
-       <div class = "sum"><b>{{resultValue |sumOfValue:'baltype'}}</b></div>
-       </div>
-       </div>
-       
-    </div>
+    
     
    </div>
 

@@ -41,18 +41,39 @@
 
                       </div>
                       </div>
+  <div class = "divider"></div>
+                   <div class = "divider"></div>
+                
+                <div class = "row">
+                 
+             <div class = "col-25">
+              <div class = "total"><b>{{total}} </b></div>
+             </div>
+            <div class = "col-25">
+              
+             </div>
+            
+               
+              <div class = "col-25">
+                <div class = "sum"><b>{{resultValue |sumOfValue:'credit'}}</b></div>
+             </div>
+             
+               <div class = "col-25">
+              <div class = "sum"><b>{{resultValue |sumOfValue:'balance'}}</b></div>
+             </div>
+            </div>
 
 
                        <div ng-show="showme" class="boxme">
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
                
-
-
+             
 
                      <div class = "container2">
                
-                     <div ng-animate="'animate'"  ng-repeat= "responses in response | orderBy:'lname'|filter:search"  class="repeated-item" >
+                      <div ng-animate="'animate'"  ng-repeat= "responses in resultValue = ( response |  filter:search ) "  class="repeated-item" >
+                     
                      
                         
                       
