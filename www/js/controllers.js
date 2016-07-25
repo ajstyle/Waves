@@ -15,7 +15,7 @@ angular.module('starter.controllers', ['ngCordova','ngFileSaver', 'filereader','
  *
  */
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,$location) {
+.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicPopover', '$timeout', '$location', function($scope, $ionicModal, $ionicPopover, $timeout,$location) {
     // Form data for the login modal
     
     $scope.loginData = {};
@@ -104,7 +104,7 @@ else
 {
    $scope.hide = "true"
 }
-})
+}])
 
 /*=====  End of App Ctrl  ======*/
 
@@ -119,7 +119,7 @@ else
 =            Login Ctrl            =
 ==================================*/
 
-.controller('LoginCtrl', function($scope,$stateParams, $timeout,$location,
+.controller('LoginCtrl', ['$scope', '$stateParams', '$timeout', '$location', 'ionicMaterialMotion', 'ionicMaterialInk', 'Mobile', '$cordovaFile', 'blob', function($scope,$stateParams, $timeout,$location,
                                    ionicMaterialMotion, ionicMaterialInk,Mobile,$cordovaFile,blob) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -175,7 +175,7 @@ else
              })
     } 
 
-})
+}])
 
 
 
@@ -191,7 +191,7 @@ else
 =            Main Ctrl            =
 =================================*/
 
-.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading' , '$ionicPopup' , 'loginid' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading,$ionicPopup,loginid)
+.controller('MainCtrl',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  ,  'connection' ,'$ionicLoading' , '$ionicPopup' , 'loginid' ,'company' ,function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services, connection,$ionicLoading,$ionicPopup,loginid,company)
 {
      
         $scope.$parent.showHeader();
@@ -217,8 +217,9 @@ else
     $scope.login = loginid ; 
 
 $scope.Mobile   = $scope.output.text;
+ $scope.company = company ;
+         
 
-          
 $scope.register = function(user) {
   
 
@@ -244,13 +245,16 @@ $scope.register = function(user) {
             $scope.Mobile   = $scope.output.text;
             $scope.id       =  $scope.output.id ;
                          
-            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile,  $scope.id ).then(function(response){
+            testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password,$scope.Mobile, $scope.id ).then(function(response){
    
     var response = Response.response(response); 
- 
+ console.log(response);
     var res =  response["login"];
-                         
+    var company = res["aName"];  
+    var city = res["aCity"];
 
+$scope.company.company = company ;
+ $scope.company.city = city ; 
     //Services for Debtors Creditors
 
 $scope.service = Services;
@@ -265,7 +269,9 @@ $scope.service = Services;
            $ionicLoading.hide();
               $ionicPopup.alert({
                 title : 'Error',
-                template : res["us"]
+                cssClass:'myPopupClass',
+                template :  res["us"]
+
               });
             $location.path("/app/register"); 
         }
@@ -319,7 +325,7 @@ $cordovaFile.writeFile(cordova.file.applicationStorageDirectory, "text.txt", txt
 =            Main Ctrl 1            =
 ===================================*/
 
-.controller('MainCtrl1',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  , 'connection' , '$ionicLoading' ,'$ionicPlatform', '$ionicPopup' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services,connection,$ionicLoading,$ionicPlatform,$ionicPopup){
+.controller('MainCtrl1',['$scope','$stateParams','$timeout', 'ionicMaterialMotion', 'ionicMaterialInk','testService' ,'FileSaver','Blob', '$window','FileReader','$cordovaFile','Response','blob','Mobile','$location','Services'  , 'connection' , '$ionicLoading' ,'$ionicPlatform', '$ionicPopup' , 'company' , function($scope,$stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, testService,FileSaver,Blob, $window,FileReader,$cordovaFile,Response,blob,Mobile,$location,Services,connection,$ionicLoading,$ionicPlatform,$ionicPopup,company){
 
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -375,7 +381,7 @@ document.addEventListener('deviceready', function () {
               var res =  JSON.parse(success)
               $scope.obj  = res ; 
                  
-
+          $scope.company = company ; 
               
            $scope.loginid =  $scope.obj.loginid ;
              $scope.branchid =  $scope.obj.branchid ;
@@ -385,23 +391,28 @@ document.addEventListener('deviceready', function () {
          
             $scope.password1  = $scope.password ;
             $scope.id       =  $scope.output.id ;
-          
-
+                                       
+            
                   
 
-             testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password1,$scope.Mobile, $scope.id  ).then(function(response){
+             testService.HelloWorld($scope.loginid,$scope.branchid,$scope.userid,$scope.password1,$scope.Mobile,$scope.id  ).then(function(response){
                     var response = Response.response(response); 
                    
-               
+                    console.log(response);
                     var res1 =  response["login"];
                    
                         $scope.service = Services;
+                
                 $scope.service.login = res1 ;
              
+                $scope.company.company = res1.aName ; 
+               $scope.company.city = res1.aCity
+
                     if(res1.ip == "0")
                    {  $ionicLoading.hide();
                        $ionicPopup.alert({
                          title : 'Error',
+                         cssClass:'myPopupClass',
                          template : res1.us
                         });         
                       $location.path("/app/registertxt"); 
@@ -422,18 +433,6 @@ document.addEventListener('deviceready', function () {
       });
      
 });
-
-
-
-
-
-
-
-
-
-
-
-       
        
 }])
 
@@ -446,7 +445,7 @@ document.addEventListener('deviceready', function () {
 =           Debtor Ctrl            =
 ====================================*/
 
-.controller('DebtorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+.controller('DebtorCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -489,12 +488,13 @@ document.addEventListener('deviceready', function () {
         });
     }, 700);
 
-      $scope.id = function(data,name)
+      $scope.id = function(data,name,city)
       {
          $scope.output = transid;
 
           $scope.output.transid = data ;
           $scope.output.name = name ;
+          $scope.output.city = city 
       }
 
 
@@ -507,7 +507,7 @@ document.addEventListener('deviceready', function () {
          $scope.nodata = false;  
         $ionicLoading.hide(); 
       
-       $scope.total = "Grand Total" ; 
+       $scope.total = "Total" ; 
         var response1 = Response.response(response); 
     $scope.response = response1; 
     
@@ -525,7 +525,7 @@ document.addEventListener('deviceready', function () {
 
  
 
-})
+}])
 
 /*=====  End of Debtor Ctrl  ======*/
 
@@ -539,7 +539,7 @@ document.addEventListener('deviceready', function () {
 ====================================*/
 
 
-.controller('CreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+.controller('CreditorCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -578,11 +578,13 @@ document.addEventListener('deviceready', function () {
         });
     }, 700);
 
-$scope.id = function(data,name)
+$scope.id = function(data,name,city)
       {
          $scope.output = transid;
           $scope.output.transid = data ;
            $scope.output.name = name ;
+            $scope.output.city = city ;
+           
       }
 
       $timeout(function() {
@@ -593,13 +595,8 @@ $scope.id = function(data,name)
          $scope.showme = true;
          $scope.nodata = false;  
         $ionicLoading.hide(); 
-      
-
         var response1 = Response.response(response); 
     $scope.response = response1; 
-   
-
-
    })
     }, 700);
 
@@ -610,7 +607,7 @@ $scope.id = function(data,name)
 
  
 
-})
+}])
 
 
 /*=====  End of Creditor Ctrl  ======*/
@@ -621,7 +618,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('OtherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+.controller('OtherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -639,12 +636,14 @@ $scope.id = function(data,name)
           $scope.us  =  data.us ; 
           $scope.ps = data.ps ; 
           $scope.total = "Total : " ;  
-          $scope.id = function(data,name)
+          $scope.id = function(data,name,city)
       {
          $scope.output = transid;
-
+          
           $scope.output.transid = data ;
           $scope.output.name = name ;
+          $scope.output.city = city ;
+          
       }
     // Set Motion
     $timeout(function() {
@@ -695,7 +694,7 @@ $scope.id = function(data,name)
 
  
 
-})
+}])
 
 /*=====  End of Other Ctrl  ======*/
 
@@ -706,13 +705,13 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('ChequeCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('ChequeCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
        $scope.hide  = false ;
     $scope.isExpanded = false;
-    $scope.total = "total : " ; 
+    $scope.total = "Total : " ; 
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
 
@@ -775,7 +774,7 @@ $scope.id = function(data,name)
 
  
 
-})
+}])
 
 /*=====  End of  Cheque Ctrl  ======*/
 
@@ -785,7 +784,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('receiptCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('receiptCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -854,7 +853,7 @@ $scope.id = function(data,name)
 
  
 
-})
+}])
 
 /*=====  End of  Receipt Ctrl  ======*/
 
@@ -866,7 +865,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('inventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
+.controller('inventoryCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -937,7 +936,7 @@ $scope.id = function(data,name)
 
  
 
-})
+}])
 
 /*=====  End of  Receipt Ctrl  ======*/
 
@@ -947,7 +946,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('SalesCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('SalesCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -995,7 +994,7 @@ $scope.id = function(data,name)
      testService. GetSales($scope.ip,$scope.db,$scope.us,$scope.ps  , "S" ).then(function(response)
       {
          console.log(response);
-         $scope.total = "Grand Total";
+         $scope.total = "Total";
          $scope.showme = true;
          $scope.nodata = false;  
        $ionicLoading.hide();
@@ -1019,7 +1018,7 @@ $scope.id = function(data,name)
 
  
 
-})
+}])
 
 /*=====  End of  Sales Ctrl  ======*/
 
@@ -1031,7 +1030,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('PurchaseCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('PurchaseCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1077,7 +1076,7 @@ $scope.id = function(data,name)
      testService.GetPurchase($scope.ip,$scope.db,$scope.us,$scope.ps  , "P" ).then(function(response)
       {
          console.log(response);
-         $scope.total = "Grand Total"; 
+         $scope.total = "Total"; 
          $scope.showme = true;
          $scope.nodata = false;  
        $ionicLoading.hide();
@@ -1100,7 +1099,7 @@ $scope.id = function(data,name)
 
  
 
-})
+}])
 
 /*=====  End of  Purchase Ctrl  ======*/
 
@@ -1109,7 +1108,7 @@ $scope.id = function(data,name)
 ====================================*/
 
 
-.controller('SupportCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher,$ionicPopup,Mobile,loginid) {
+.controller('SupportCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', '$ionicPopup', 'Mobile', 'loginid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher,$ionicPopup,Mobile,loginid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1129,7 +1128,7 @@ $scope.Mobile   = $scope.output.text;
     $scope.register = function(blob)
     {
        $ionicLoading.show({
-          templateUrl: 'templates/loader.html',
+          templateUrl: 'templates/loader1.html',
           hideOnStateChange : 'true',
           noBackdrop : 'true'
 
@@ -1141,6 +1140,7 @@ $scope.Mobile   = $scope.output.text;
         $ionicLoading.hide();
          $ionicPopup.alert({
                 title : 'Success',
+                cssClass:'myPopupClass',
                 template : response
               });
 
@@ -1150,7 +1150,7 @@ $scope.Mobile   = $scope.output.text;
 
  
 
-})
+}])
 
 /*=====  End of  Support Ctrl  ======*/
 
@@ -1161,7 +1161,7 @@ $scope.Mobile   = $scope.output.text;
 ====================================*/
 
 
-.controller('transactionCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
+.controller('transactionCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', 'voucher', '$cordovaFile', '$cordovaFileOpener2', '$cordovaSocialSharing','company', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing,company) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1174,7 +1174,8 @@ $scope.Mobile   = $scope.output.text;
     $scope.output = transid;
     $scope.hide = "false";
      $scope.enable = false ;
-  
+     $scope.company = company ; 
+
         var data = $scope.service.login ;
           
           $scope.ip = data.ip;
@@ -1183,8 +1184,8 @@ $scope.Mobile   = $scope.output.text;
           $scope.ps = data.ps ; 
            $scope.id  = $scope.output.transid
            $scope.name = $scope.output.name ;
-
-        
+                 
+           
 
     // Set Motion
     $timeout(function() {
@@ -1235,9 +1236,14 @@ $scope.Mobile   = $scope.output.text;
 //--------------------DOC Function -------------------------------------------------------------//
 
      $scope.doc = function(){
-
+;
+       
+var companyname = $scope.company.company ;  
+var companycity = $scope.company.city ; 
 
  var name =   $scope.output.name ;
+ var city =   $scope.output.city ;
+
  var debit = $filter('sumOfValuedash')(response1,'debit');
  var credit = $filter('sumOfValuedash')(response1,'credit');
  var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
@@ -1247,9 +1253,15 @@ var Inventorydata = {
     accounting: []
 };
 var value = [];
-value.push({ text: name });
+value.push({ text: name , city : city });
+console.log(value);
+
 var total = [] ; 
 total.push({ debit : debit , credit : credit , balance : balance}) ; 
+var company = [] ; 
+company.push({text : companyname   });
+var city = [] ; 
+city.push({text : companycity  });
 
 for(var i in response1) {
 
@@ -1299,7 +1311,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths: [65, '*',200, '*', '*',100],
+              widths: [65, 60,200, 60,60,100],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
@@ -1315,6 +1327,24 @@ function text(data)
      
   }
 }
+function company11(data)
+{
+  return {
+    text : data , style: 'header'
+         
+  }
+
+}
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
+
+
+
 function total1(data1)
 {
  var data  = data1.toString()  ;
@@ -1326,19 +1356,21 @@ function total1(data1)
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
+      company11(company),
+      comcity(city),
         { text: '', style: 'margin' },
         
-        { text: 'DEBTORS Report', style: 'header1' },
+        
          { text: '', style: 'margin' },
          
          text(value),
-        
+        text(value[0].city),
+        { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
           {
           
             table: {
-                 widths: [65, '*',200, '*', '*',95],
+                 widths: [65, 60,200, 60,60,95],
                   
                 body: [
                   
@@ -1353,7 +1385,7 @@ var dd = {
       fontSize: 22,
       bold: true,
      alignment: 'center' ,
-      
+       
     },
      subheader: {
       fontSize: 14,
@@ -1378,7 +1410,7 @@ var dd = {
     } ,content: {
       
       
-     alignment: 'right' ,
+     
       
     }
   }
@@ -1474,23 +1506,35 @@ var dd = {
 $scope.share = function () {
 
 
+var companyname = $scope.company.company ;  
+  var companycity = $scope.company.city ; 
+   var cityparty =   $scope.output.city ;
 
-  
  var name =   $scope.output.name ; 
 var Inventorydata = [];
 var Inventorydata = {
     accounting: []
 };
+var city = [] ; 
+city.push({text : companycity  });
+
 var debit = $filter('sumOfValuedash')(response1,'debit');
  var credit = $filter('sumOfValuedash')(response1,'credit');
  var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
 var total = [] ; 
 total.push({ debit : debit , credit : credit , balance : balance}) ; 
 
+var company = [] ; 
+
+company.push({text : companyname });
+
 
 var value = [];
-value.push({ text: name});
+value.push({ text: name });
+var city1 = [];
+city1.push({ text: cityparty });
 
+console.log(city1);
 for(var i in response1) {
 
     var item = response1[i];
@@ -1539,7 +1583,7 @@ function buildTableBody(data, columns) {
 function table(data, columns) {
     return {
         table: {
-              widths:  [65, '*',200, '*', '*',95],
+              widths:  [55,50,160, 60, 60,80],
             headerRows: 2,
            
             body: buildTableBody(data, columns),
@@ -1554,6 +1598,27 @@ function text(data)
     text : data , style: 'header2'
   }
 }
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
+function cityname(data)
+{
+  return {
+    text : data , style: 'subheader'
+  }
+}
+function company11(data)
+{
+  return {
+    text : data , style: 'header'
+     
+  }
+}
+
   function total1(data1)
 {
  var data  = data1.toString()  ;
@@ -1564,18 +1629,20 @@ function text(data)
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
+        company11(company),
+        comcity(city),
         { text: '', style: 'margin' },
         
-        { text: 'DEBTORS Report', style: 'header1' },
+        
          { text: '', style: 'margin' },
          text(value),
-
+         cityname(city1),
+        { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
        {
           
             table: {
-                 widths: [65, '*',200, '*', '*',95],
+                 widths: [55,50,150, 60, 60,80],
                   
                 body: [
                   
@@ -1604,7 +1671,7 @@ var dd = {
      header1: {
       fontSize: 16,
       bold: true,
-     alignment: 'left' ,
+     alignment: 'center' ,
       
     },
    header2: {
@@ -1615,8 +1682,7 @@ var dd = {
     } ,content: {
       
       
-     alignment: 'right' ,
-      
+          
     }
   }
 }
@@ -1625,7 +1691,7 @@ var dd = {
  pdfMake.createPdf(dd).getBuffer(function (buffer){
     
  $ionicLoading.show({
-         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Sharing PDF....</center></div>',
           hideOnStateChange : 'true',
           noBackdrop : 'true',
           duration :  3000
@@ -1715,7 +1781,7 @@ $cordovaSocialSharing.shareViaEmail('Debtors Report ', 'Debtors Report', null, n
 
  
 
-})
+}])
 
 /*=====  End of  Transaction Ctrl   ======*/
 
@@ -1731,7 +1797,7 @@ $cordovaSocialSharing.shareViaEmail('Debtors Report ', 'Debtors Report', null, n
 ====================================*/
 
 
-.controller('transactionCreditorCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
+.controller('transactionCreditorCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', 'voucher', '$cordovaFile', '$cordovaFileOpener2', '$cordovaSocialSharing', 'company' , function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing,company) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -1742,7 +1808,7 @@ $cordovaSocialSharing.shareViaEmail('Debtors Report ', 'Debtors Report', null, n
      $scope.enable = false ;
     $scope.service = Services;
     $scope.output = transid;
-   
+    $scope.company = company ; 
         var data = $scope.service.login ;
           
           $scope.ip = data.ip;
@@ -1795,13 +1861,23 @@ $cordovaSocialSharing.shareViaEmail('Debtors Report ', 'Debtors Report', null, n
  
 
 
+
+ 
+ var cityparty =   $scope.output.city ;
+var companycity = $scope.company.city ; 
+var companyname = $scope.company.company ;  
  var name =   $scope.output.name ; 
+var city1 = [];
+city1.push({ text: cityparty });
 var Inventorydata = [];
 var Inventorydata = {
     accounting: []
 };
 var value = [];
 value.push({ text: name});
+var city = [] ; 
+city.push({text : companycity  });
+
  var debit = $filter('sumOfValuedash')(response1,'debit');
  var credit = $filter('sumOfValuedash')(response1,'credit');
  var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
@@ -1810,6 +1886,11 @@ value.push({ text: name});
 
 var total = [] ; 
 total.push({ debit : debit , credit : credit , balance : balance}) ; 
+
+var company = [] ; 
+
+company.push({text : companyname });
+
 
 function total1(data1)
 {
@@ -1878,24 +1959,45 @@ function table(data, columns) {
         style : 'content'
     };
 }
+function cityname(data)
+{
+  return {
+    text : data , style: 'subheader'
+  }
+}
 function text(data)
 {
   return {
     text : data , style: 'subheader'
   }
 }
-  
+  function company11(data)
+{
+  return {
+    text : data , style: 'header'
+     
+  }
+}
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
 
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
+     company11(company),
+     comcity(city),
         { text: '', style: 'margin' },
         
-        { text: 'Creditor Report', style: 'header1' },
+      
          { text: '', style: 'margin' },
          text(value),
-
+         cityname(city1),
+         { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Date','Type' ,'Nera' , 'Debit' , 'Credit' , 'Balance'] ),
         {
           
@@ -1930,7 +2032,7 @@ var dd = {
      header1: {
       fontSize: 16,
       bold: true,
-     alignment: 'left' ,
+     alignment: 'center' ,
       
     },
    header2: {
@@ -1941,7 +2043,7 @@ var dd = {
     } ,content: {
       
       
-     alignment: 'center' ,
+    
       
     }
   }
@@ -2022,7 +2124,17 @@ $scope.share = function () {
 
 
 
+
+
+ var cityparty =   $scope.output.city ;
+var companycity = $scope.company.city ; 
+var companyname = $scope.company.company ;
  var name =   $scope.output.name ; 
+
+var city = [] ; 
+city.push({text : companycity  });
+var city1 = [];
+city1.push({ text: cityparty });
 var Inventorydata = [];
 var Inventorydata = {
     accounting: []
@@ -2034,7 +2146,9 @@ var debit = $filter('sumOfValuedash')(response1,'debit');
  var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
 var total = [] ; 
 total.push({ debit : debit , credit : credit , balance : balance}) ; 
+var company = [] ; 
 
+company.push({text : companyname });
 
 for(var i in response1) {
 
@@ -2064,7 +2178,6 @@ function total1(data1)
 
 function buildTableBody(data, columns) {
     var body = [[ {text : 'Date', style: 'subheader'}, 
-                 
                   {text : 'Type' , style: 'subheader'} ,
                    {text : 'Narration',style : 'subheader'} , 
                   {text : 'Debit' , style: 'subheader'},
@@ -2101,24 +2214,45 @@ function table(data, columns) {
        
     };
 }
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
 function text(data)
 {
   return {
     text : data , style: 'header1'
   }
 }
-  
-
+  function company11(data)
+{
+  return {
+    text : data , style: 'header'
+     
+  }
+}
+function cityname(data)
+{
+  return {
+    text : data , style: 'subheader'
+  }
+}
+ 
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
+       company11(company),
+       comcity(city),
         { text: '', style: 'margin' },
         
-        { text: 'Creditors Report', style: 'header1' },
+     
          { text: '', style: 'margin' },
          text(value),
-
+         cityname(city1),
+         { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Date','Type','Nera'  , 'Debit' , 'Credit' , 'Balance'] ),
          
 {
@@ -2229,7 +2363,7 @@ $cordovaSocialSharing.shareViaEmail('Creditor Report ', 'Creditor Report', null,
       });
 });
   $ionicLoading.show({
-         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Sharing PDF....</center></div>',
           hideOnStateChange : 'true',
           noBackdrop : 'true',
           duration :  3000
@@ -2257,7 +2391,7 @@ $cordovaSocialSharing.shareViaEmail('Creditor Report ', 'Creditor Report', null,
 
  
 
-})
+}])
 
 /*=====  End of  Transaction Creditor Ctrl   ======*/
 
@@ -2270,7 +2404,7 @@ $cordovaSocialSharing.shareViaEmail('Creditor Report ', 'Creditor Report', null,
 ====================================*/
 
 
-.controller('transactionInventoryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
+.controller('transactionInventoryCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', 'voucher', '$cordovaFile', '$cordovaFileOpener2', '$cordovaSocialSharing','company', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher, $cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing,company) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -2281,9 +2415,9 @@ $cordovaSocialSharing.shareViaEmail('Creditor Report ', 'Creditor Report', null,
    var response1 ; 
     $scope.service = Services;
     $scope.output = transid;
-
+     $scope.company = company ; 
  
-
+       
 
 
  var vm = this;
@@ -2345,16 +2479,22 @@ $cordovaSocialSharing.shareViaEmail('Creditor Report ', 'Creditor Report', null,
     
  
     $scope.doc = function(){
- 
- 
+
+
+ var companycity = $scope.company.city ; 
+ var companyname = $scope.company.company ;  
  var name =   $scope.output.name ; 
+var city = [] ; 
+city.push({text : companycity  });
 var Inventorydata = [];
 var Inventorydata = {
     accounting: []
 };
 var value = [];
 value.push({ text: name});
+var company = [] ; 
 
+company.push({text : companyname });
 for(var i in response1) {
 
     var item = response1[i];
@@ -2418,17 +2558,33 @@ function text(data)
     text : data , style: 'header2'
   }
 }
-  
+ function company11(data)
+{
+  return {
+    text : data , style: 'header'
+     
+  }
+} 
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
+
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
+        company11(company),
+        comcity(city),
+ 
         { text: '', style: 'margin' },
         
-        { text: 'Inventory Report', style: 'header1' },
+        
          { text: '', style: 'margin' },
          text(value),
-
+          { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Number','Date', 'Party' , 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
       
  
@@ -2462,7 +2618,7 @@ var dd = {
       
     } ,
     content: {
-      alignment: 'right' 
+     
       }
   }
 }
@@ -2529,8 +2685,9 @@ $scope.share = function () {
 
 
 
- 
- 
+
+ var companycity = $scope.company.city ; 
+ var companyname = $scope.company.company ;  
  var name =   $scope.output.name ; 
 var Inventorydata = [];
 var Inventorydata = {
@@ -2538,7 +2695,10 @@ var Inventorydata = {
 };
 var value = [];
 value.push({ text: name});
-
+var company = [] ; 
+company.push({text : companyname });
+var city = [] ; 
+city.push({text : companycity  });
 for(var i in response1) {
 
     var item = response1[i];
@@ -2602,17 +2762,32 @@ function text(data)
     text : data , style: 'header2'
   }
 }
-  
+ function company11(data)
+{
+  return {
+    text : data , style: 'header'
+     
+  }
+} 
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
+
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
+        company11(company),
+        comcity(city),
         { text: '', style: 'margin' },
         
-        { text: 'Inventory Report', style: 'header1' },
+      
          { text: '', style: 'margin' },
          text(value),
-
+         { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Number','Date', 'Party' , 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
       
  
@@ -2636,7 +2811,7 @@ var dd = {
      header1: {
       fontSize: 16,
       bold: true,
-     alignment: 'left' ,
+     alignment: 'center' ,
       
     },
    header2: {
@@ -2647,7 +2822,7 @@ var dd = {
     }, content: {
       
       
-     alignment: 'right' ,
+  
       
     }
   }
@@ -2717,7 +2892,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 });
 
  $ionicLoading.show({
-         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Sharing PDF....</center></div>',
           hideOnStateChange : 'true',
           noBackdrop : 'true',
           duration :  3000
@@ -2740,7 +2915,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
   
     ionicMaterialInk.displayEffect();
 
-   })                             
+   }])                             
 
 /*=====  End of  Transaction Inventory Ctrl   ======*/
 
@@ -2752,7 +2927,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 ====================================*/
 
 
-.controller('transactionOtherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing) {
+.controller('transactionOtherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'transid', 'voucher', '$cordovaFile', '$cordovaFileOpener2', '$cordovaSocialSharing','company',function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,transid,voucher,$cordovaFile,$cordovaFileOpener2,$cordovaSocialSharing,company) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -2760,7 +2935,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-
+    $scope.company = company ; 
     $scope.service = Services;
     $scope.output = transid;
    
@@ -2819,6 +2994,14 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
     $scope.doc = function(){
 
 
+
+var companycity = $scope.company.city ; 
+var companyname = $scope.company.company ;  
+
+var cityparty =   $scope.output.city ;
+
+
+
 var debit = $filter('sumOfValuedash')(response1,'debit');
  var credit = $filter('sumOfValuedash')(response1,'credit');
  var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
@@ -2828,10 +3011,17 @@ var Inventorydata = [];
 var Inventorydata = {
     accounting: []
 };
+var city1 = [];
+city1.push({ text: cityparty });
+var city = [] ; 
+city.push({text : companycity  });
 var value = [];
 value.push({ text: name});
 var total = [] ; 
 total.push({ debit : debit , credit : credit , balance : balance}) ; 
+var company = [] ; 
+company.push({text : companyname });
+
 for(var i in response1) {
 
     var item = response1[i];
@@ -2900,18 +3090,40 @@ function text(data)
   return {
           text : data , style: 'subheader' 
           }}
-
+function company11(data)
+{
+  return {
+    text : data , style: 'header'
+     
+  }
+}
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
+function cityname(data)
+{
+  return {
+    text : data , style: 'subheader'
+  }
+}
  
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
+     company11(company),
+      comcity(city),
+
         { text: '', style: 'margin' },
         
         { text: 'Inventory Report', style: 'header1' },
          { text: '', style: 'margin' },
          text(value),
-           
+            cityname(city1),
+          { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
         {
           
@@ -2946,7 +3158,7 @@ var dd = {
      header1: {
       fontSize: 16,
       bold: true,
-     alignment: 'left' ,
+     alignment: 'center' ,
       
     },
    header2: {
@@ -2958,7 +3170,7 @@ var dd = {
     content: {
       
       
-     alignment: 'center' ,
+    
       
     }
   
@@ -3050,12 +3262,21 @@ var dd = {
  //--------------Share Function------------------------//
 
 $scope.share = function () {
+
+
+
+
+
+ var companycity = $scope.company.city ; 
+ var cityparty =   $scope.output.city ;
+var companyname = $scope.company.company ; 
  var debit = $filter('sumOfValuedash')(response1,'debit');
  var credit = $filter('sumOfValuedash')(response1,'credit');
  var balance = $filter('totalSumPriceQty')(response1,'debit' , 'credit');
 
 
  
+
  var name =   $scope.output.name ; 
 var Inventorydata = [];
 var Inventorydata = {
@@ -3063,9 +3284,15 @@ var Inventorydata = {
 };
 var value = [];
 value.push({ text: name});
-
+var city = [] ; 
+city.push({text : companycity  });
 var total = [] ; 
 total.push({ debit : debit , credit : credit , balance : balance}) ; 
+var company = [] ; 
+company.push({text : companyname });
+var city1 = [];
+city1.push({ text: cityparty });
+
 for(var i in response1) {
 
     var item = response1[i];
@@ -3131,17 +3358,38 @@ function text(data)
   return {
           text : data , style: 'subheader' 
 }}
-
+function company11(data)
+{
+  return {
+    text : data , style: 'header'
+     
+  }
+}
+function cityname(data)
+{
+  return {
+    text : data , style: 'subheader'
+  }
+}
+function comcity(data)
+{
+  return {
+    text : data , style: 'subheader'
+         
+  }
+}
 var dd = {
  
     content: [
-        { text: 'Waves Compusoft', style: 'header' },
-        { text: '', style: 'margin' },
+        company11(company),
+       comcity(city),
+ { text: '', style: 'margin' },
         
-        { text: 'Inventory Report', style: 'header1' },
+
          { text: '', style: 'margin' },
          text(value),
-
+       cityname(city1),
+       { text: 'from 01-04-2016 To 31-03-2016', style: 'header1' },
         table(Inventorydata.accounting, ['Date', 'Type' , 'Receive' , 'Issue' , 'Balance'] ),
       {
           
@@ -3186,8 +3434,7 @@ var dd = {
       
     }, content: {
       
-      
-     alignment: 'center' ,
+    
       
     }
   }
@@ -3256,7 +3503,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 });
 
   $ionicLoading.show({
-         template: '<div class = "pdfloader"><div class = "loader1"><center> Creating PDF....</center></div>',
+         template: '<div class = "pdfloader"><div class = "loader1"><center> Sharing PDF....</center></div>',
           hideOnStateChange : 'true',
           noBackdrop : 'true',
           duration :  3000
@@ -3283,7 +3530,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 
  
 
-})
+}])
 
 
 /*=====  End of  Transaction Other Ctrl   ======*/
@@ -3295,7 +3542,7 @@ $cordovaSocialSharing.shareViaEmail('Inventory Report ', 'Inventory Report', nul
 ====================================*/
 
 
-.controller('voucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$location,$ionicLoading,$filter,connection,Services,Response,voucher,transid) {
+.controller('voucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$location', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$location,$ionicLoading,$filter,connection,Services,Response,voucher,transid) {
     // Set Header
       $scope.title = "Invoice" ; 
   $scope.output = voucher;
@@ -3461,7 +3708,7 @@ $scope.template1 = function()
 
  }
 
-})
+}])
 
 /*=====  End of  Voucher Ctrl   ======*/
 
@@ -3471,7 +3718,7 @@ $scope.template1 = function()
 ====================================*/
 
 
-.controller('CreditorvoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,$location,voucher,transid) {
+.controller('CreditorvoucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', '$location', 'voucher', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,$location,voucher,transid) {
     // Set Header
     $scope.output = voucher
     var acc =  $scope.output.acc 
@@ -3640,12 +3887,12 @@ $scope.template1 = function()
 
  }
 
-})
+}])
 
 /*=====  End of Inventory voucher Ctrl   ======*/
 
 
-.controller('inventoryVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher,transid) {
+.controller('inventoryVoucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -3660,7 +3907,7 @@ $scope.template1 = function()
  $scope.output1 = transid;
    
  $scope.name = $scope.output1.name ;
-
+console.log($scope.name);
   
         var data = $scope.service.login ;
           
@@ -3716,7 +3963,7 @@ $scope.template1 = function()
 
  
 
-})
+}])
 
 /*=====  End of Inventory voucher Ctrl   ======*/
 
@@ -3726,7 +3973,7 @@ $scope.template1 = function()
 ====================================*/
 
 
-.controller('chequeVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('chequeVoucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -3790,7 +4037,7 @@ $scope.template1 = function()
 
  
 
-})
+}])
 
 /*=====  End of Cheque voucher Ctrl   ======*/
 
@@ -3800,7 +4047,7 @@ $scope.template1 = function()
 ====================================*/
 
 
-.controller('purchaseVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('purchaseVoucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -3867,17 +4114,18 @@ $scope.template1 = function()
 
  
 
-})
+}])
 
 /*=====  End of Purchasevoucher Ctrl   ======*/
 
 
-/*====================================
+/*==============================
+======
 =    Sale voucher Ctrl     =
 ====================================*/
 
 
-.controller('saleVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher,transid) {
+.controller('saleVoucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', 'transid', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher,transid) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -3942,7 +4190,7 @@ $scope.template1 = function()
 
  
 
-})
+}])
 
 /*=====  End of Sale voucher Ctrl   ======*/
 
@@ -3953,7 +4201,7 @@ $scope.template1 = function()
 ====================================*/
 
 
-.controller('otherVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('otherVoucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -4019,7 +4267,7 @@ $scope.template1 = function()
 
  
 
-})
+}])
 
 /*=====  End of Other voucher Ctrl   ======*/
 
@@ -4032,7 +4280,7 @@ $scope.template1 = function()
 ====================================*/
 
 
-.controller('CreditorAVoucherCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
+.controller('CreditorAVoucherCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', 'voucher', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response,voucher) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -4096,7 +4344,7 @@ $scope.template1 = function()
 
  
 
-})
+}])
 
 
 
@@ -4105,7 +4353,7 @@ $scope.template1 = function()
 ====================================*/
 
 
-.controller('logoutCtrl', function($location,$ionicHistory, $ionicLoading, $timeout) {
+.controller('logoutCtrl', ['$location', '$ionicHistory', '$ionicLoading', '$timeout', function($location,$ionicHistory, $ionicLoading, $timeout) {
       $ionicLoading.show({template:'Logging out....'});
     
 
@@ -4121,7 +4369,7 @@ $scope.template1 = function()
 
  
 
-})
+}])
 
 
 /*====================================
@@ -4134,7 +4382,7 @@ $scope.template1 = function()
 ====================================*/
 
 
-.controller('versionCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('versionCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
       
       $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -4142,12 +4390,8 @@ $scope.template1 = function()
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-
-       $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
+     
+      
 
   cordova.getAppVersion.getVersionNumber(function (version) {
    $scope.version = version ;
@@ -4156,7 +4400,7 @@ $scope.template1 = function()
   
  
 
-})
+}])
 
 
 /*====================================
@@ -4168,7 +4412,7 @@ $scope.template1 = function()
 =            Gallery Ctrl            =
 ====================================*/
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) 
+.controller('GalleryCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', 'testService', '$ionicLoading', '$filter', 'connection', 'Services', 'Response', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,testService,$ionicLoading,$filter,connection,Services,Response) 
   {
 
 
@@ -4273,7 +4517,7 @@ var debD = new Array();
 
      
 
-})
+}])
 
 /*=====  End of Gallery Ctrl  ======*/
 
@@ -4369,12 +4613,25 @@ var debD = new Array();
   object.text = "";
   object.id = "";
   object.mobile = "";
-
+ 
  
   return object;
 
  
 })
+
+.factory('company', function () {
+  
+
+ var object = {};
+  object.company = "";
+  object.city = "" ; 
+ 
+  return object;
+
+ 
+})
+
 
 
 .factory('Services', function () {

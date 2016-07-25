@@ -2,8 +2,7 @@
     <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
 
 </ion-nav-bar>
-  <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
-    </ion-side-menu>
+ 
      <ion-content overflow-scroll='true'>
 
 
@@ -35,7 +34,7 @@
    <div class = "date"> Number:</div></br>
 </div>
    <div class = "col-25">
-   <div class = "vchno"> {{responses.vchno}}</div></br>
+   <div class = "nav"> {{responses.vchno}}</div></br>
 </div>
 
 </div>
@@ -47,17 +46,17 @@
        <div class = "containervoucher">
           
 
-            <div class = "row">
+            <div class = "row1">
           
-                    <div class = "col-50">   
+                    <div class = "col col-60">   
                    Description
                      </div>
-                     <div class = "col-25"> 
+                     <div class = "col-20"> 
                     <div class = "debit1">    Debit </div>
                       </div>
                     
 
-                       <div class = "col-25"> 
+                       <div class = "col-20"> 
                    <div class = "credit1">    Credit </div>
                       </div>
                        
@@ -79,9 +78,9 @@
                   <a href="#">
                
                    <div class = "divider"></div>
-                   <div class = "row">
+                   <div class = "row1">
                   
-                  <div class = "col-50">
+                  <div class = "col col-60">
            
                 <div class = "company">  {{responses.cd}} {{responses.lname}} </div>                    
                       
@@ -89,7 +88,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col-20">
                     
                      <div class = "debit">    {{responses.debit}} </div>
                 
@@ -98,7 +97,7 @@
                       
                 
                   
-                  <div class = "col-25">
+                  <div class = "col-20">
 
                 <div class = "credit">     {{responses.credit}} </div>
                    </div>
@@ -126,7 +125,7 @@
            <div ng-animate="'animate'"  ng-repeat= "responses in response|limitTo : 1"  class="repeated-item" >
            <div class = "row">
                   
-                  <div class = "col-50">
+                  <div class = "col col-60">
                 <div class = "voucherval">{{responses.rem1}} </div>   
                 <div class = "voucherval">   {{responses.rem2}} </div>                    
                       
@@ -134,7 +133,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-20">
                     
                   <div class = "voucherval1">   {{responses.totDebit}} </div>
                 
@@ -143,7 +142,7 @@
                       
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "voucherval1">     {{responses.totCredit}} </div>
                    </div>

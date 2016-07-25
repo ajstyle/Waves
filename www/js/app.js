@@ -170,7 +170,7 @@ if( connection.checkconnection() == 'No network connection' )
 
  
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
     // Turn off caching for demo simplicity's sake
     $ionicConfigProvider.views.maxCache(0);
@@ -505,5 +505,5 @@ if( connection.checkconnection() == 'No network connection' )
 
 
 
-});
+}]);
 })();

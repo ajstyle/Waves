@@ -10,7 +10,7 @@ const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const gulpWebpack = require('gulp-webpack');
 const webpack = require('webpack');
- 
+   var ngAnnotate = require('gulp-ng-annotate');
 var connect = require('gulp-connect');
 
 const distPath = './dist/';
@@ -117,11 +117,18 @@ gulp.task('concat', function() {
 });
 
 gulp.task('compress', function() {
-  return gulp.src('./www/dist/*.js')
+  return gulp.src('./www/js/*.js')
     .pipe(uglify())
     .pipe(gulp.dest('./www/min/'));
 });
 
+  gulp.task('ng_annotate', function (done) {
+    gulp.src('./www/js/*.js')
+      .pipe(ngAnnotate({single_quotes: true}))
+      .pipe(gulp.dest('./www/dist/dist_js/app'))
+      .on('end', done);
+  });
 
-gulp.task('default', ['webpack', 'styles', 'watch' , 'templatecache'], function () {
+  
+gulp.task('default', ['webpack', 'styles', 'watch' , 'templatecache','ng_annotate'], function () {
 });

@@ -2,8 +2,7 @@
     <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
 
 </ion-nav-bar>
-     <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
-    </ion-side-menu>
+     
     <ion-content overflow-scroll='true'>
     
 
@@ -21,9 +20,8 @@
            <b>  <div class = "balance"> {{responses.transtatus}} </div></b>
              </div>
              </div>
-
             
-            <div class = "row">
+           <div class = "row">
             <div class = "col-25">
             <b> <div class = "vch">Number:</div></b>
              </div>
@@ -38,7 +36,7 @@
              </div>
             </div>
            <div class = "row">
-              <div class = "col-75">
+              <div class = "col-90">
                <b>  <div class = "vch"> {{name}} </div></b>
           </div>
            </div>
@@ -47,20 +45,20 @@
      <div class = "containervoucher">
           
 
-            <div class = "row">
+            <div class = "row1">
           
-                    <div class = "col-25">   
+                    <div class = "col col-50">   
                   PRODUCT NAME  
                      </div>
-                     <div class = "col-25"> 
+                     <div class = "col col-15"> 
                       QTY
                       </div>
                     
 
-                       <div class = "col-25"> 
+                       <div class = "col col-15"> 
                    <div class = "credit1">  RATE</div>
                       </div>
-                       <div class = "col-25"> 
+                       <div class = "col col-20"> 
                      <div class = "amount"> AMOUNT</div>
                       </div>
                        
@@ -83,9 +81,9 @@
                   <a href="#">
                
                    <div class = "divider"></div>
-                   <div class = "row">
+                   <div class = "row1">
                   
-                  <div class = "col-25">
+                  <div class = "col col-40">
                 
 
                 <div class = "company"><b>   {{responses.billname}} </b></div>                    
@@ -94,7 +92,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-20">
                     
                      <div class = "vch">   <b> {{responses.qty}} </b></div>
                 
@@ -103,11 +101,11 @@
                        
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "credit">    <b> {{responses.rate}}</b> </div>
                    </div>
-                    <div class = "col-25">
+                    <div class = "col col-20">
 
                 <div class = "balance">    <b> {{responses.amount}}</b> </div>
                    </div>
@@ -120,10 +118,10 @@
 
               
 
- <div class = "container9">
+ <div class = "container6">
  <div ng-animate="'animate'"  ng-repeat= "responses in response | limitTo : 1"  class="repeated-item" >
-              <div class = "row" class =  "vch">
-              <div class = "col col-20">
+              <div class = "row" >
+              <div class = "col col-25">
                 
                 <div class = "vouchertext">  Order no. :</div>                    
                       
@@ -131,7 +129,7 @@
                       </div>
                       
                   
-                   <div class = "col col-20 ">
+                   <div class = "col col-33">
                     
                      <div class = "voucherval">    {{responses.orderno}} </div>
                 
@@ -142,9 +140,9 @@
                   
                   <div class = "col col-20">
 
-                <div class = "vouchertext1">     Dis. : </div>
+                <div class = "vouchertext">     Dis. : </div>
                    </div>
-                    <div class = "col col-20">
+                    <div class = "col col-25 ">
 
                 <div class =  "voucherval1">    {{responses.amount}} </div>
                    </div>
@@ -152,7 +150,7 @@
 
 
               <div class = "row" class =  "vch">
-              <div class = "col col-20">
+              <div class = "col col-25">
                 
                 <div class ="vouchertext">  L.R. No. :</div>                    
                       
@@ -160,7 +158,7 @@
                       </div>
                       
                   
-                   <div class = "col col-20 ">
+                   <div class = "col col-33  ">
                     
                      <div class =  "voucherval">  {{responses.lrno}} </div>
                 
@@ -171,15 +169,15 @@
                   
                    <div class = "col col-20 ">
                   
-                <div class = "vouchertext1">    TAX :  </div>
+                <div class = "vouchertext">    TAX :  </div>
                    </div>
-                   <div class = "col col-20 ">
+                   <div class = "col col-25  ">
 
                 <div class =  "voucherval1">    {{responses.tax}} </div>
                    </div>
               </div>
               <div class = "row">
-               <div class = "col col-20">
+               <div class = "col col-25">
                 
                 <div class = "vouchertext">  Parcels : </div>                    
                       
@@ -187,7 +185,7 @@
                       </div>
                       
                   
-                   <div class = "col col-20">
+                   <div class = "col col-33">
                     
                      <div class =  "voucherval">    {{responses.nocs}} </div>
                 
@@ -196,9 +194,9 @@
                        
                 
                   
-                  <div class = "col col-20">
+                  <div class = "col col-25">
 
-                <div class = "vouchertext1">     Other A/L : </div>
+                <div class = "vouchertext">     Other A/L : </div>
                    </div>
                     <div class = "col col-20">
 
@@ -206,7 +204,7 @@
                    </div>
               </div>
               <div class = "row" class =  "vch">
-               <div class = "col col-20">
+               <div class = "col col-25">
                 
                 <div class = "vouchertext"> Transp :</div>                    
                       
@@ -214,7 +212,7 @@
                       </div>
                       
                   
-                   <div class = "col col-20">
+                   <div class = "col col-33">
                     
                      <div class =  "voucherval">    {{responses.tpt}} </div>
                 
@@ -225,15 +223,15 @@
                   
                   <div class = "col col-20">
 
-                <div class = "vouchertext1">    Cash : </div>
+                <div class = "vouchertext">    Cash : </div>
                    </div>
-                    <div class = "col col-20">
+                    <div class = "col col-25">
 
                 <div class = "voucherval1">     {{responses.cash}} </div>
                    </div>
               </div>
               <div class = "row" class =  "vch">
-               <div class = "col col-20">
+               <div class = "col col-25">
                 
                 <div class = "vouchertext"> Remark :</div>                    
                       
@@ -241,7 +239,7 @@
                       </div>
                       
                   
-                   <div class = "col col-20">
+                   <div class = "col col-33">
                     
                      <div class =  "voucherval">   {{responses.remark1}}</div>
                 
@@ -252,9 +250,9 @@
                   
                   <div class = "col col-20">
 
-                <div class = "vouchertext1">     Credit : </div>
+                <div class = "vouchertext">     Credit : </div>
                    </div>
-                    <div class = "col col-20">
+                    <div class = "col col-25">
 
                 <div class =  "voucherval1">     {{responses.credit}} </div>
                    </div>

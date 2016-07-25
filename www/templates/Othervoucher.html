@@ -2,8 +2,7 @@
     <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
 
 </ion-nav-bar>
-     <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
-    </ion-side-menu>
+     
      <ion-content overflow-scroll='true'>
     
 
@@ -32,11 +31,11 @@
     </div>
  
 <div class = "row">
-   <div class = "col-25">
+   <div class = "col col-20">
    <div class = "date"> Number:</div></br>
 </div>
-   <div class = "col-25">
-   <div class = "vchno"> {{responses.voucher}}</div></br>
+   <div class = "col col-50">
+   <div class = "date1"> {{responses.voucher}}</div></br>
 </div>
 
 </div>
@@ -69,6 +68,8 @@
                          <div ng-switch = "(response| filter:search).length">
                          <span ng-switch-when="0"> <p class = "message">Sorry ! Nothing was found</p></span>
                
+
+
 
 
 
@@ -131,6 +132,7 @@
                   <div class = "col-50">
                 <div class = "voucherval">{{responses.rem1}} </div>   
                 <div class = "voucherval">   {{responses.rem2}} </div>                    
+
                       
                                
                       </div>

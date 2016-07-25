@@ -2,8 +2,7 @@
     <ion-nav-bar class="bar bar-header bar-dark"  align-title="left">
 
 </ion-nav-bar>
-    <ion-side-menu side="left"  width="220" is-enabled = "{{enable}}">
-    </ion-side-menu>
+   
  <div ng-if = "template()">
   <ion-content overflow-scroll='true'>
     
@@ -21,7 +20,7 @@
 <div class = "col-25">
   <div class = "date">  <b> {{responses.date}}</b></div>
    </div>
-<div class = "col-25">
+<div class = "col-10">
   <b><div class = "balance">Type:</div></b> 
    </div>
 <div class = "col-25">
@@ -51,17 +50,17 @@
    
   <div class = "containervoucher">          
 
-            <div class = "row">
+            <div class = "row1">
           
-                    <div class = "col-50">   
+                    <div class = "col col-60">   
                    Description
                      </div>
-                     <div class = "col-25"> 
+                     <div class = "col-20"> 
                      <div class = "credit1">  Debit</div>
                       </div>
                     
 
-                       <div class = "col-25"> 
+                       <div class = "col-20"> 
                      <div class = "credit1">  Credit </div>
                       </div>
                        
@@ -84,9 +83,9 @@
                   <a href="#">
                
                    <div class = "divider"></div>
-                   <div class = "row">
+                   <div class = "row1">
                   
-                  <div class = "col-50">
+                  <div class = "col col-60">
              
                 <div class = "company"><b> {{responses.cd}}  {{responses.lname}} </b></div>                    
                       
@@ -94,7 +93,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-20">
                     
                      <div class = "credit">   <b> {{responses.debit}} </b></div>
                 
@@ -103,7 +102,7 @@
                       
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "credit">    <b> {{responses.credit}}</b> </div>
                    </div>
@@ -131,16 +130,15 @@
            <div ng-animate="'animate'" ng-repeat= "responses in response|limitTo : 1"  >
            <div class = "row">
                   
-                  <div class = "col-33">
+                  <div class = "col col-60">
                 <div class = "voucherval"><b>   {{responses.rem2}} </b></div>
-                <div class = "voucherval">{{responses.rem1}} </div>   
-                                    
+               
                       
                                
                       </div>
                       
                   
-                   <div class = "col-33">
+                   <div class = "col col-20">
                     
                      <div class = "voucherval1">   <b> {{responses.totDebit}} </b></div>
                 
@@ -149,13 +147,16 @@
                       
                 
                   
-                  <div class = "col-33">
+                  <div class = "col col-20">
 
                 <div class = "voucherval1">    <b> {{responses.totCredit}}</b> </div>
                    </div>
                
-          
+          <div class = "col col-90">
+                <div class = "voucherval"><b>   {{responses.rem1}} </b></div>        
+                      </div>
           </div>
+          
        </div>
                 
         </div>
@@ -193,21 +194,21 @@
 
             
             <div class = "row">
-            <div class = "col-25">
-            <b> <div class = "vch">Number:</div></b>
+            <div class = "col col-20">
+            <b> <div class = "vch">Number :</div></b>
              </div>
-             <div class = "col-25">
+             <div class = "col col-33">
            <b>  <div class = "vch"> {{responses.vcn}} </div></b>
              </div>
-             <div class = "col-25">
+             <div class = "col col-20">
             <b> <div class = "balance"> Date:</div></b>
              </div>
-             <div class = "col-25">
+             <div class = "col col-25">
            <b>  <div class = "balance"> {{responses.date}} </div></b>
              </div>
             </div>
             <div class = "row">
-              <div class = "col-25">
+              <div class = "col col-90">
             <b> <div class = "vch">{{name}}</div></b>
              </div>
             </div>
@@ -217,20 +218,20 @@
  <div class = "containervoucher">
           
 
-            <div class = "row">
+            <div class = "row1">
           
-                    <div class = "col-25">   
+                    <div class = "col col-40">   
                   PRODUCT NAME  
                      </div>
-                     <div class = "col-25"> 
+                     <div class = "col col-20"> 
                       QTY
                       </div>
                     
 
-                       <div class = "col-25"> 
+                       <div class = "col col-20"> 
                    <div class = "credit1">  RATE</div>
                       </div>
-                       <div class = "col-25"> 
+                       <div class = "col col-20"> 
                      <div class = "amount"> AMOUNT</div>
                       </div>
                        
@@ -253,9 +254,9 @@
                   <a href="#">
                
                    <div class = "divider"></div>
-                   <div class = "row">
+                   <div class = "row1">
                   
-                  <div class = "col-25">
+                  <div class = "col col-40">
                 
 
                 <div class = "company"><b>   {{responses.billname}} </b></div>                    
@@ -264,7 +265,7 @@
                       </div>
                       
                   
-                   <div class = "col-25">
+                   <div class = "col col-20">
                     
                      <div class = "vch">   <b> {{responses.qty}} </b></div>
                 
@@ -273,11 +274,11 @@
                        
                 
                   
-                  <div class = "col-25">
+                  <div class = "col col-20">
 
                 <div class = "credit">    <b> {{responses.rate}}</b> </div>
                    </div>
-                    <div class = "col-25">
+                    <div class = "col col-20">
 
                 <div class = "balance">    <b> {{responses.amount}}</b> </div>
                    </div>
